@@ -1,4 +1,5 @@
 # UICrawler （基于Appium的App UI遍历工具）
+![](https://github.com/lgxqf/UICrawler/blob/master/demo.gif)
 
 ## 功能描述
 * 支持Andoird/iOS
