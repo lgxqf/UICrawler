@@ -5,7 +5,7 @@
 ## 安装node
 * https://nodejs.org/
 ```aidl
-#安装appium
+#安装appium 1.8.0
 http://appium.io/
 
 #检查appium环境正确性
