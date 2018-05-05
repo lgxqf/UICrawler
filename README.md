@@ -19,7 +19,8 @@
 * 遍历界面元素的xpath
 * 自动登录的用户名和密码及相应的UI元素ID 
 
-
+### 下载Jar包
+[UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -56,7 +57,8 @@ iOS:
 
 ## 注意事项
 * 同时运行多台ios设备时要每台设备要设置不同的IOS_WDA_PORT ： 8001-8888
-* Android7的手机必须安装Uiautomator2 的两个apk(安装deskstop版appium,初次连接appium会自动安装)
+* Android7的手机必须安装Uiautomator2 server 的两个apk(安装deskstop版appium,初次连接appium会自动安装), 也可进入到apk目录下通过adb安装
+* Android6及以下的手机不要安装Uiautomator2 server的APK
 
 ## Known issue
 * iOS 不支持wkwebview元素获取 https://github.com/appium/appium/issues/9408
