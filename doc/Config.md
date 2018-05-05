@@ -20,10 +20,11 @@
   * ANDROID_MAIN_ACTIVITY: com.xxx.yyy.StartActivity
  
   IOS_BUNDLE_ID: iOS的bundle id com.xxxx.yyy   
-  IOS_BUNDLE_NAME: 手机屏幕上显示的app的名字  
+  IOS_BUNDLE_NAME: 手机屏幕上显示的app的名字  如下图： 其值为:学而思test
+  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/IOS_BUNDLE_NAME.png)
   IOS_IPA_NAME: ips文件名前缀 
   * 这个很关键用于判断iOS app是否crash了
-  * 可以通过idevicecrashreport -u udid . 查看ips文件名前缀
+  * 可以通过idevicecrashreport ./ 查看ips文件名前缀. 如：AlipayWallet-2018-04-23-125441.ips  其IOS_IPA_NAME值为AlipayWallet
 
 
 
@@ -33,7 +34,7 @@
   * ANDROID_BOTTOM_TAB_BAR_ID: com.xxx.yy:id/bottomBar
   * IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
   * 当app中有tab bar时需要配置此项，配置后会先遍历tab bar以外的元素，最后再遍历tab bar  
-  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/Tab%20bar.png)
+  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/Tabbar.png)
 
   查找需要点击的元素的关键XPATH内容
   * ANDROID_CLICK_XPATH_HEADER: '@clickable="true" and string-length(@text)<30'

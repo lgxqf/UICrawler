@@ -17,7 +17,7 @@
 * 限制遍历深度
 * 限制点击次数
 * 遍历界面元素的xpath
-* 支持自动登录 
+* 自动登录的用户名和密码及相应的UI元素ID 
 
 
 ### 启动appium
@@ -56,7 +56,7 @@ iOS:
 
 ## 注意事项
 * 同时运行多台ios设备时要每台设备要设置不同的IOS_WDA_PORT ： 8001-8888
-* Android7的手机必须安装Uiautomator2 的两个apk(初次连接appium会自动安装)
+* Android7的手机必须安装Uiautomator2 的两个apk(安装deskstop版appium,初次连接appium会自动安装)
 
 ## Known issue
 * iOS 不支持wkwebview元素获取 https://github.com/appium/appium/issues/9408
