@@ -73,3 +73,7 @@ iOS:
     https://jingyan.baidu.com/article/e6c8503c4a0182e54f1a1804.html
 * https://github.com/baozhida/libimobiledevice
         
+
+# 更多细节
+* [配置文件介绍](doc/Config.md)
+* [环境搭建](doc/Environment.md)
