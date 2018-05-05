@@ -1,4 +1,4 @@
-# UICrawler
+# UICrawler （基于Appium的App UI遍历工具）
 
 ## 功能描述
 * 支持Andoird/iOS
@@ -22,7 +22,7 @@
 ### 启动appium
 ```bash
 appium --session-override -p 4723
--p 设定appium server的端口。不加参数默认为4723
+-p 设定appium server的端口 , 不加参数默认为4723
 ```
 
 ### 运行UICrawler(必须有yml配置文件)
