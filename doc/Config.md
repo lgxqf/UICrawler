@@ -1,4 +1,4 @@
-  ###一些默认值，通常不需要修改
+  ### 一些默认值，通常不需要修改
   SCREENSHOT_COUNT : 截屏数量  
   MAX_DEPTH : 遍历深度  
   MAX_CLICK_COUNT : 点击次数   
@@ -14,7 +14,7 @@
   * true 遇到crash会重启App继续遍历
   * false 遇到crash停止遍历
   
-  ###针对不同APP必需修改的值
+  ### 针对不同APP必需修改的值
   Android APK包名和主Activity  
   * ANDROID_PACKAGE: com.xxxx.yyyy
   * ANDROID_MAIN_ACTIVITY: com.xxx.yyy.StartActivity
@@ -27,7 +27,7 @@
 
 
 
-  ###构建XPATH需要的一些内容
+  ### 构建XPATH需要的一些内容
 
   UI底部TabBar
   * ANDROID_BOTTOM_TAB_BAR_ID: com.xxx.yy:id/bottomBar
@@ -39,7 +39,7 @@
   * IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
   * 注意属性值要加双引号""，通常不需要改用默认值即可
   
-  ###自动登录时需要的信息
+  ### 自动登录时需要的信息
   * 支持两种操作，一种是input 一种是click
   * 目前只支持通过用户和密码登录的app   
   
@@ -69,7 +69,7 @@
     * XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
     * ACTION: click
 
-###LIST
+### LIST
   PRESS_BACK_KEY_PACKAGE_LIST: 当跳到转以下app时，触发back键
   - 高德地图
   - com.autonavi.minimap
