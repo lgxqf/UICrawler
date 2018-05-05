@@ -37,7 +37,7 @@
   查找需要点击的元素的关键XPATH内容
   * ANDROID_CLICK_XPATH_HEADER: '@clickable="true" and string-length(@text)<30'
   * IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
-  * 注意属性值要加双引号""，通常不需要改用默认值即可
+  * 注意属性值要加双引号""，通常用默认值即可
   
   ### 自动登录时需要的信息
   * 支持两种操作，一种是input 一种是click

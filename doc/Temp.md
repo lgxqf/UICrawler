@@ -41,3 +41,7 @@
 ## 支持的平台
 * Android 4-7 Android 4-5 未测试
 * IOS 10-11 IOS 10未测试
+
+
+TODO:
+    把uiautomator2 apk放到git上
