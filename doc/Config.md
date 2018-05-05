@@ -32,7 +32,8 @@
   UI底部TabBar
   * ANDROID_BOTTOM_TAB_BAR_ID: com.xxx.yy:id/bottomBar
   * IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
-  * 当app中有tab bar时需要配置此项，配置后会先遍历tab bar以外的元素，最后再遍历tab bar
+  * 当app中有tab bar时需要配置此项，配置后会先遍历tab bar以外的元素，最后再遍历tab bar  
+  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/Tab%20bar.png)
 
   查找需要点击的元素的关键XPATH内容
   * ANDROID_CLICK_XPATH_HEADER: '@clickable="true" and string-length(@text)<30'
