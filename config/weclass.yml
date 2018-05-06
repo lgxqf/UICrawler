@@ -1,0 +1,160 @@
+GENERAL:
+  #截屏数量
+  SCREENSHOT_COUNT: 5000
+  #遍历深度
+  MAX_DEPTH: 2000
+  #点击次数
+  MAX_CLICK_COUNT: 100000
+  APPIUM_SERVER_IP: 0.0.0.0
+  #TIME
+  DEFAULT_WAIT_SEC: 10
+  #查找元素的间隔时间
+  DEFAULT_POLLING_INTERVAL_SEC: 5
+  #Crash时截图显示步骤数量
+  CRASH_PIC_COUNT: 5
+
+
+DEFAULT_VALUE:
+  PORT: 4723
+  #IOS 才会用到WDA_PORT
+  IOS_WDA_PORT: 8001
+  #是否忽略Crash,设为true时 Crash后会重启app然后继续遍历
+  IGNORE_CRASH: true
+
+
+
+#以下的内容需要根据不同的APP定制
+CRITICAL_ELEMENT:
+  #Android
+  ANDROID_PACKAGE: com.weclassroom.fcclassroomapp
+  ANDROID_MAIN_ACTIVITY: com.weclassroom.fcclassroomapp.ui.activity.SplashActivity
+
+  #IOS
+  IOS_BUNDLE_ID: com.100tal.weClassroom
+  IOS_BUNDLE_NAME: 直播云
+  IOS_IPA_NAME: groupclass
+
+  #构建XPATH需要的一些内容
+
+  #UI底部TabBar
+  #ANDROID_BOTTOM_TAB_BAR_ID: com.xes.jazhanghui.activity:id/bottomBar
+  #IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
+
+  ANDROID_CLICK_XPATH_HEADER: ' string-length(@text)<30'
+  IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
+
+  #ANDROID LOGIN_ELEMENT
+  ANDROID_USERNAME:
+    XPATH: '//*[@text="输入手机号"]'
+    ACTION: input
+    VALUE: '13988887770'
+
+  ANDROID_PASSWORD:
+    XPATH: '//*[@text="输入密码"]'
+    ACTION: input
+    VALUE: '887770'
+
+  ANDROID_LOGIN_BUTTON:
+    XPATH: '//*[@text="登录"]'
+    ACTION: click
+
+  #IOS LOGIN_ELEMENT
+  IOS_USERNAME:
+    XPATH: '//*[@type="XCUIElementTypeTextField"]'
+    ACTION: input
+    VALUE: '13988887770'
+  IOS_PASSWORD:
+    XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
+    ACTION: input
+    VALUE: '887770'
+  IOS_LOGIN_BUTTON:
+     XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
+     ACTION: click
+
+
+LIST:
+  #除了APP本身的包名外 根据以下包名判断是否跳出了APP
+  ANDROID_VALID_PACKAGE_LIST:
+  - com.miui.securitycenter
+  - com.android.server.telecom
+  - com.lbe.security.miui
+  - gallery
+  - packageinstaller
+
+  IOS_VALID_BUNDLE_LIST:
+  - 照片
+
+  ITEM_WHITE_LIST:
+  - 确定
+  - 允许
+  - 退出
+  - 234e588f7a35d2915cf303ad16055355
+  - 下次再说
+
+  #不点击包含以下文本的控件
+  ITEM_BLACKLIST:
+  - 拍照
+  - 客服
+  - 电话
+  - 班
+  - '2018'
+  - 午
+  - 未上课
+  - 已过期
+  - 测试
+  - 口令教室
+  - 取消
+  - 立即更新
+
+  #IOS不点击以下控件及其子元素
+  IOS_EXCLUDE_BAR:
+  #手机状态栏
+  - XCUIElementTypeStatusBar
+  #键盘
+  - XCUIElementTypeKeyboard
+
+  #IOS 不点击以下类型的控件
+  IOS_EXCLUDE_TYPE:
+#  - XCUIElementTypeOther
+  - XCUIElementTypeKey
+  - XCUIElementTypeWindow
+
+  #Android 不点击以下类型的控件
+  ANDROID_EXCLUDE_TYPE:
+  - android.widget.FrameLayout
+
+  NODE_NAME_EXCLUDE_LIST:
+  - selected
+  - instance
+  - checked
+  - naf
+  - content
+
+  STRUCTURE_NODE_NAME_EXCLUDE_LIST:
+  - value
+  - lable
+  - name
+  - text
+
+
+
+
+
+d6744554:
+  DEVICE_NAME: XiaoMi4
+
+76050d7:
+  DEVICE_NAME: XiaoMiNote
+
+SJE0217B29005225:
+  DEVICE_NAME: Huawei
+
+
+8a786ee271a213f47ac891f453bc5d14e404418f:
+  DEVICE_NAME: iPhone6-plus
+
+214be01a3254152a362fb9107ceb2db22ad3d559:
+  DEVICE_NAME: Justin's iPhone
+
+
+

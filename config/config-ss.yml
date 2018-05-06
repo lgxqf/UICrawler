@@ -1,0 +1,162 @@
+GENERAL:
+  #截屏数量
+  SCREENSHOT_COUNT: 5000
+  #遍历深度
+  MAX_DEPTH: 2000
+  #点击次数
+  MAX_CLICK_COUNT: 100000
+  #TIME
+  DEFAULT_WAIT_SEC: 10
+  #查找元素的间隔时间
+  DEFAULT_POLLING_INTERVAL_SEC: 5
+  #Crash时截图显示步骤数量
+  CRASH_PIC_COUNT: 5
+
+
+DEFAULT_VALUE:
+  #Appium server IP， 0.0.0.0代表Server在本地
+  APPIUM_SERVER_IP: 0.0.0.0
+  #Appium端口
+  PORT: 4723
+  #IOS 才会用到WDA_PORT
+  IOS_WDA_PORT: 8001
+  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
+  IGNORE_CRASH: true
+
+
+#以下的内容很关键，而且需要根据不同的APP定制
+CRITICAL_ELEMENT:
+  #Android 包名和启动的Activity
+  ANDROID_PACKAGE: com.xes.jazhanghui.activity
+  ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
+
+  #IOS Bundle ID
+  IOS_BUNDLE_ID: com.Xueersi.DTSmogi
+  #手机桌面上显示的APP的名字
+  IOS_BUNDLE_NAME: 学而思双师
+  #IPA名字的前缀
+  IOS_IPA_NAME: 学而思
+
+
+#构建XPATH需要的一些内容
+  #UI底部TabBar
+  ANDROID_BOTTOM_TAB_BAR_ID: com.xes.jazhanghui.activity:id/bottomBar
+  IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeScrollView
+
+  #注意属性值要加双引号""
+  ANDROID_CLICK_XPATH_HEADER: '@clickable="true" and string-length(@text)<30'
+  IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
+
+  ANDROID_BACK_KEY:
+  IOS_BACK_KEY: '//*[contains(@name,"tutor redesign")]'
+
+  #注意属性值要加双引号""
+  ANDROID_USERNAME:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
+    ACTION: input
+    VALUE: '15000030069900'
+  ANDROID_PASSWORD:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
+    ACTION: input
+    VALUE: '12345678'
+  ANDROID_LOGIN_BUTTON:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
+    ACTION: click
+
+  #IOS LOGIN_ELEMENT
+  IOS_USERNAME:
+    XPATH: '//*[@type="XCUIElementTypeTextField"]'
+    ACTION: input
+    VALUE: '18600004286'
+  IOS_PASSWORD:
+    XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
+    ACTION: input
+    VALUE: '123456'
+  IOS_LOGIN_BUTTON:
+    XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
+    ACTION: click
+
+LIST:
+  PRESS_BACK_KEY_PACKAGE_LIST:
+  - 高德地图
+  - com.autonavi.minimap
+
+  #除了APP本身的包名外 根据以下包名判断是否跳出了APP
+  ANDROID_VALID_PACKAGE_LIST:
+  - com.miui.securitycenter
+  - com.android.server.telecom
+  - com.lbe.security.miui
+  - gallery
+  - packageinstaller
+
+  IOS_VALID_BUNDLE_LIST:
+  - 照片
+
+  ITEM_WHITE_LIST:
+  - 确定
+  - 允许
+  - 取消
+
+  #不点击包含以下文本的控件
+  ITEM_BLACKLIST:
+  - 客服
+  - 电话
+  - '0571 - 8522 5188'
+  - 不允许
+  - 拒绝
+  - 拍照
+  - 禁止
+  - 呼叫
+  - dock setting
+  - 退出
+
+  IOS_EXCLUDE_BAR:
+  #手机状态栏
+  - XCUIElementTypeStatusBar
+  #键盘
+  - XCUIElementTypeKeyboard
+
+  IOS_EXCLUDE_TYPE:
+  - XCUIElementTypeOther
+  - XCUIElementTypeKey
+  - XCUIElementTypeWindow
+
+  ANDROID_EXCLUDE_TYPE:
+  - android.widget.FrameLayout
+
+  NODE_NAME_EXCLUDE_LIST:
+  - selected
+  - instance
+  - checked
+  - naf
+  - content
+
+  STRUCTURE_NODE_NAME_EXCLUDE_LIST:
+  - value
+  - lable
+  - name
+  - text
+
+
+
+d6744554:
+  DEVICE_NAME: XiaoMi4
+
+76050d7:
+  DEVICE_NAME: XiaoMiNote
+
+SJE0217B29005225:
+  DEVICE_NAME: Huawei
+
+
+8a786ee271a213f47ac891f453bc5d14e404418f:
+  DEVICE_NAME: iPhone6-plus
+
+214be01a3254152a362fb9107ceb2db22ad3d559:
+  DEVICE_NAME: Justin's iPhone
+
+7e9d6675edc2e9b4d50428549ca70f93a09e5aad:
+    DEVICE_NAME: iPad
+
+
+

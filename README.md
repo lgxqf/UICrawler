@@ -21,6 +21,9 @@
 
 ### 下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
+### 下载和修改配置文件模板
+[config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml)
+
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -50,9 +53,9 @@ iOS:
   
 #Android 查看apk main activity
   ./aapt dump badging "apk"  | grep launchable-activity
-     aapt 通常在android sdk的 build-tools目录下
-     windows中将grep换成findstr
-     "apk"是apk文件路径
+  aapt 通常在android sdk的 build-tools目录下
+  windows中将grep换成findstr
+  "apk"是apk文件路径
 ```
 
 ## 注意事项
