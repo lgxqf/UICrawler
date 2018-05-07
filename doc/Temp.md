@@ -4,10 +4,7 @@
 * 定义遍历优先级
 * 判断是不是同一个UIby tolerance
 * edittext 文本输入
-* 支持滑动等更多动作
-* merge macaca monkey
-* 重现bug
-* 当跳出app时检查是否Crash android & iOS
+
 
 
 ## 优化
@@ -41,7 +38,3 @@
 ## 支持的平台
 * Android 4-7 Android 4-5 未测试
 * IOS 10-11 IOS 10未测试
-
-
-TODO:
-    把uiautomator2 apk放到git上

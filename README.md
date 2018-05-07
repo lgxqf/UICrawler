@@ -1,14 +1,17 @@
-# UICrawler （基于Appium的App UI遍历工具）
+# UICrawler（基于Appium的App UI遍历工具）
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
 
-## 功能描述
+## 1.0 版 功能描述 
 * 支持Andoird/iOS
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
 
-
+## 待开发功能 1.1版 预计6下旬月release
+* 整合Monkey功能
+* 支持滑动等更多动作
+* 根据执行步骤重现bug
 
 ## 配置文件可配置项
 * 截图数量控制
@@ -80,8 +83,10 @@ iOS:
 * Android API level 与version对应关系 http://www.cnblogs.com/jinglecode/p/7753107.html  
     CMD: adb -s uuid shell getprop | grep version.sdk
 * iPhone分辨率与坐标系 https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
-* IOS 分析ips文件 https://blog.csdn.net/rainbowfactory/article/details/73332735
-    https://jingyan.baidu.com/article/e6c8503c4a0182e54f1a1804.html
+* IOS 分析ips文件  
+    * https://blog.csdn.net/rainbowfactory/article/details/73332735 
+    * https://jingyan.baidu.com/article/e6c8503c4a0182e54f1a1804.html 
+    * https://www.cnblogs.com/someonelikeyou/p/6379861.html
 * https://github.com/baozhida/libimobiledevice
         
 
