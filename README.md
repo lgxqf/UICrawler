@@ -22,15 +22,15 @@
 ### 下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
 ### 下载配置文件
-[config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml)
-### 根据App和操作系统修改CRITICAL_ELEMENT中的值 
+[config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
+### 根据App和操作系统修改CRITICAL_ELEMENT中的值 [配置文件介绍](doc/Config.md)
   #### Android
-  * ANDROID_PACKAGE: com.xes.jazhanghui.activity
-  * ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
+  * ANDROID_PACKAGE
+  * ANDROID_MAIN_ACTIVITY
   #### iOS
-  * IOS_BUNDLE_ID: com.xes.studentClient
-  * IOS_BUNDLE_NAME: 学而思test
-  * IOS_IPA_NAME: xesapp
+  * IOS_BUNDLE_ID
+  * IOS_BUNDLE_NAME
+  * IOS_IPA_NAME
   
 ### 启动appium
 ```bash
