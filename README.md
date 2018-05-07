@@ -23,7 +23,7 @@
 [UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
 ### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
-### 根据App和操作系统修改CRITICAL_ELEMENT中的值 [配置文件介绍](doc/Config.md)
+### 根据App和操作系统类型修改配置文件中下列各项的值，其它值用默认值即可 [配置文件介绍](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
   * ANDROID_MAIN_ACTIVITY
