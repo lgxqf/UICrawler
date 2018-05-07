@@ -21,9 +21,17 @@
 
 ### 下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
-### 下载和修改配置文件模板
+### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml)
-
+### 根据App和操作系统修改CRITICAL_ELEMENT中的值 
+  #### Android
+  * ANDROID_PACKAGE: com.xes.jazhanghui.activity
+  * ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
+  #### iOS
+  * IOS_BUNDLE_ID: com.xes.studentClient
+  * IOS_BUNDLE_NAME: 学而思test
+  * IOS_IPA_NAME: xesapp
+  
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -51,7 +59,7 @@ iOS:
   instruments -s  devices
   idevice_id -l
   
-#Android 查看apk main activity
+#Android 查看apk 和 Main activity
   ./aapt dump badging "apk"  | grep launchable-activity
   aapt 通常在android sdk的 build-tools目录下
   windows中将grep换成findstr
