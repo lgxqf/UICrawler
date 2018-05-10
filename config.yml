@@ -1,5 +1,5 @@
 GENERAL:
-  #截图数量
+  #截屏数量
   SCREENSHOT_COUNT: 5000
   #遍历深度
   MAX_DEPTH: 2000
@@ -12,7 +12,6 @@ GENERAL:
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 5
 
-
 DEFAULT_VALUE:
   #Appium server IP， 0.0.0.0代表Server在本地
   APPIUM_SERVER_IP: 0.0.0.0
@@ -23,6 +22,25 @@ DEFAULT_VALUE:
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
 
+#设置事件百分比
+MONKEY:
+  #SECOND
+  MONKEY_RUNNING_TIME:  500
+  #以下各项值总和需为100
+  SWIPE_RATIO: 10
+  CLICK_RATIO: 80
+  #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
+  CLICK_SPECIAL_POINT_RATIO: 8
+  RESTART_APP_RATIO: 1
+  #Android Only
+  HOME_KEY_RATIO: 0
+
+
+MONKEY_LIST:
+  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
+  MONKEY_SPECIAL_POINT_LIST:
+  - '100,100'
+  - '50,50'
 
 #以下的内容很关键，而且需要根据不同的APP定制
 CRITICAL_ELEMENT:
@@ -50,11 +68,11 @@ CRITICAL_ELEMENT:
   ANDROID_USERNAME:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
     ACTION: input
-    VALUE: '111111'
+    VALUE: '13810179702'
   ANDROID_PASSWORD:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
     ACTION: input
-    VALUE: '111111'
+    VALUE: '123456'
   ANDROID_LOGIN_BUTTON:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
     ACTION: click
@@ -63,11 +81,11 @@ CRITICAL_ELEMENT:
   IOS_USERNAME:
     XPATH: '//*[@type="XCUIElementTypeTextField"]'
     ACTION: input
-    VALUE: '111111'
+    VALUE: '13691034108'
   IOS_PASSWORD:
     XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
     ACTION: input
-    VALUE: '111111'
+    VALUE: '123456'
   IOS_LOGIN_BUTTON:
     XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
     ACTION: click
@@ -92,11 +110,13 @@ LIST:
   - 确定
   - 允许
   - 退出
+  - 取消
 
   #不点击包含以下文本的控件
   ITEM_BLACKLIST:
   - 客服
   - 电话
+  - '0571 - 8522 5188'
   - 不允许
   - 拒绝
   - 拍照
@@ -125,11 +145,12 @@ LIST:
   - content
 
   STRUCTURE_NODE_NAME_EXCLUDE_LIST:
-  - value
-  - lable
+  #iOS
+  #- value
   - name
-  - text
 
+  #Android
+  - text
 
 
 d6744554:

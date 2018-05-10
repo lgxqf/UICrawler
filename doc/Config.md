@@ -21,13 +21,24 @@
  
   IOS_BUNDLE_ID: iOS的bundle id com.xxxx.yyy   
   IOS_BUNDLE_NAME: 手机屏幕上显示的app的名字  如下图： 其值为:学而思test  
-  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/IOS_BUNDLE_NAME.png)  
+  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/IOS_BUNDLE_NAME.png)   
   IOS_IPA_NAME: ips文件名前缀 
   * 这个很关键用于判断iOS app是否crash了
   * 可以通过idevicecrashreport ./ 查看ips文件名前缀. 如：AlipayWallet-2018-04-23-125441.ips  其IOS_IPA_NAME值为AlipayWallet
 
 
+### Monkey功能配置
+  MONKEY_RUNNING_TIME:  180      运行时间，以分钟计  
+  * 以下各项值总和需为100    
+  * SWIPE_RATIO: 10  滑动事件百分比    
+  * CLICK_RATIO: 80  点击事件百分比    
+  * CLICK_SPECIAL_POINT_RATIO: 8  点击特殊坐标事件的百分比。MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能     
+  * RESTART_APP_RATIO: 1  重启APP事件百分比     
+  * HOME_KEY_RATIO: 1  按Home键事件百分比（只支持安卓）     
 
+  MONKEY_SPECIAL_POINT_LIST: 提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久     
+  * '80,160' 
+  * '50,50' 
   ### 构建XPATH需要的一些内容
 
   UI底部TabBar
