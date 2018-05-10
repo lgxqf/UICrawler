@@ -33,7 +33,7 @@
 [UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
 ### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
-### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [配置文件介绍](doc/Config.md)
+### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [详情见 Config.md 配置文件介绍](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
   * ANDROID_MAIN_ACTIVITY
@@ -41,7 +41,7 @@
   * IOS_BUNDLE_ID
   * IOS_BUNDLE_NAME
   * IOS_IPA_NAME
-  
+### Monkey配置项可选， 请见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -108,4 +108,3 @@ iOS:
 
 # 测试报告 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/Test-Report.png)
->>>>>>> 3e36fc5a17b10104e6b0bfad2b84b7b3ef38cfe4
