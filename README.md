@@ -30,7 +30,7 @@
 * 自动登录的用户名和密码及相应的UI元素ID 
 
 ### 下载Jar包
-[UICrawler.jar](https://pan.baidu.com/s/12cCTp1nQ6DSk9OPuFt_uEw)
+[UICrawler.jar](https://pan.baidu.com/s/1mNci6SWNHPuLj_mvrfgIbg)
 ### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
 ### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [详情见 Config.md 配置文件介绍](doc/Config.md)
