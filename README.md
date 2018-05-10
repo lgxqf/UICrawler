@@ -33,7 +33,7 @@
 [UICrawler.jar](https://pan.baidu.com/s/1mNci6SWNHPuLj_mvrfgIbg)
 ### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
-### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [详情见 Config.md 配置文件介绍](doc/Config.md)
+### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [详情见 Config.md](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
   * ANDROID_MAIN_ACTIVITY
@@ -41,7 +41,7 @@
   * IOS_BUNDLE_ID
   * IOS_BUNDLE_NAME
   * IOS_IPA_NAME
-### Monkey配置项可选， 请见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
+### Monkey配置项可选， 详情见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -67,14 +67,14 @@ java -jar UICrawler.jar -h
 
 ### 一些常用命令
 ```
-#查看设备udid
+查看设备udid
 Android:
   adb devices
 iOS:
   instruments -s  devices
   idevice_id -l
   
-#Android 查看apk 和 Main activity
+Android 查看apk 和 Main activity
   ./aapt dump badging "apk"  | grep launchable-activity
   aapt 通常在android sdk的 build-tools目录下
   windows中将grep换成findstr
