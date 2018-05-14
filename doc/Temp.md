@@ -2,7 +2,7 @@
 ##待开发功能
 * 去除Android7 android:id/statusBarBackground
 * 定义遍历优先级
-* 判断是不是同一个UIby tolerance
+* 判断是不是同一个UI by tolerance
 * edittext 文本输入
 
 

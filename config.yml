@@ -1,6 +1,6 @@
 GENERAL:
   #截屏数量
-  SCREENSHOT_COUNT: 5000
+  SCREENSHOT_COUNT: 500
   #遍历深度
   MAX_DEPTH: 2000
   #点击次数
@@ -11,6 +11,7 @@ GENERAL:
   DEFAULT_POLLING_INTERVAL_SEC: 5
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 5
+
 
 DEFAULT_VALUE:
   #Appium server IP， 0.0.0.0代表Server在本地
@@ -59,19 +60,19 @@ CRITICAL_ELEMENT:
   ANDROID_BOTTOM_TAB_BAR_ID: com.xes.jazhanghui.activity:id/bottomBar
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
-  #注意属性值要加双引号""
+  #注意属性值要加引号''
   ANDROID_CLICK_XPATH_HEADER: '@clickable="true" and string-length(@text)<30'
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
-  #ANDROID LOGIN_ELEMENT
+  #注意属性值要加双引号""
   ANDROID_USERNAME:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
     ACTION: input
-    VALUE: '13810179702'
+    VALUE: '131xxxxx889'
   ANDROID_PASSWORD:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
     ACTION: input
-    VALUE: '123456'
+    VALUE: '123'
   ANDROID_LOGIN_BUTTON:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
     ACTION: click
@@ -80,11 +81,11 @@ CRITICAL_ELEMENT:
   IOS_USERNAME:
     XPATH: '//*[@type="XCUIElementTypeTextField"]'
     ACTION: input
-    VALUE: '13691034108'
+    VALUE: '130xxxxx456'
   IOS_PASSWORD:
     XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
     ACTION: input
-    VALUE: '123456'
+    VALUE: '111111'
   IOS_LOGIN_BUTTON:
     XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
     ACTION: click
@@ -93,6 +94,7 @@ LIST:
   PRESS_BACK_KEY_PACKAGE_LIST:
   - 高德地图
   - com.autonavi.minimap
+  - com.android.settings
 
   #除了APP本身的包名外 根据以下包名判断是否跳出了APP
   ANDROID_VALID_PACKAGE_LIST:
@@ -110,6 +112,8 @@ LIST:
   - 允许
   - 退出
   - 取消
+  - 关闭
+  - 已解决
 
   #不点击包含以下文本的控件
   ITEM_BLACKLIST:
@@ -121,6 +125,10 @@ LIST:
   - 拍照
   - 禁止
   - 呼叫
+  - '10108899'
+  - 第四个
+  - 第五个
+  - 第六个
 
   IOS_EXCLUDE_BAR:
   #手机状态栏
@@ -152,6 +160,7 @@ LIST:
   - text
 
 
+
 d6744554:
   DEVICE_NAME: XiaoMi4
 
@@ -163,10 +172,10 @@ SJE0217B29005225:
 
 
 8a786ee271a213f47ac891f453bc5d14e404418f:
-  DEVICE_NAME: myiphone
+  DEVICE_NAME: iPhone6-plus
 
 214be01a3254152a362fb9107ceb2db22ad3d559:
-  DEVICE_NAME: test 6plus
+  DEVICE_NAME: Justin's iPhone
 
 
 
