@@ -3,7 +3,7 @@
 
 ## 1.0 版 功能描述 
 * 支持Andoird/iOS
-* 生成整体操作步骤视频，方便重现发现的问题
+* 生成整体操作步骤视频，方便重现发现的问题（见下图）
 * 当检查当Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 支持Monkey功能及以下事件
     * 随机点击
@@ -15,7 +15,7 @@
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/click-point.png)
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
 
 
 ## 待开发功能 1.1版 预计6下旬月release
