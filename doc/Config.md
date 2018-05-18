@@ -32,7 +32,7 @@
   * 以下各项值总和需为100    
   * SWIPE_RATIO: 10  滑动事件百分比    
   * CLICK_RATIO: 80  点击事件百分比    
-  * CLICK_SPECIAL_POINT_RATIO: 8  点击特殊坐标事件的百分比。MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能     
+  * CLICK_SPECIAL_POINT_RATIO: 8  点击MONKEY_SPECIAL_POINT_LIST中坐标事件百分比。 主要用于触发"返回"功能。     
   * RESTART_APP_RATIO: 1  重启APP事件百分比     
   * HOME_KEY_RATIO: 1  按Home键事件百分比（只支持安卓）     
   * LONG_PRESS_RATIO: 8 特殊坐标长按(10秒)
