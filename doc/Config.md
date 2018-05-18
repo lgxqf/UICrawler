@@ -35,10 +35,13 @@
   * CLICK_SPECIAL_POINT_RATIO: 8  点击特殊坐标事件的百分比。MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能     
   * RESTART_APP_RATIO: 1  重启APP事件百分比     
   * HOME_KEY_RATIO: 1  按Home键事件百分比（只支持安卓）     
-
-  MONKEY_SPECIAL_POINT_LIST: 提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久     
-  * '80,160' 
-  * '50,50' 
+  * LONG_PRESS_RATIO: 8 特殊坐标长按(10秒)
+  * LONG_PRESS_LIST: 根据以下坐标长按10秒   
+   '980,560'   
+   '100，120'      
+  * MONKEY_SPECIAL_POINT_LIST: 提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久         
+    '80,160'       
+    '50,50'      
   ### 构建XPATH需要的一些内容
 
   UI底部TabBar
