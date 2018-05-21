@@ -2,9 +2,9 @@
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
 
 ## 1.0 版 功能描述 
-* 支持Andoird/iOS
+* 支持Android/iOS
 * 生成整体操作步骤视频，方便重现发现的问题（见下图）
-* 当检查当Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
+* 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 支持Monkey功能及以下事件
     * 随机点击
     * 特殊位置点击(需在文件中进行配置)
