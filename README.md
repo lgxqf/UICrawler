@@ -88,6 +88,8 @@ Android 查看apk 和 Main activity
 ```
 
 ## 注意事项
+* iOS设备一定要打开"开发者选项"里的“Enable UI Automation” https://www.jianshu.com/p/a1d075b3472c
+* iOS测试包必须是debug版的
 * 同时运行多台ios设备时要每台设备要设置不同的IOS_WDA_PORT ： 8001-8888
 * Android7的手机必须安装Uiautomator2 server 的两个apk(安装deskstop版appium,初次连接appium会自动安装), 也可进入到[apk](https://github.com/lgxqf/UICrawler/tree/master/apk)目录下通过adb安装
 * Android6及以下的手机不要安装Uiautomator2 server的APK
