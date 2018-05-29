@@ -108,7 +108,8 @@ Android 查看apk 和 Main activity
     * https://jingyan.baidu.com/article/e6c8503c4a0182e54f1a1804.html 
     * https://www.cnblogs.com/someonelikeyou/p/6379861.html
 * https://github.com/baozhida/libimobiledevice
-        
+* 微信小程序自动化测试 https://testerhome.com/topics/12003?order_by=like&
+
 
 # 更多细节
 * [配置文件介绍](doc/Config.md)
