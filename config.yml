@@ -22,40 +22,58 @@ DEFAULT_VALUE:
   IOS_WDA_PORT: 8001
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
+  #遍历的过程中进行向上划动操作
+  ENABLE_VERTICAL_SWIPE: true
+
 
 #设置事件百分比 各事件百分比之和为100
 MONKEY:
   #运行时间，以分钟计
   MONKEY_RUNNING_TIME:  180
   #以下各项值总和需为100
-  SWIPE_RATIO: 10
-  CLICK_RATIO: 88
+  SWIPE_RATIO: 0
+  CLICK_RATIO: 100
   #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 1
-  RESTART_APP_RATIO: 1
+  CLICK_SPECIAL_POINT_RATIO: 0
+  RESTART_APP_RATIO: 0
   LONG_PRESS_RATIO: 0
   #Android Only
   HOME_KEY_RATIO: 0
 
+  #Gesture https://www.jianshu.com/p/095e81f21e07
+  #双击
+  DOUBLE_TAP_RATIO: 0
+  #缩小(两指)
+  PINCH_RATIO: 0
+  #放大(两指)
+  UNPINCH_RATIO: 0
 
-#小程序
-MINI_PROGRAM:
-  MINI_PROGRAM_NAME: 速位
-  MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
 
-
+#Monkey相关的一些值
 MONKEY_LIST:
   #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
   MONKEY_SPECIAL_POINT_LIST:
   - '80,160'
+  - '50，50'
 
+  #根据坐标长按某点10秒
   LONG_PRESS_LIST:
   - '980,560'
+  - '100,250'
 
   #设置不点击的区域， radius用来设置以下列坐标为圆心，不想点击的半径区域
   MONKEY_BLACKLIST_POINT_LIST:
   - 'radius,10'
   - '0,0'
+
+
+#小程序
+MINI_PROGRAM:
+  #小程序的名字
+  MINI_PROGRAM_NAME: 学而思营业厅
+  #小程序的进程
+  MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
+
 
 #以下的内容很关键，而且需要根据不同的APP定制
 CRITICAL_ELEMENT:
@@ -63,17 +81,17 @@ CRITICAL_ELEMENT:
   ANDROID_PACKAGE: com.tencent.mm
   ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
 
-  #IOS Bundle ID
-  IOS_BUNDLE_ID: com.xes.studentClient
+  #IOS Bundle ID com.apple.mobilesafari
+  IOS_BUNDLE_ID: com.tencent.xin
   #手机桌面上显示的APP的名字
-  IOS_BUNDLE_NAME: 学而思test
+  IOS_BUNDLE_NAME: 微信
   #IPA名字的前缀
-  IOS_IPA_NAME: xesapp
+  IOS_IPA_NAME: wechat
 
 
 #构建XPATH需要的一些内容
   #UI底部TabBar
-  ANDROID_BOTTOM_TAB_BAR_ID: com.xes.jazhanghui.activity:id/bottomBar
+  ANDROID_BOTTOM_TAB_BAR_ID: com.huxiu:id/footer_bar
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
   #注意属性值要加引号''
@@ -106,7 +124,20 @@ CRITICAL_ELEMENT:
     XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
     ACTION: click
 
+
 LIST:
+  #待输入文件本的控制类型
+  INPUT_CLASS_LIST:
+  - android.widget.TextView
+  - XCUIElementTypeTextField
+  - XCUIElementTypeSecureTextField
+
+  #待输入的文本
+  INPUT_TEXT_LIST:
+  - '123'
+  - 'ABC'
+
+  #当发现App跳转到一下app时 会触发back键
   PRESS_BACK_KEY_PACKAGE_LIST:
   - 高德地图
   - com.autonavi.minimap
@@ -123,12 +154,12 @@ LIST:
   IOS_VALID_BUNDLE_LIST:
   - 照片
 
+  #白名单，遇到包含以下文本的控件，会多次点击（默认所有控件只点一次）
   ITEM_WHITE_LIST:
   - 确定
   - 允许
   - 退出
   - 取消
-  - 关闭
   - 已解决
 
   #不点击包含以下文本的控件
@@ -141,6 +172,7 @@ LIST:
   - 禁止
   - 呼叫
   - 低电量模式
+  - 关闭
 
 
   IOS_EXCLUDE_BAR:
@@ -149,6 +181,7 @@ LIST:
   #键盘
   - XCUIElementTypeKeyboard
 
+  #点击时排除以下类型的元素
   IOS_EXCLUDE_TYPE:
   - XCUIElementTypeOther
   - XCUIElementTypeKey
@@ -176,22 +209,8 @@ LIST:
   - text
 
 
-
+#设备udid 对应的设备名称
 d6744554:
   DEVICE_NAME: XiaoMi4
-
-76050d7:
-  DEVICE_NAME: XiaoMiNote
-
-SJE0217B29005225:
-  DEVICE_NAME: Huawei
-
-
-8a786ee271a213f47ac891f453bc5d14e404418f:
-  DEVICE_NAME: iPhone6-plus
-
-214be01a3254152a362fb9107ceb2db22ad3d559:
-  DEVICE_NAME: Justin's iPhone
-
 
 

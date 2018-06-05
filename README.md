@@ -1,30 +1,44 @@
-# UICrawler（基于Appium的App UI遍历工具）
+# UICrawler （基于Appium 1.8.0开发，Java版 App UI遍历工具）
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
 
+QQ 技术交流群 ： 728183683
+
+环境搭建文档： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
+
 ## 1.0 版 功能描述 
-* 支持Android/iOS
-* 生成整体操作步骤视频，方便重现发现的问题（见下图）
-* 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
-* 支持Monkey功能及以下事件
-    * 随机点击
-    * 能过黑名单控制不想点击的区域
-    * 特殊位置点击(需在文件中进行配置)
-    * 特殊位置长按10秒(需在文件中进行配置)
-    * 任意方向及长度的滑动
-    * 触发Home键(Android Only)
-    * 重启app
+### 支持Monkey功能及以下事件
+* 随机点击
+* 通过黑名单控制不想点击的区域
+* 特殊位置点击(需在文件中进行配置)
+* 特殊位置长按10秒(需在文件中进行配置)
+* 任意方向及长度的滑动
+* 触发Home键(Android Only)
+* 重启app
+
+
+### 支持UI遍历及以下功能    
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
+* 支持对输入框的文本输入(需在文件中进行配置)
+* 统计每个Activity点击数量(Android)
+* 支持滑动动作
+
+
+### 其它功能
+* 以上两个功能同时支持Android/iOS
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
+* 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
+* 生成整体操作步骤视频，方便重现发现的问题（见下图）
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
 
 
 ## 待开发功能 1.1版 预计6下旬月release
-* 支持滑动等更多动作
-* 根据执行步骤重现bug
-* 统计每个页面点击数量(Android)
 * 支持小程序测试
+* 支持滑动等更多动作
+* 支持更多手势
+* 支持遍历顺序控制
+* 根据执行步骤重现bug
 
 
 ## 配置文件可配置项
@@ -35,6 +49,7 @@
 * 限制点击次数
 * 遍历界面元素的xpath
 * 自动登录的用户名和密码及相应的UI元素ID 
+* 待输入文本列表及控件类型
 
 
 ### 下载Jar包
@@ -111,6 +126,7 @@ Android 查看apk 和 Main activity
     * https://www.cnblogs.com/someonelikeyou/p/6379861.html
 * https://github.com/baozhida/libimobiledevice
 * 微信小程序自动化测试 https://testerhome.com/topics/12003?order_by=like&
+* 手势 https://www.jianshu.com/p/095e81f21e07
 
 
 # 更多细节
