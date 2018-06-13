@@ -1,5 +1,6 @@
 # UICrawler
 ## 基于Appium 1.8.0开发，Java版 App UI遍历工具
+
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
 
 QQ 技术交流群 ： 728183683
@@ -36,6 +37,7 @@ QQ 技术交流群 ： 728183683
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 生成整体操作步骤视频，方便重现发现的问题(见下图)
+
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
 
 
