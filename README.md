@@ -4,7 +4,7 @@
 
 QQ 技术交流群 ： 728183683
 
-环境搭建文档： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
+环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
 ## 1.0 版 功能描述 
 ### 支持Monkey功能及以下事件
@@ -15,13 +15,18 @@ QQ 技术交流群 ： 728183683
 * 任意方向及长度的滑动
 * 触发Home键(Android Only)
 * 重启app
+* 及以下手势操作(位置随机)
+*      双击
+*      双指放大
+*      双指缩小
+*      拖拽
 
 
 ### 支持UI遍历及以下功能    
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
-* 支持对输入框的文本输入(需在文件中进行配置)
+* 支持对输入框的文本输入(需在文件中进行配置 INPUT_TEXT_LIST)
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
 
@@ -35,9 +40,7 @@ QQ 技术交流群 ： 728183683
 
 
 ## 待开发功能 1.1版 预计6下旬月release
-* 支持小程序测试
-* 支持滑动等更多动作
-* 支持更多手势
+* 支持小程序测试(Android Only)
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
 
@@ -128,6 +131,8 @@ Android 查看apk 和 Main activity
 * https://github.com/baozhida/libimobiledevice
 * 微信小程序自动化测试 https://testerhome.com/topics/12003?order_by=like&
 * 手势 https://www.jianshu.com/p/095e81f21e07
+* XpathTester https://www.freeformatter.com/xpath-tester.html
+* Appium并发测试 https://www.cnblogs.com/testway/p/6140594.html
 
 
 # 更多细节

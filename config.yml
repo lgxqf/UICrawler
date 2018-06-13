@@ -13,13 +13,14 @@ GENERAL:
   DEFAULT_POLLING_INTERVAL_SEC: 5
 
 
+#一些默认值
 DEFAULT_VALUE:
   #Appium server IP， 0.0.0.0代表Server在本地
   APPIUM_SERVER_IP: 0.0.0.0
   #Appium端口
   PORT: 4723
   #IOS 才会用到WDA_PORT
-  IOS_WDA_PORT: 8001
+  IOS_WDA_PORT: 8100
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
   #遍历的过程中进行向上划动操作
@@ -30,23 +31,26 @@ DEFAULT_VALUE:
 MONKEY:
   #运行时间，以分钟计
   MONKEY_RUNNING_TIME:  180
-  #以下各项值总和需为100
-  SWIPE_RATIO: 0
-  CLICK_RATIO: 100
-  #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 0
-  RESTART_APP_RATIO: 0
-  LONG_PRESS_RATIO: 0
-  #Android Only
-  HOME_KEY_RATIO: 0
 
-  #Gesture https://www.jianshu.com/p/095e81f21e07
+  #以下各项值总和为100即可
+  SWIPE_RATIO: 4
+  CLICK_RATIO: 70
+  #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
+  CLICK_SPECIAL_POINT_RATIO: 4
+  RESTART_APP_RATIO: 0
+  LONG_PRESS_RATIO: 1
+  #Android Only
+  HOME_KEY_RATIO: 1
+
+  #手势操作
   #双击
-  DOUBLE_TAP_RATIO: 0
+  DOUBLE_TAP_RATIO: 5
   #缩小(两指)
-  PINCH_RATIO: 0
+  PINCH_RATIO: 5
   #放大(两指)
-  UNPINCH_RATIO: 0
+  UNPINCH_RATIO: 5
+  #拖拽
+  DRAG_RATIO: 5
 
 
 #Monkey相关的一些值
@@ -77,7 +81,7 @@ MINI_PROGRAM:
 
 #以下的内容很关键，而且需要根据不同的APP定制
 CRITICAL_ELEMENT:
-  #Android 包名和启动的Activity
+  #Android包名和启动的Activity
   ANDROID_PACKAGE: com.tencent.mm
   ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
 
@@ -94,11 +98,11 @@ CRITICAL_ELEMENT:
   ANDROID_BOTTOM_TAB_BAR_ID: com.huxiu:id/footer_bar
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
-  #注意属性值要加引号''
+  #注意值要加引号''
   ANDROID_CLICK_XPATH_HEADER: 'string-length(@text)<30'
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
-  #注意属性值要加双引号""
+  #注意xpath中的属性值要加双引号""
   ANDROID_USERNAME:
     XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
     ACTION: input
@@ -119,20 +123,20 @@ CRITICAL_ELEMENT:
   IOS_PASSWORD:
     XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
     ACTION: input
-    VALUE: '111111'
+    VALUE: '123'
   IOS_LOGIN_BUTTON:
     XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
     ACTION: click
 
 
 LIST:
-  #待输入文件本的控制类型
+  #待输入文本的控制类型
   INPUT_CLASS_LIST:
   - android.widget.TextView
   - XCUIElementTypeTextField
   - XCUIElementTypeSecureTextField
 
-  #待输入的文本
+  #待输入的文本（随机选中后选列表中的一个）
   INPUT_TEXT_LIST:
   - '123'
   - 'ABC'
@@ -143,7 +147,7 @@ LIST:
   - com.autonavi.minimap
   - com.android.settings
 
-  #除了APP本身的包名外 根据以下包名判断是否跳出了APP
+  #除了APP本身的包名外 根据以下包名判断是否跳出了APP,当app跳转到以下app时被认为是合法，会继续遍历操作
   ANDROID_VALID_PACKAGE_LIST:
   - com.miui.securitycenter
   - com.android.server.telecom
@@ -151,6 +155,7 @@ LIST:
   - gallery
   - packageinstaller
 
+  #同ANDROID_VALID_PACKAGE_LIST
   IOS_VALID_BUNDLE_LIST:
   - 照片
 
@@ -175,6 +180,7 @@ LIST:
   - 关闭
 
 
+  #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:
   #手机状态栏
   - XCUIElementTypeStatusBar
@@ -192,7 +198,7 @@ LIST:
   - android.widget.FrameLayout
   - android.widget.ImageButton
 
-
+  #解释待续
   NODE_NAME_EXCLUDE_LIST:
   - selected
   - instance
@@ -200,6 +206,7 @@ LIST:
   - naf
   - content
 
+  #解释待续
   STRUCTURE_NODE_NAME_EXCLUDE_LIST:
   #iOS
   #- value
