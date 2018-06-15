@@ -22,6 +22,20 @@ CRAWLER="${JENKINS_ROOT}/uicrawler/uicrawler.jar"
 ADB=/root/android_sdk/platform-tools/adb
 
 
+checkResult(){
+    pwd && ls 
+    isCrash=`find . -iname report.html | xargs grep "No crash found" | wc -l`
+
+    echo $isCrash
+    if [ "$isCrash" -eq 1 ]; then
+        echo "equal"
+        exit 0
+    else
+        echo "not equal"
+        exit 1
+    fi
+}
+
 killAppium(){
     ps -ax | grep appium | awk '{print $1}' | xargs kill -9
 }
@@ -33,6 +47,10 @@ if [ -z "$1" ]; then
     echo "./runTest.sh download xes android  --- download android app for xes"
     echo "./runTest.sh run xes ios udid 4723 config_xes.yml buildNumber --- run test for xes on ios with udid and appium port appium_port"
     exit 0
+fi
+
+if [ "$ACTION" == "check" ]; then
+    checkResult
 fi
 
 if [ "$ACTION" == "kill-appium" ]; then

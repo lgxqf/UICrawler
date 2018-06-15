@@ -155,4 +155,7 @@ Android 查看apk 和 Main activity
 #Chnage History
 ##2018-06-14  
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME 
-* 特殊点坐标值的问题
+##2018-06-15
+* 更改特殊点坐标的选取为顺序选取(原来是随机选取)
+* 为文本查找增加划动查找功能(Android)
+* 增加配置项 DISABLE_DOM_DISPLAY 屏蔽/开启 UI DOM Tree在Log中的显示
