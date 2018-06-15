@@ -23,8 +23,10 @@ DEFAULT_VALUE:
   IOS_WDA_PORT: 8100
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
-  #遍历的过程中进行向上划动操作
+  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
   ENABLE_VERTICAL_SWIPE: true
+  #UI遍历的时间限制(分钟)
+  CRAWLER_RUNNING_TIME: 1800
 
 
 #设置事件百分比 各事件百分比之和为100
