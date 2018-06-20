@@ -40,6 +40,11 @@ killAppium(){
     ps -ax | grep appium | awk '{print $1}' | xargs kill -9
 }
 
+killTask(){
+    ps -ax | grep appium | awk '{print $1}' | xargs kill -9
+    ps -ax | grep uicrawler.jar | awk '{print $1}' | xargs kill -9
+}
+
 if [ -z "$1" ]; then
     echo "./runTest.sh curl start/stop udid buildNumber"
     echo "./runTest.sh appium 5 --- start 5 appium server"
@@ -51,6 +56,11 @@ fi
 
 if [ "$ACTION" == "check" ]; then
     checkResult
+fi
+
+if [ "$ACTION" == "kill-task" ]; then
+    killTask
+    exit 0
 fi
 
 if [ "$ACTION" == "kill-appium" ]; then

@@ -159,3 +159,4 @@ Android 查看apk 和 Main activity
 * 更改特殊点坐标的选取为顺序选取(原来是随机选取)
 * 为文本查找增加划动查找功能(Android)
 * 增加配置项 DISABLE_DOM_DISPLAY 屏蔽/开启 UI DOM Tree在Log中的显示
+* 将Monkey和UICrawler时间限制统一合并到参数 -r

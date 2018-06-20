@@ -11,8 +11,14 @@ GENERAL:
   DEFAULT_WAIT_SEC: 10
   #查找元素的间隔时间
   DEFAULT_POLLING_INTERVAL_SEC: 5
+  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
+  IGNORE_CRASH: true
   #是否屏蔽DOM树在Log中的显示
   DISABLE_DOM_DISPLAY: false
+  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
+  ENABLE_VERTICAL_SWIPE: false
+  #运行时间限制(分钟)
+  CRAWLER_RUNNING_TIME: 1800
 
 
 #一些默认值
@@ -23,19 +29,10 @@ DEFAULT_VALUE:
   PORT: 4723
   #IOS 才会用到WDA_PORT
   IOS_WDA_PORT: 8100
-  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
-  IGNORE_CRASH: true
-  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
-  ENABLE_VERTICAL_SWIPE: true
-  #UI遍历的时间限制(分钟)
-  CRAWLER_RUNNING_TIME: 1800
 
 
 #设置事件百分比 各事件百分比之和为100
 MONKEY:
-  #运行时间，以分钟计
-  MONKEY_RUNNING_TIME:  180
-
   #以下各项值总和为100即可
   SWIPE_RATIO: 4
   CLICK_RATIO: 70
