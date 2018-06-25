@@ -26,14 +26,17 @@ checkResult(){
     pwd && ls 
     isCrash=`find . -iname report.html | xargs grep "No crash found" | wc -l`
 
+    RET=0
     echo $isCrash
+
     if [ "$isCrash" -eq 1 ]; then
         echo "equal"
-        exit 0
     else
         echo "not equal"
-        exit 1
+        RET=1
     fi
+
+    exit $RET
 }
 
 killAppium(){
@@ -42,6 +45,10 @@ killAppium(){
 
 killTask(){
     ps -ax | grep appium | awk '{print $1}' | xargs kill -9
+    ps -ax | grep uicrawler.jar | awk '{print $1}' | xargs kill -9
+}
+
+killJava(){
     ps -ax | grep uicrawler.jar | awk '{print $1}' | xargs kill -9
 }
 
@@ -60,6 +67,11 @@ fi
 
 if [ "$ACTION" == "kill-task" ]; then
     killTask
+    exit 0
+fi
+
+if [ "$ACTION" == "kill-java" ]; then
+    killJava
     exit 0
 fi
 
@@ -85,14 +97,19 @@ startAppium(){
 
     APP_PORT=4721
     WDALOCALPORT=8099
+    CHROME_PORT=9514
 
     for((i=0;i<$COUNT;i++))
     do
         APP_PORT=$[APP_PORT + 2]
         BP_PORT=$[APP_PORT + 1]
         WDALOCALPORT=$[WDALOCALPORT + 1]
-        echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, WDALOCALPORT $WDALOCALPORT"
-        appium --session-override  -p  $APP_PORT -bp $BP_PORT --webdriveragent-port $WDALOCALPORT &
+        CHROME_PORT=$[CHROME_PORT + 1]
+        #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, WDALOCALPORT $WDALOCALPORT"
+        #appium --session-override  -p  $APP_PORT -bp $BP_PORT --webdriveragent-port $WDALOCALPORT &
+
+        echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
+        appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
     done
 }
 

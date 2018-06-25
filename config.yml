@@ -2,9 +2,9 @@ GENERAL:
   #截屏数量
   SCREENSHOT_COUNT: 500
   #Crash时截图显示步骤数量
-  CRASH_PIC_COUNT: 5
+  CRASH_PIC_COUNT: 10
   #遍历深度
-  MAX_DEPTH: 2000
+  MAX_DEPTH: 1000
   #点击次数
   MAX_CLICK_COUNT: 100000
   #TIME
@@ -42,7 +42,8 @@ MONKEY:
   LONG_PRESS_RATIO: 1
   #Android Only
   HOME_KEY_RATIO: 1
-
+  #触发Back Key
+  BACK_KEY_RATIO: 1
   #手势操作
   #双击
   DOUBLE_TAP_RATIO: 5

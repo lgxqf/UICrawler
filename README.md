@@ -15,6 +15,7 @@ QQ 技术交流群 ： 728183683
 * 特殊位置长按10秒(需在文件中进行配置)
 * 任意方向及长度的滑动
 * 触发Home键(Android Only)
+* 触发Back键(Android Only)
 * 重启app
 * 及以下手势操作(位置随机)
 *      双击
@@ -120,6 +121,7 @@ Android 查看apk 和 Main activity
 
 ## Known issue
 * iOS 不支持wkwebview元素获取 https://github.com/appium/appium/issues/9408
+* 当有横屏和竖屏截图混合时 生成的mp4内容无效
 
 
 ## 参考内容
@@ -155,8 +157,17 @@ Android 查看apk 和 Main activity
 #Chnage History
 ##2018-06-14  
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME 
+
 ##2018-06-15
 * 更改特殊点坐标的选取为顺序选取(原来是随机选取)
 * 为文本查找增加划动查找功能(Android)
 * 增加配置项 DISABLE_DOM_DISPLAY 屏蔽/开启 UI DOM Tree在Log中的显示
 * 将Monkey和UICrawler时间限制统一合并到参数 -r
+
+##2018-06-16
+* 增加小程序遍历结束判断
+
+##2018-06-19
+* 为小程序测试增加划动查找"小程序"功能（Android）
+* 为Monkey功能加入Back键事件支持
+
