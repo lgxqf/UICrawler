@@ -60,7 +60,7 @@ MONKEY_LIST:
   #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
   MONKEY_SPECIAL_POINT_LIST:
   - '80,160'
-  - '50，50'
+  - '50,50'
 
   #根据坐标长按某点10秒
   LONG_PRESS_LIST:
