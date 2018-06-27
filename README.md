@@ -1,5 +1,5 @@
 # UICrawler
-## 基于Appium 1.8.0开发，Java版 App UI遍历工具
+## 基于Appium 1.8.1开发，Java版 App UI遍历工具
 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
 
@@ -50,6 +50,7 @@ QQ 技术交流群 ： 728183683
 
 ## 待开发功能 1.1版 预计6下旬月release
 * 根据关键字触发返回功能
+* 性能监控
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
 
@@ -177,4 +178,7 @@ Android 查看apk 和 Main activity
 * 为Monkey功能加入Back键事件支持
 
 ##2018-06-26
-* 添加循环遍历次数设置 -l 
+* 支持循环执行UI遍历  见参数 -l 
+
+##2018-06-27
+* 加入遍历深度参数支持 -d

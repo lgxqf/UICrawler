@@ -4,7 +4,7 @@ GENERAL:
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
   #遍历深度
-  MAX_DEPTH: 1000
+  MAX_DEPTH: 800
   #点击次数
   MAX_CLICK_COUNT: 100000
   #TIME
