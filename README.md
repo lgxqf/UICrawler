@@ -162,32 +162,32 @@ Android 查看apk 和 Main activity
 * 关于测试运行的频度，只要有代码改动建议至少一天一次，下班时运行，第二天看结果 
 
 
-#Chnage History
-##2018-06-14  
+# Chnage History
+## 2018-06-14  
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME 
 
-##2018-06-15
+## 2018-06-15
 * 更改特殊点坐标的选取为顺序选取(原来是随机选取)
 * 为文本查找增加划动查找功能(Android)
 * 增加配置项 DISABLE_DOM_DISPLAY 屏蔽/开启 UI DOM Tree在Log中的显示
 * 将Monkey和UICrawler时间限制统一合并到参数 -r
 
-##2018-06-16
+## 2018-06-16
 * 增加小程序遍历结束判断
 
-##2018-06-19
+## 2018-06-19
 * 为小程序测试增加划动查找"小程序"功能（Android）
 * 为Monkey功能加入Back键事件支持
 
-##2018-06-26
+## 2018-06-26
 * 支持循环执行UI遍历  见参数 -l 
 
-##2018-06-28
+## 2018-06-28
 * 加入遍历深度参数支持 -d
 * 增加根据文本内容和控件类型来触发Back Key    BACK_KEY_TRIGGER_LIST:
 * 修复了有时会点击失败的问题
 
-##2018-06-28
+## 2018-06-28
 * Update Java-Client to 1.6.1
 * Android通过屏蔽 "bounds"值 解决Xpath不能定位到 权限对话框的问题
 * 运行时增加version输出
