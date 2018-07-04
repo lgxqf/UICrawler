@@ -31,6 +31,7 @@ QQ 技术交流群 ： 728183683
 * 支持对输入框的文本输入(需在文件中进行配置 INPUT_TEXT_LIST)
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
+* 支持根据关键字和控件类型触发Back key(Android)
 
 
 ### 支持小程序测试(Android Only)
@@ -49,7 +50,7 @@ QQ 技术交流群 ： 728183683
 
 
 ## 待开发功能 1.1版 预计6下旬月release
-* 根据关键字触发返回功能
+* bounds="[0,2025][270,2030] 解决坐标中含有边界坐标值时xpath不能定位到元素的问题
 * 性能监控
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
@@ -144,6 +145,7 @@ Android 查看apk 和 Main activity
 * 手势 https://www.jianshu.com/p/095e81f21e07
 * XpathTester https://www.freeformatter.com/xpath-tester.html
 * Appium并发测试 https://www.cnblogs.com/testway/p/6140594.html
+* Android 性能采集 https://blog.csdn.net/bigconvience/article/details/35553983
 
 
 # 更多细节
@@ -180,5 +182,12 @@ Android 查看apk 和 Main activity
 ##2018-06-26
 * 支持循环执行UI遍历  见参数 -l 
 
-##2018-06-27
+##2018-06-28
 * 加入遍历深度参数支持 -d
+* 增加根据文本内容和控件类型来触发Back Key    BACK_KEY_TRIGGER_LIST:
+* 修复了有时会点击失败的问题
+
+##2018-06-28
+* Update Java-Client to 1.6.1
+* Android通过屏蔽 "bounds"值 解决Xpath不能定位到 权限对话框的问题
+* 运行时增加version输出

@@ -18,9 +18,12 @@ BUILD_NUMBER=$7
 JENKINS_ROOT="/data/jenkins/"
 APP_ROOT_DIR="${JENKINS_ROOT}/uicrawler/app/"
 CRAWLER="${JENKINS_ROOT}/uicrawler/uicrawler.jar"
-#ADB=/Users/tal/Project/AndroidSDK/platform-tools/adb
-ADB=/root/android_sdk/platform-tools/adb
 
+#Linux Agent
+#ADB=/root/android_sdk/platform-tools/adb
+
+#Mac Mini
+ADB=/Users/mg/Project/AndroidSDK/platform-tools/adb
 
 checkResult(){
     pwd && ls 
@@ -52,41 +55,6 @@ killJava(){
     ps -ax | grep uicrawler.jar | awk '{print $1}' | xargs kill -9
 }
 
-if [ -z "$1" ]; then
-    echo "./runTest.sh curl start/stop udid buildNumber"
-    echo "./runTest.sh appium 5 --- start 5 appium server"
-    echo "./runTest.sh kill-appium --- kill all the appium process"
-    echo "./runTest.sh download xes android  --- download android app for xes"
-    echo "./runTest.sh run xes ios udid 4723 config_xes.yml buildNumber --- run test for xes on ios with udid and appium port appium_port"
-    exit 0
-fi
-
-if [ "$ACTION" == "check" ]; then
-    checkResult
-fi
-
-if [ "$ACTION" == "kill-task" ]; then
-    killTask
-    exit 0
-fi
-
-if [ "$ACTION" == "kill-java" ]; then
-    killJava
-    exit 0
-fi
-
-if [ "$ACTION" == "kill-appium" ]; then
-    killAppium
-    exit 0
-fi
-
-if [ -z "$1" ] || [ -z "$2" ]; then
-    echo "Please input valid value for action and app name , appium count or curl operation"
-    exit 1
-fi
-
-echo $CONFIG
-
 startAppium(){
     COUNT=$1
 
@@ -105,11 +73,16 @@ startAppium(){
         BP_PORT=$[APP_PORT + 1]
         WDALOCALPORT=$[WDALOCALPORT + 1]
         CHROME_PORT=$[CHROME_PORT + 1]
+
         #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, WDALOCALPORT $WDALOCALPORT"
         #appium --session-override  -p  $APP_PORT -bp $BP_PORT --webdriveragent-port $WDALOCALPORT &
 
-        echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
-        appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
+        #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
+        #appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
+
+        echo "start appium at port $APP_PORT, BP_PORT $BP_PORT"
+        appium --session-override  -p  $APP_PORT -bp $BP_PORT &
+
     done
 }
 
@@ -153,24 +126,58 @@ downloadApp(){
 
 triggerNightTestingRecord(){
     if [ "$1" == "start" ]; then
-        echo ""
-        curl -d "" http://10.1.12.206:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER
-        echo "\n night testing start message posted.  http://10.1.12.206:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER\n"
+        curl -d "" http://10.33.13.7:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER
+        echo "\n night testing start message posted.  http://10.33.13.7:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER\n"
     else
-        curl -d "" http://10.1.12.206:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER
-        echo "\n night testing stop  message posted. http://10.1.12.206:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER\n"
+        curl -d "" http://10.33.13.7:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER
+        echo "\n night testing stop  message posted. http://10.33.13.7:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER\n"
     fi
 }
 
 runTest(){
     triggerNightTestingRecord "start"
 
-    echo "Start testing on device " $UDID
+    echo "Start testing on device ..." $UDID
     #cd $JENKINS_ROOT/uicrawler
     #java -jar $CRAWLER -f config/$CONFIG -t $APPIUM_PORT  -u $UDID
 
 }
 
+
+if [ -z "$1" ]; then
+    echo "./runTest.sh curl start/stop udid buildNumber"
+    echo "./runTest.sh appium 5 --- start 5 appium server"
+    echo "./runTest.sh kill-appium --- kill all the appium process"
+    echo "./runTest.sh download xes android  --- download android app for xes"
+    echo "./runTest.sh run xes ios udid 4723 config_xes.yml buildNumber --- run test for xes on ios with udid and appium port appium_port"
+    exit 0
+fi
+
+if [ "$ACTION" == "check" ]; then
+    checkResult
+fi
+
+if [ "$ACTION" == "kill-task" ]; then
+    killTask
+    exit 0
+fi
+
+if [ "$ACTION" == "kill-java" ]; then
+    killJava
+    exit 0
+fi
+
+if [ "$ACTION" == "kill-appium" ]; then
+    killAppium
+    exit 0
+fi
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Please input valid value for action and app name , appium count or curl operation"
+    exit 1
+fi
+
+echo $CONFIG
 echo "Action  : " $ACTION
 echo "App name or Appium count : " $APP
 
@@ -219,6 +226,12 @@ if [ $ACTION == "run" ]; then
 
     if [ "$OS" == "android" ] ; then
         echo "Android Device is : "  $UDID
+        if [ "$APP" == "xes" ]; then
+            echo "Uninstalling app..."
+            $CMD -s $UDID uninstall com.xes.jazhanghui.activity
+        fi
+
+        echo "Installing app..."
         $CMD -s $UDID install -r ${APP_ROOT_DIR}${APP}"$EXT"
     else
         echo "iOS Device is : "  $UDID
