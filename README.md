@@ -187,7 +187,7 @@ Android 查看apk 和 Main activity
 * 增加根据文本内容和控件类型来触发Back Key    BACK_KEY_TRIGGER_LIST:
 * 修复了有时会点击失败的问题
 
-## 2018-06-28
+## 2018-07-04
 * Update Java-Client to 1.6.1
 * Android通过屏蔽 "bounds"值 解决Xpath不能定位到 权限对话框的问题
 * 运行时增加version输出
