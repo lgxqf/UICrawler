@@ -73,15 +73,14 @@ startAppium(){
         BP_PORT=$[APP_PORT + 1]
         WDALOCALPORT=$[WDALOCALPORT + 1]
         CHROME_PORT=$[CHROME_PORT + 1]
-
         #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, WDALOCALPORT $WDALOCALPORT"
         #appium --session-override  -p  $APP_PORT -bp $BP_PORT --webdriveragent-port $WDALOCALPORT &
 
         #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
         #appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
 
-        echo "start appium at port $APP_PORT, BP_PORT $BP_PORT"
-        appium --session-override  -p  $APP_PORT -bp $BP_PORT &
+        #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
+        #appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
 
     done
 }
@@ -95,6 +94,7 @@ downloadApp(){
     case "$APP" in
         "xes")
             APK_URL="http://10.1.12.3/Android/Apk/current/xesapp.apk"
+            APK_URL="http://10.1.12.3/Android/Apk/current/xesapp.apk/app-gamma.apk"
             BUNDLE_URL="http://10.1.12.3/iOS/current/XesApp.ipa"
             ;;
 
@@ -125,12 +125,16 @@ downloadApp(){
 }
 
 triggerNightTestingRecord(){
+
+    #SERVER_IP=10.33.33.228
+    SERVER_IP=10.33.34.24
+
     if [ "$1" == "start" ]; then
-        curl -d "" http://10.33.13.7:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER
-        echo "\n night testing start message posted.  http://10.33.13.7:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER\n"
+        curl -d "" http://$SERVER_IP:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER
+        echo "\n night testing start message posted.  http://$SERVER_IP:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER\n"
     else
-        curl -d "" http://10.33.13.7:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER
-        echo "\n night testing stop  message posted. http://10.33.13.7:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER\n"
+        curl -d "" http://$SERVER_IP:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER
+        echo "\n night testing stop  message posted. http://$SERVER_IP:8081/server/app/night/testing/end/$UDID/$BUILD_NUMBER\n"
     fi
 }
 
@@ -226,13 +230,13 @@ if [ $ACTION == "run" ]; then
 
     if [ "$OS" == "android" ] ; then
         echo "Android Device is : "  $UDID
-        if [ "$APP" == "xes" ]; then
-            echo "Uninstalling app..."
-            $CMD -s $UDID uninstall com.xes.jazhanghui.activity
-        fi
+        #if [ "$APP" == "xes" ]; then
+        #    echo "Uninstalling app..."
+        #    $CMD -s $UDID uninstall com.xes.jazhanghui.activity
+        #fi
 
         echo "Installing app..."
-        $CMD -s $UDID install -r ${APP_ROOT_DIR}${APP}"$EXT"
+        $CMD -s $UDID install -r -d ${APP_ROOT_DIR}${APP}"$EXT"
     else
         echo "iOS Device is : "  $UDID
         EXT=".ipa"

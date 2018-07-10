@@ -50,7 +50,6 @@ QQ 技术交流群 ： 728183683
 
 
 ## 待开发功能 1.1版 预计6下旬月release
-* bounds="[0,2025][270,2030] 解决坐标中含有边界坐标值时xpath不能定位到元素的问题
 * 性能监控
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
@@ -129,6 +128,7 @@ Android 查看apk 和 Main activity
 ## Known issue
 * iOS 不支持wkwebview元素获取 https://github.com/appium/appium/issues/9408
 * 当有横屏和竖屏截图混合时 生成的mp4内容无效
+* Android中bounds=[device width, device height]时xpath不能定位到元素.（appium bug)
 
 
 ## 参考内容
@@ -191,3 +191,10 @@ Android 查看apk 和 Main activity
 * Update Java-Client to 1.6.1
 * Android通过屏蔽 "bounds"值 解决Xpath不能定位到 权限对话框的问题
 * 运行时增加version输出
+
+## 2018-07-05
+* Android 当待点击元素的bounds值中包含屏幕的height时，在查找元素的xpath中忽略bounds的值(功能已修改 见2018-07-10)
+
+## 2018-07-10
+* Android 当待点击元素的bounds值中包含屏幕的[width,height]时(通常包含这个值的元素在屏幕右下角)，在查找元素的xpath中忽略bounds的值。
+* 注： 之所以添加这个功能是为临时解决Appium在用Xpath查找元素时的一个bug. 当元素位于右下角时 xpath查找时如果包含bounds的值，会找不到元素。
