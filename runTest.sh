@@ -127,7 +127,7 @@ downloadApp(){
 triggerNightTestingRecord(){
 
     #SERVER_IP=10.33.33.228
-    SERVER_IP=10.33.34.24
+    SERVER_IP=10.33.10.11
 
     if [ "$1" == "start" ]; then
         curl -d "" http://$SERVER_IP:8081/server/app/night/testing/start/$UDID/$BUILD_NUMBER

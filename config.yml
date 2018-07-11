@@ -19,7 +19,8 @@ GENERAL:
   ENABLE_VERTICAL_SWIPE: false
   #运行时间限制(分钟)
   CRAWLER_RUNNING_TIME: 1800
-
+  #忽略底部元素Bounds值
+  REMOVE_BOTTOM_BOUND: true
 
 #一些默认值
 DEFAULT_VALUE:

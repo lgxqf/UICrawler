@@ -197,4 +197,7 @@ Android 查看apk 和 Main activity
 
 ## 2018-07-10
 * Android 当待点击元素的bounds值中包含屏幕的[width,height]时(通常包含这个值的元素在屏幕右下角)，在查找元素的xpath中忽略bounds的值。
-* 注： 之所以添加这个功能是为临时解决Appium在用Xpath查找元素时的一个bug. 当元素位于右下角时 xpath查找时如果包含bounds的值，会找不到元素。
+* 添加配置项  REMOVE_BOTTOM_BOUND 来开启和关闭该功能
+* 注：之所以添加这个功能是为临时解决Appium在用Xpath查找元素时的一个bug. 当元素位于右下角时 xpath查找时如果包含bounds的值，会找不到元素。
+* 更改测试报告中图片相关的路径为相对路径，方便Copy到其它目录后查看结果
+* 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
