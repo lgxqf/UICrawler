@@ -7,8 +7,8 @@ QQ 技术交流群 ： 728183683
 
 环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
-## 1.0 版 功能描述 
-### 支持Monkey功能及以下事件
+## 2.0 版 功能描述 
+### 1.支持Monkey功能及以下事件（Android & iOS)
 * 随机点击
 * 通过黑名单控制不想点击的区域
 * 特殊位置点击(需在文件中进行配置)
@@ -24,7 +24,7 @@ QQ 技术交流群 ： 728183683
 *      拖拽
 
 
-### 支持UI遍历及以下功能    
+### 2.支持UI遍历及以下功能 （Android & iOS)
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
@@ -32,15 +32,15 @@ QQ 技术交流群 ： 728183683
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
 * 支持根据关键字和控件类型触发Back key(Android)
+* 性能数据收集(内存和CPU) 生成perf_data.txt 
 
 
-### 支持小程序测试(Android Only)
+### 3.支持小程序测试(Android Only)
 * Monkey (iOS & Monkey)
 * UI遍历 Android only
 
 
-### 其它功能
-* 以上两个功能同时支持Android/iOS
+### 4.其它功能
 * 以上两个功能同时支持运行时间限制
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
@@ -50,7 +50,7 @@ QQ 技术交流群 ： 728183683
 
 
 ## 待开发功能 1.1版 预计6下旬月release
-* 性能监控
+* 将性能数据通过grafana显示 https://www.cnblogs.com/yyhh/p/5990228.html
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
 
@@ -201,3 +201,6 @@ Android 查看apk 和 Main activity
 * 注：之所以添加这个功能是为临时解决Appium在用Xpath查找元素时的一个bug. 当元素位于右下角时 xpath查找时如果包含bounds的值，会找不到元素。
 * 更改测试报告中图片相关的路径为相对路径，方便Copy到其它目录后查看结果
 * 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
+
+## 2018-07-11
+* 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
