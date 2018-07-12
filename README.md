@@ -211,7 +211,8 @@ Android 查看apk 和 Main activity
 * 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
 
 ## 2018-07-12
-* <font color=#0099ff>重要更新：  将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID</font>
+* <font color=#0099ff>重要更新：  Android 将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID, 将且要加上@resource-id 关键字</font>
+如ANDROID_BOTTOM_TAB_BAR_ID: 'com.xes.jazhanghui.activity:id/bottomBar'  更改变为 ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
 * 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
 * 测试报告中各项加入英文翻译
 
