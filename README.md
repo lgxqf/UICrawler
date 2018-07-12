@@ -47,7 +47,7 @@ QQ 技术交流群 ： 728183683
 
 
 ### 4.其它功能
-* 以上两个功能同时支持运行时间限制
+* 运行时间限制
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 生成整体操作步骤视频，方便重现发现的问题(见下图)
@@ -211,6 +211,7 @@ Android 查看apk 和 Main activity
 * 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
 
 ## 2018-07-12
+* <font color=#0099ff>重要更新：  将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID</font>
 * 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
 * 测试报告中各项加入英文翻译
-* <font color=#0099ff>重要更新 将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID</font>
+
