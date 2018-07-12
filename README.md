@@ -7,13 +7,14 @@ QQ 技术交流群 ： 728183683
 
 环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
+
 ## 2.0 版 功能描述 
 ### 1.UI遍历功能 Android/iOS 
 ### 2.Monkey功能 Android/iOS 
 ### 3.微信小程序 
 
 
-### 1.支持UI遍历及以下功能 （Android & iOS)
+### UI遍历及以下功能 
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
@@ -24,7 +25,7 @@ QQ 技术交流群 ： 728183683
 * 性能数据收集(内存和CPU) 生成perf_data.txt 
 
 
-### 2.支持Monkey功能及以下事件（Android & iOS)
+### Monkey功能及以下事件
 * 随机点击
 * 通过黑名单控制不想点击的区域
 * 特殊位置点击(需在文件中进行配置)
@@ -40,7 +41,7 @@ QQ 技术交流群 ： 728183683
 *      拖拽
 
 
-### 3.支持小程序测试
+### 小程序测试
 * Monkey (iOS & Monkey)
 * UI遍历 Android only
 
