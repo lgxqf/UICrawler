@@ -152,6 +152,7 @@ Android 查看apk 和 Main activity
 * XpathTester https://www.freeformatter.com/xpath-tester.html
 * Appium并发测试 https://www.cnblogs.com/testway/p/6140594.html
 * Android 性能采集 https://blog.csdn.net/bigconvience/article/details/35553983
+* Grafana http://docs.grafana.org/installation/mac/
 
 ## 一些技术文档
 * iOS多机远程控制技术 https://mp.weixin.qq.com/s/rN2xcO9gNIAoeY71NX_HZw
@@ -211,8 +212,12 @@ Android 查看apk 和 Main activity
 * 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
 
 ## 2018-07-12
-* <font color=#0099ff>重要更新：  Android 将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID, 将且要加上@resource-id 关键字</font>
+* 重要更新：  Android 将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID, 将且要加上@resource-id 关键字
 如ANDROID_BOTTOM_TAB_BAR_ID: 'com.xes.jazhanghui.activity:id/bottomBar'  更改变为 ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
 * 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
 * 测试报告中各项加入英文翻译
 
+## 2018-07-17
+* v 2.8
+* 添加 -x 参数 支持将性能数据写入到influxDB, -x需与-e结合使用。
+* 配置文件中添InfluxDB 配置项 INFLUXDB    

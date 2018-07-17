@@ -1,5 +1,5 @@
 GENERAL:
-  #截屏数量
+  #截屏数量 
   SCREENSHOT_COUNT: 500
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
@@ -31,6 +31,9 @@ DEFAULT_VALUE:
   #IOS 才会用到WDA_PORT
   IOS_WDA_PORT: 8100
 
+INFLUXDB:
+  DB_PORT: 8086
+  DB_IP: localhost
 
 #设置事件百分比 各事件百分比之和为100
 MONKEY:
@@ -100,8 +103,8 @@ CRITICAL_ELEMENT:
 
 
 #构建XPATH需要的一些内容
-  #UI底部TabBar
-  ANDROID_BOTTOM_TAB_BAR_ID: com.huxiu:id/footer_bar
+  #UI底部TabBar 多个id时用or拼接 如'@resource-id="id1" or @resource-id="id2"'
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.huxiu:id/footer_bar"'
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
   #注意值要加引号''
