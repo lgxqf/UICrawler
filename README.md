@@ -11,14 +11,17 @@ QQ 技术交流群 ： 728183683
 ## 2.0 版 功能描述 
 
 ### 1.UI遍历及以下功能 Android/iOS 
-* 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
+* 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.
+*
+       Android提供logcat的log. 
+       iOS提供系统log及crash相应的ips文件
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
 * 支持对输入框的文本输入(需在文件中进行配置 INPUT_TEXT_LIST)
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
 * 支持根据关键字和控件类型触发Back key(Android)
-* 性能数据收集(内存和CPU) 生成perf_data.txt ，写放到influxDB（需单独安装）
+* Android 性能数据收集(内存和CPU) 生成perf_data.txt ，写放到influxDB（需单独安装）
 
 
 ### 2.Monkey功能及以下事件 Android/iOS 
@@ -31,10 +34,11 @@ QQ 技术交流群 ： 728183683
 * 触发Back键(Android Only)
 * 重启app
 * 及以下手势操作(位置随机)
-*      双击
-*      双指放大
-*      双指缩小
-*      拖拽
+*
+         双击
+         双指放大
+         双指缩小
+         拖拽
 
 
 ### 3.微信小程序
@@ -159,8 +163,7 @@ Android 查看apk 和 Main activity
 * http://appium.io/docs/en/commands/mobile-command/
 * https://appiumpro.com/editions/12
 
-# 配置文件介绍
-* [配置文件介绍](doc/Config.md)
+# [配置文件介绍](doc/Config.md)
 
 
 # 测试报告 
