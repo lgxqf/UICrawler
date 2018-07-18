@@ -38,8 +38,8 @@ QQ 技术交流群 ： 728183683
 
 
 ### 3.微信小程序
-* Monkey (iOS & Monkey)
-* UI遍历 Android only
+* 微信小程序 Monkey (iOS & Android)
+* 微信小程序 UI遍历  (Android only)
 
 
 ### 4.其它功能
