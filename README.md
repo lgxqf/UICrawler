@@ -105,6 +105,25 @@ java -jar UICrawler.jar -f config.yml -u udid -t 4723 -m
 ### 查看支持的参数
 ```aidl
 java -jar UICrawler.jar -h
+
+    -a  Android package's main activity
+    -b  iOS bundle id
+    -c  Maximum click count
+    -d  Maximum crawler UI depth
+    -e  Record performance data
+    -f  Yaml config  file
+    -h  Print this usage information
+    -i  Ignore crash
+    -l  Execution loop count
+    -m  Run monkey
+    -p  Android package name
+    -r  Crawler running time
+    -t  Appium port
+    -u  Device serial
+    -v  Version
+    -w  WDA port for ios
+    -x  Write data to influx db
+
 ```
 
 ### 一些常用命令
