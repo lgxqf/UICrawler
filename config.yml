@@ -13,14 +13,24 @@ GENERAL:
   DEFAULT_POLLING_INTERVAL_SEC: 5
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
-  #是否屏蔽DOM树在Log中的显示
-  DISABLE_DOM_DISPLAY: false
   #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
   ENABLE_VERTICAL_SWIPE: false
   #运行时间限制(分钟)
   CRAWLER_RUNNING_TIME: 1800
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: true
+  #控制视频方向，竖屏或模屏
+  VIDEO_VERTICAL: false
+
+#输出更多的log,主要用于调试工具用
+LOG:
+  #将性能数据写入数据库相关的log
+  DB_LOG: false
+  #性能数据相关log
+  PERF_LOG: false
+  #是否屏蔽DOM树在log中的显示
+  DOM_DISPLAY: false
+
 
 #一些默认值
 DEFAULT_VALUE:

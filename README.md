@@ -1,7 +1,7 @@
 # UICrawler
 ## 基于Appium 1.8.1开发，Java版 App UI遍历工具
 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/demo.gif)
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
 
 QQ 技术交流群 ： 728183683
 
@@ -50,9 +50,9 @@ QQ 技术交流群 ： 728183683
 * 运行时间限制
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
-* 生成整体操作步骤视频，方便重现发现的问题(见下图)
+* 生成整体操作步骤视频，方便重现发现的问题
 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
+
 
 
 ## 待开发功能 1.1版 预计6下旬月release
@@ -152,14 +152,21 @@ Android 查看apk 和 Main activity
 * XpathTester https://www.freeformatter.com/xpath-tester.html
 * Appium并发测试 https://www.cnblogs.com/testway/p/6140594.html
 * Android 性能采集 https://blog.csdn.net/bigconvience/article/details/35553983
+
+
+## 依赖的工具
 * Grafana http://docs.grafana.org/installation/mac/
+* InfluxDB https://portal.influxdata.com/downloads
 
 ## 一些技术文档
+* Appium Java-Client API http://appium.github.io/java-client/
 * iOS多机远程控制技术 https://mp.weixin.qq.com/s/rN2xcO9gNIAoeY71NX_HZw
+* http://appium.io/docs/en/commands/mobile-command/
+* https://appiumpro.com/editions/12
 
 # 更多细节
 * [配置文件介绍](doc/Config.md)
-* [环境搭建](doc/Environment.md)
+
 
 # 测试报告 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/Test-Report.png)
@@ -217,7 +224,11 @@ Android 查看apk 和 Main activity
 * 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
 * 测试报告中各项加入英文翻译
 
-## 2018-07-17
-* v 2.8
-* 添加 -x 参数 支持将性能数据写入到influxDB, -x需与-e结合使用。
+## 2018-07-17 v2.8
+* 添加 -x 参数 支持将性能数据写入到influxDB, -x 要与 -e 结合使用。 （需要安装influxdb https://portal.influxdata.com/downloads)
 * 配置文件中添InfluxDB 配置项 INFLUXDB    
+
+## 2018-07-18
+* 修复生成遍历视频时因为有不同方向截图而导致生成的视频黑屏的问题
+* 添加VIDEO_VERTICAL 控制视频的显示方向 true为竖屏 false为横屏
+* 命令行输出增加视频生成进度显示
