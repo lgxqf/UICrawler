@@ -9,12 +9,8 @@ QQ 技术交流群 ： 728183683
 
 
 ## 2.0 版 功能描述 
-### 1.UI遍历功能 Android/iOS 
-### 2.Monkey功能 Android/iOS 
-### 3.微信小程序 
 
-
-### UI遍历及以下功能 
+### 1.UI遍历及以下功能 Android/iOS 
 * 基于深度优先的原则，点击UI上的元素。当发现Crash时会提供操作步骤截图及相应的Log.(Android提供logcat的log. iOS提供系统log及crash相应的ips文件)
 * 元素遍历结束或按下Ctrl + C键会生成HTML测试报告。测试报告中汇集了测试统计、log及截图的相应信息  
 * 同一个元素只会点击一次(白名单中的元素可能会被多次点击)
@@ -25,7 +21,7 @@ QQ 技术交流群 ： 728183683
 * 性能数据收集(内存和CPU) 生成perf_data.txt 
 
 
-### Monkey功能及以下事件
+### 2.Monkey功能及以下事件 Android/iOS 
 * 随机点击
 * 通过黑名单控制不想点击的区域
 * 特殊位置点击(需在文件中进行配置)
@@ -41,7 +37,7 @@ QQ 技术交流群 ： 728183683
 *      拖拽
 
 
-### 小程序测试
+### 3.微信小程序
 * Monkey (iOS & Monkey)
 * UI遍历 Android only
 
@@ -51,14 +47,6 @@ QQ 技术交流群 ： 728183683
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 生成整体操作步骤视频，方便重现发现的问题
-
-
-
-
-## 待开发功能 1.1版 预计6下旬月release
-* 将性能数据通过grafana显示 https://www.cnblogs.com/yyhh/p/5990228.html
-* 支持遍历顺序控制
-* 根据执行步骤重现bug
 
 
 ## 配置文件可配置项
@@ -72,11 +60,18 @@ QQ 技术交流群 ： 728183683
 * 待输入文本列表及控件类型
 
 
+## 待开发功能
+* 将性能数据通过grafana显示 https://www.cnblogs.com/yyhh/p/5990228.html
+* 支持遍历顺序控制
+* 根据执行步骤重现bug
+
+## 运行工具
+
 ### 下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/1mNci6SWNHPuLj_mvrfgIbg)
 ### 下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
-### 根据待测试App修改配置文件中下列各项的值，其它值用默认值即可 [详情见 Config.md](doc/Config.md)
+### 根据待测试App修改配置文件中下列各项的值 [详情见 Config.md](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
   * ANDROID_MAIN_ACTIVITY
@@ -84,7 +79,7 @@ QQ 技术交流群 ： 728183683
   * IOS_BUNDLE_ID
   * IOS_BUNDLE_NAME
   * IOS_IPA_NAME
-### Monkey配置项可选， 详情见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
+  #### Monkey配置项可选， 详情见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
 ### 启动appium
 ```bash
 appium --session-override -p 4723
@@ -128,12 +123,16 @@ Android 查看apk 和 Main activity
 * iOS设备一定要打开"开发者选项"里的“Enable UI Automation” https://www.jianshu.com/p/a1d075b3472c
 * iOS测试包必须是debug版的
 * 同时运行多台ios设备时要每台设备要设置不同的IOS_WDA_PORT ： 8001-8888
-* Android7的手机必须安装Uiautomator2 server 的两个apk(安装deskstop版appium,初次连接appium会自动安装), 也可进入到[apk](https://github.com/lgxqf/UICrawler/tree/master/apk)目录下通过adb安装
-* Android6及以下的手机不要安装Uiautomator2 server的APK
+* Android7及以上的手机必须安装Uiautomator2 server 的两个apk(安装deskstop版appium,初次连接appium会自动安装), 也可进入到[apk](https://github.com/lgxqf/UICrawler/tree/master/apk)目录下通过adb安装
+
+
+## 依赖的工具
+* Grafana http://docs.grafana.org/installation/mac/
+* InfluxDB https://portal.influxdata.com/downloads
+
 
 ## Known issue
-* iOS 不支持wkwebview元素获取 https://github.com/appium/appium/issues/9408
-* 当有横屏和竖屏截图混合时 生成的mp4内容无效
+* iOS不支持WKWebview元素获取 https://github.com/appium/appium/issues/9408
 * Android中bounds=[device width, device height]时xpath不能定位到元素.（appium bug)
 
 
@@ -154,17 +153,13 @@ Android 查看apk 和 Main activity
 * Android 性能采集 https://blog.csdn.net/bigconvience/article/details/35553983
 
 
-## 依赖的工具
-* Grafana http://docs.grafana.org/installation/mac/
-* InfluxDB https://portal.influxdata.com/downloads
-
 ## 一些技术文档
 * Appium Java-Client API http://appium.github.io/java-client/
 * iOS多机远程控制技术 https://mp.weixin.qq.com/s/rN2xcO9gNIAoeY71NX_HZw
 * http://appium.io/docs/en/commands/mobile-command/
 * https://appiumpro.com/editions/12
 
-# 更多细节
+# 配置文件介绍
 * [配置文件介绍](doc/Config.md)
 
 
