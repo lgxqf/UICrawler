@@ -51,6 +51,8 @@ QQ 技术交流群 ： 728183683
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 生成整体操作步骤视频，方便重现发现的问题
+* 性能数据采集 Android : CPU+Memory   iOS: instruments trace data https://appiumpro.com/editions/12
+
 
 
 
@@ -68,6 +70,7 @@ QQ 技术交流群 ： 728183683
 * 将性能数据通过grafana显示 https://www.cnblogs.com/yyhh/p/5990228.html
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
+* 划动半屏  划动一屏
 
 ## 运行工具
 
@@ -122,7 +125,7 @@ java -jar UICrawler.jar -h
     -u  Device serial
     -v  Version
     -w  WDA port for ios
-    -x  Write data to influx db
+    -x  Write data to influxDB
 
 ```
 
@@ -181,6 +184,7 @@ Android 查看apk 和 Main activity
 * iOS多机远程控制技术 https://mp.weixin.qq.com/s/rN2xcO9gNIAoeY71NX_HZw
 * http://appium.io/docs/en/commands/mobile-command/
 * https://appiumpro.com/editions/12
+* SpringAOP https://blog.csdn.net/zknxx/article/details/53240959
 
 # [配置文件介绍](doc/Config.md)
 
@@ -245,7 +249,13 @@ Android 查看apk 和 Main activity
 * 添加 -x 参数 支持将性能数据写入到influxDB, -x 要与 -e 结合使用。 （需要安装influxdb https://portal.influxdata.com/downloads)
 * 配置文件中添InfluxDB 配置项 INFLUXDB    
 
-## 2018-07-18
+## 2018-07-18 v2.9
 * 修复生成遍历视频时因为有不同方向截图而导致生成的视频黑屏的问题
 * 添加VIDEO_VERTICAL 控制视频的显示方向 true为竖屏 false为横屏
 * 命令行输出增加视频生成进度显示
+
+## 2018-07-23 v2.10
+* 修复视频生成时只有一半截图的问题
+
+## 2018-08-01 v2.11
+* 增加iOS性能监控 生成trace.zip， 性能数据需结合instruments查看， 详情请见 https://appiumpro.com/editions/12
