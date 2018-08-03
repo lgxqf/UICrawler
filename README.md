@@ -84,7 +84,7 @@ appium --session-override -p 4723
 -p 设定appium server的端口 , 不加参数默认为4723
 ```
 
-### 5.1 运行元素遍历(必须有yml配置文件), 运行前请先阅读[注意事项](https://github.com/lgxqf/UICrawler#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+### 5.1 运行元素遍历(必须有yml配置文件)
 ```aidl
 java -jar UICrawler.jar -f config.yml -u udid -t 4723
 -u 指定设备udid
@@ -96,18 +96,19 @@ java -jar UICrawler.jar -f config.yml -u udid -t 4723
 java -jar UICrawler.jar -f config.yml -u udid -t 4723 -m
 ```
 
-### 5.3 运行微信小程序测试，需修改以下各值
+### 5.3 运行微信小程序测试，需修改 MINI_PROGRAM_NAME的值，并按照下面的值设置 CRITICAL_ELEMENT中相应的值，才会启动微信进入小程序
 ```
 #小程序
 MINI_PROGRAM:
   MINI_PROGRAM_NAME: 此处值为待测的小程序的名字
   MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
 
-#以下的内容很关键，而且需要根据不同的APP定制
 CRITICAL_ELEMENT:
+  #Android 微信
   ANDROID_PACKAGE: com.tencent.mm
   ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
 
+  #iOS 微信
   IOS_BUNDLE_ID: com.tencent.xin
   IOS_BUNDLE_NAME: 微信
   IOS_IPA_NAME: wechat
