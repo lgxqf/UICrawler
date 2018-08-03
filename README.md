@@ -21,7 +21,6 @@ QQ 技术交流群 ： 728183683
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
 * 支持根据关键字和控件类型触发Back key(Android)
-* Android 性能数据收集(内存和CPU) 生成perf_data.txt ，写放到influxDB（需单独安装）
 
 
 ### 2.Monkey功能及以下事件 Android/iOS 
@@ -51,9 +50,9 @@ QQ 技术交流群 ： 728183683
 * 每次点击都会生一个一截图，截图中被点击的位置会用红点标注，方便查找点击位置
 * 当检查到Crash时，为每个Crash提供单独的操作步骤截图和mp4格式的视频文件
 * 生成整体操作步骤视频，方便重现发现的问题
-* 性能数据采集 
-*        Android : CPU+Memory   生成perf.txt 并支持写入influxDB
-*        iOS: appium --session-override --relaxed-security https://appiumpro.com/editions/12
+* 性能数据采集，执行时添加-e参数
+*        Android : 每秒采集一次CPU和Memory数据 生成perf_data.txt并写放到influxDB（需单添加-x参数，且influxDB要单独安装）
+*        iOS: 要求以appium --session-override --relaxed-security 启动appium, 之后会生成XCode instrument能直接读取的性能数据 详见 https://appiumpro.com/editions/12
 
 
 ## 配置文件主要可配置项
@@ -74,11 +73,11 @@ QQ 技术交流群 ： 728183683
 
 ## 运行工具
 
-### 下载Jar包
+### 1.下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/1mNci6SWNHPuLj_mvrfgIbg)
-### 下载配置文件
+### 2.下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
-### 根据待测试App修改配置文件中下列各项的值 [详情见 Config.md](doc/Config.md)
+### 3.根据待测试App修改配置文件中下列各项的值 [详情见 Config.md](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
   * ANDROID_MAIN_ACTIVITY
@@ -87,20 +86,20 @@ QQ 技术交流群 ： 728183683
   * IOS_BUNDLE_NAME
   * IOS_IPA_NAME
   #### Monkey配置项可选， 详情见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
-### 启动appium
+### 4.启动appium
 ```bash
 appium --session-override -p 4723
 -p 设定appium server的端口 , 不加参数默认为4723
 ```
 
-### 运行UICrawler元素遍历(必须有yml配置文件), 运行前请先阅读[注意事项](https://github.com/lgxqf/UICrawler#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+### 5.1 运行UICrawler元素遍历(必须有yml配置文件), 运行前请先阅读[注意事项](https://github.com/lgxqf/UICrawler#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 ```aidl
 java -jar UICrawler.jar -f config.yml -u udid -t 4723
 -u 指定设备udid
 -t 指定appium server的端口（此项为可选项，默认值是4723)
 ```
 
-### 运行UICrawler Monkey
+### 5.2 运行UICrawler Monkey
 ```aidl
 java -jar UICrawler.jar -f config.yml -u udid -t 4723 -m
 ```
