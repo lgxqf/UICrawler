@@ -55,7 +55,7 @@ QQ 技术交流群 ： 728183683
 *        iOS: 要求以appium --session-override --relaxed-security 启动appium, 之后会生成XCode instrument能直接读取的性能数据 详见 https://appiumpro.com/editions/12
 
 
-## 5.待开发功能
+### 5.待开发功能
 * 将性能数据通过grafana显示 
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
@@ -84,17 +84,36 @@ appium --session-override -p 4723
 -p 设定appium server的端口 , 不加参数默认为4723
 ```
 
-### 5.1 运行UICrawler元素遍历(必须有yml配置文件), 运行前请先阅读[注意事项](https://github.com/lgxqf/UICrawler#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+### 5.1 运行元素遍历(必须有yml配置文件), 运行前请先阅读[注意事项](https://github.com/lgxqf/UICrawler#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 ```aidl
 java -jar UICrawler.jar -f config.yml -u udid -t 4723
 -u 指定设备udid
 -t 指定appium server的端口（此项为可选项，默认值是4723)
 ```
 
-### 5.2 运行UICrawler Monkey
+### 5.2 运行 Monkey功能
 ```aidl
 java -jar UICrawler.jar -f config.yml -u udid -t 4723 -m
 ```
+
+### 5.3 运行微信小程序测试，需修改以下各值
+```
+#小程序
+MINI_PROGRAM:
+  MINI_PROGRAM_NAME: 此处值为待测的小程序的名字
+  MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
+
+#以下的内容很关键，而且需要根据不同的APP定制
+CRITICAL_ELEMENT:
+  ANDROID_PACKAGE: com.tencent.mm
+  ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
+
+  IOS_BUNDLE_ID: com.tencent.xin
+  IOS_BUNDLE_NAME: 微信
+  IOS_IPA_NAME: wechat
+  
+```
+
 
 ### 查看支持的参数
 ```aidl
