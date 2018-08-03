@@ -55,21 +55,13 @@ QQ 技术交流群 ： 728183683
 *        iOS: 要求以appium --session-override --relaxed-security 启动appium, 之后会生成XCode instrument能直接读取的性能数据 详见 https://appiumpro.com/editions/12
 
 
-## 配置文件主要可配置项
-* 截图数量控制
-* 黑名单、白名单
-* 限制遍历深度、次数、时间
-* 遍历界面元素的xpath
-* 自动登录的用户名和密码及相应的UI元素ID 
-* 待输入文本列表及待输入的控件类型
-* Monkey触发事件类型及比率
-
-
-## 待开发功能
-* 将性能数据通过grafana显示 https://www.cnblogs.com/yyhh/p/5990228.html
+## 5.待开发功能
+* 将性能数据通过grafana显示 
 * 支持遍历顺序控制
 * 根据执行步骤重现bug
 * 划动半屏  划动一屏
+* 黑名单支持XPath
+
 
 ## 运行工具
 
@@ -144,6 +136,22 @@ Android 查看apk 和 Main activity
   "apk"是apk文件路径
 ```
 
+## [配置文件介绍](doc/Config.md)
+
+## 配置文件主要可配置项
+* 截图数量控制
+* 黑名单、白名单
+* 限制遍历深度、次数、时间
+* 遍历界面元素的xpath
+* 自动登录的用户名和密码及相应的UI元素ID 
+* 待输入文本列表及待输入的控件类型
+* Monkey触发事件类型及比率
+
+
+## 测试报告 
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/Test-Report.png)
+
+
 ## 注意事项
 * iOS设备一定要打开"开发者选项"里的“Enable UI Automation” https://www.jianshu.com/p/a1d075b3472c
 * iOS测试包必须是debug版的
@@ -159,6 +167,13 @@ Android 查看apk 和 Main activity
 ## Known issue
 * iOS不支持WKWebview元素获取 https://github.com/appium/appium/issues/9408
 * Android中bounds=[device width, device height]时xpath不能定位到元素.（appium bug)
+
+
+## 关于如何发挥测试工具的价值
+* 用不同的账号运行测试，因为每个账号可能看到的内容不一样
+* 用不同的手机系统版本运行测试，尽可能做到iOS 9-11, Android 4-8 都覆盖到，如果资源有限无法同时运行多台设备，每天可以选择一两个系统版的手机去运行测试
+* 用不同的手机运行测试，尤其安卓碎片化严重，手机厂商多，有的问题只有特定手机才能发现
+* 关于测试运行的频度，只要有代码改动建议至少一天一次，下班时运行，第二天看结果 
 
 
 ## 参考内容
@@ -185,76 +200,64 @@ Android 查看apk 和 Main activity
 * https://appiumpro.com/editions/12
 * SpringAOP https://blog.csdn.net/zknxx/article/details/53240959
 
-# [配置文件介绍](doc/Config.md)
 
-
-# 测试报告 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/Test-Report.png)
-
-# 关于如何发挥测试工具的价值
-* 用不同的账号运行测试，因为每个账号可能看到的内容不一样
-* 用不同的手机系统版本运行测试，尽可能做到iOS 9-11, Android 4-8 都覆盖到，如果资源有限无法同时运行多台设备，每天可以选择一两个系统版的手机去运行测试
-* 用不同的手机运行测试，尤其安卓碎片化严重，手机厂商多，有的问题只有特定手机才能发现
-* 关于测试运行的频度，只要有代码改动建议至少一天一次，下班时运行，第二天看结果 
-
-
-# Chnage History
-## 2018-06-14  
+## Chnage History
+### 2018-06-14  
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME 
 
-## 2018-06-15
+### 2018-06-15
 * 更改特殊点坐标的选取为顺序选取(原来是随机选取)
 * 为文本查找增加划动查找功能(Android)
 * 增加配置项 DISABLE_DOM_DISPLAY 屏蔽/开启 UI DOM Tree在Log中的显示
 * 将Monkey和UICrawler时间限制统一合并到参数 -r
 
-## 2018-06-16
+### 2018-06-16
 * 增加小程序遍历结束判断
 
-## 2018-06-19
+### 2018-06-19
 * 为小程序测试增加划动查找"小程序"功能（Android）
 * 为Monkey功能加入Back键事件支持
 
-## 2018-06-26
+### 2018-06-26
 * 支持循环执行UI遍历  见参数 -l 
 
-## 2018-06-28
+### 2018-06-28
 * 加入遍历深度参数支持 -d
 * 增加根据文本内容和控件类型来触发Back Key    BACK_KEY_TRIGGER_LIST:
 * 修复了有时会点击失败的问题
 
-## 2018-07-04
+### 2018-07-04
 * Update Java-Client to 1.6.1
 * Android通过屏蔽 "bounds"值 解决Xpath不能定位到 权限对话框的问题
 * 运行时增加version输出
 
-## 2018-07-05
+### 2018-07-05
 * Android 当待点击元素的bounds值中包含屏幕的height时，在查找元素的xpath中忽略bounds的值(功能已修改 见2018-07-10)
 
-## 2018-07-10
+### 2018-07-10
 * Android 当待点击元素的bounds值中包含屏幕的[width,height]时(通常包含这个值的元素在屏幕右下角)，在查找元素的xpath中忽略bounds的值。
 * 添加配置项  REMOVE_BOTTOM_BOUND 来开启和关闭该功能
 * 注：之所以添加这个功能是为临时解决Appium在用Xpath查找元素时的一个bug. 当元素位于右下角时 xpath查找时如果包含bounds的值，会找不到元素。
 * 更改测试报告中图片相关的路径为相对路径，方便Copy到其它目录后查看结果
 * 添加性能监控输出，获取内存和CPU的值 参数-e 生成 perf_data.txt 
 
-## 2018-07-12
+### 2018-07-12
 * 重要更新：  Android 将原来tab只支持单个Resource ID改为可由or拼接的多个Resource ID, 将且要加上@resource-id 关键字
 如ANDROID_BOTTOM_TAB_BAR_ID: 'com.xes.jazhanghui.activity:id/bottomBar'  更改变为 ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
 * 当iOS获取不到XCUIApplication (app name)时，返回config中设备的 IOS_BUNDLE_NAME
 * 测试报告中各项加入英文翻译
 
-## 2018-07-17 v2.8
+### 2018-07-17 v2.8
 * 添加 -x 参数 支持将性能数据写入到influxDB, -x 要与 -e 结合使用。 （需要安装influxdb https://portal.influxdata.com/downloads)
 * 配置文件中添InfluxDB 配置项 INFLUXDB    
 
-## 2018-07-18 v2.9
+### 2018-07-18 v2.9
 * 修复生成遍历视频时因为有不同方向截图而导致生成的视频黑屏的问题
 * 添加VIDEO_VERTICAL 控制视频的显示方向 true为竖屏 false为横屏
 * 命令行输出增加视频生成进度显示
 
-## 2018-07-23 v2.10
+### 2018-07-23 v2.10
 * 修复视频生成时只有一半截图的问题
 
-## 2018-08-01 v2.11
-* 增加iOS性能监控 生成trace.zip， 性能数据需结合instruments查看， 详情请见 https://appiumpro.com/editions/12
+### 2018-08-01 v2.11
+* 增加iOS性能监控 -e 生成trace.zip， 性能数据需结合instruments查看， 详情请见 https://appiumpro.com/editions/12
