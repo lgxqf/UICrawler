@@ -67,8 +67,10 @@ QQ 技术交流群 ： 728183683
 
 ### 1.下载Jar包
 [UICrawler.jar](https://pan.baidu.com/s/1mNci6SWNHPuLj_mvrfgIbg)
+
 ### 2.下载配置文件
 [config.yml](https://github.com/lgxqf/UICrawler/blob/master/config.yml) 
+
 ### 3.根据待测试App修改配置文件中下列各项的值 [详情见 Config.md](doc/Config.md)
   #### Android
   * ANDROID_PACKAGE
@@ -78,6 +80,7 @@ QQ 技术交流群 ： 728183683
   * IOS_BUNDLE_NAME
   * IOS_IPA_NAME
   #### Monkey配置项可选， 详情见 [Monkey配置](https://github.com/lgxqf/UICrawler/blob/master/doc/Config.md#monkey%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE)  
+
 ### 4.启动appium
 ```bash
 appium --session-override -p 4723
