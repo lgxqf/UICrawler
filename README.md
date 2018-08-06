@@ -284,3 +284,6 @@ Android 查看apk 和 Main activity
 
 ### 2018-08-01 v2.11
 * 增加iOS性能监控 -e 生成trace.zip， 性能数据需结合instruments查看， 详情请见 https://appiumpro.com/editions/12
+
+### 2018-08-06 v2.12
+* 修改了一些错误提示，找不到设备时会列出当前的设备列表
