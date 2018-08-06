@@ -15,15 +15,66 @@ UDID=$4
 APPIUM_PORT=$5
 CONFIG=$6
 BUILD_NUMBER=$7
+
+
 JENKINS_ROOT="/data/jenkins/"
 APP_ROOT_DIR="${JENKINS_ROOT}/uicrawler/app/"
-CRAWLER="${JENKINS_ROOT}/uicrawler/uicrawler.jar"
+#TOOL="${JENKINS_ROOT}/uicrawler/uicrawler.jar"
+
+if [ "$APP" == "weclass" ]; then
+    UDID=$3
+    BUILD_NUMBER=$4
+    APP_ROOT_DIR="${JENKINS_ROOT}/uiautomation/app/"
+fi
 
 #Linux Agent
 #ADB=/root/android_sdk/platform-tools/adb
 
 #Mac Mini
 ADB=/Users/mg/Project/AndroidSDK/platform-tools/adb
+
+TIMESTAMP(){
+    echo $(date "+%Y-%m-%d %H:%M:%S")
+}
+
+proc_num(){
+	num=`ps -ef | grep $1 | grep -v grep | wc -l`
+	return $num
+}
+
+proc_id(){
+	pid=`ps -ef | grep $1 | grep -v grep | awk '{print $2}'`
+	echo "pid" ${pid}
+}
+
+checkProcess(){
+	proc_name=startJenkins  #进程名
+	file_name=/data/service/monitor/logs/$proc_name.log #日志路径
+
+	while true
+	do
+		proc_num proc_name
+		number=$?
+		echo $(TIMESTAMP):  $proc_name" 进程数" ${number} >> $file_name
+		if [ $number -eq 0 ]                                    # 判断进程是否存在
+		then
+			echo '钉钉通知开始' >> $file_name
+			curl 'https://oapi.dingtalk.com/robot/send?access_token=98e3b91cc5161833ff2733e672509d6d5a8278deee1d2cfda914a40569fbd966' \
+			   -H 'Content-Type: application/json' \
+			   -d '
+			  {"msgtype": "text",
+			    "text": {
+			        "content": "警告！！生产环境应用 '$proc_name' 停止运行! 请检查!"
+			     }
+			  }'
+			sleep 5
+			echo '钉钉通知结束' >> $file_name
+			break
+		fi
+
+		sleep 30
+	done
+}
 
 checkResult(){
     pwd && ls 
@@ -33,10 +84,26 @@ checkResult(){
     echo $isCrash
 
     if [ "$isCrash" -eq 1 ]; then
-        echo "equal"
+        echo "No Crash found"
     else
-        echo "not equal"
+        echo "Crash found!"
         RET=1
+    fi
+
+    exit $RET
+}
+
+checkWCResult(){
+    isCrash=`find . -iname *failure.png | wc -l`
+
+    RET=0
+    echo $isCrash
+
+    if [ "$isCrash" -eq 1 ]; then
+        echo "failure found"
+        RET=1
+    else
+        echo "no failure found"
     fi
 
     exit $RET
@@ -73,18 +140,15 @@ startAppium(){
         BP_PORT=$[APP_PORT + 1]
         WDALOCALPORT=$[WDALOCALPORT + 1]
         CHROME_PORT=$[CHROME_PORT + 1]
+
         #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, WDALOCALPORT $WDALOCALPORT"
         #appium --session-override  -p  $APP_PORT -bp $BP_PORT --webdriveragent-port $WDALOCALPORT &
 
         #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
-        #appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
-
-        #echo "start appium at port $APP_PORT, BP_PORT $BP_PORT, CHROME_PORT $CHROME_PORT"
-        #appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
+        appium --session-override  -p  $APP_PORT -bp $BP_PORT --chromedriver-port $CHROME_PORT &
 
     done
 }
-
 
 
 downloadApp(){
@@ -98,8 +162,9 @@ downloadApp(){
             BUNDLE_URL="http://10.1.12.3/iOS/current/XesApp.ipa"
             ;;
 
-        "new")
-            echo "new"
+        "weclass")
+            echo "weclass"
+
             ;;
 
         *)
@@ -121,12 +186,12 @@ downloadApp(){
     FILE=${APP_ROOT_DIR}${APP}"$EXT"
     echo  $DOWNLOAD_URL  "====>" $FILE
 
-    curl "$DOWNLOAD_URL" -o $FILE --progress
+    if [ "$APP" == "xes" ]; then
+        curl "$DOWNLOAD_URL" -o $FILE --progress
+    fi
 }
 
 triggerNightTestingRecord(){
-
-    #SERVER_IP=10.33.33.228
     SERVER_IP=10.33.10.11
 
     if [ "$1" == "start" ]; then
@@ -159,6 +224,10 @@ fi
 
 if [ "$ACTION" == "check" ]; then
     checkResult
+fi
+
+if [ "$ACTION" == "checkWC" ]; then
+    checkWCResult
 fi
 
 if [ "$ACTION" == "kill-task" ]; then
@@ -212,30 +281,32 @@ if [ "$ACTION" == "download" ]; then
     exit 0
 fi
 
-if [ $ACTION == "run" ]; then
-    if [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ]; then
-        echo "Please input valid value for udid , os , config file, appium port"
+if [ $ACTION == "run" ] || [ $ACTION == "install" ]; then
+#    if [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ]; then
+#        echo "Please input valid value for udid , os , config file, appium port"
+#        exit 1
+#    fi
+    if [ -z "$2" ] || [ -z "$3" ]; then
+        echo "Please input valid value for udid, app "
         exit 1
     fi
 
-    APPNAME=
-
     echo "Udid : " $UDID
-    echo "OS : " $OS
 
     echo "installing app..."
 
-    CMD=$ADB
     EXT=".apk"
 
-    if [ "$OS" == "android" ] ; then
+    LEN=${#UDID}
+
+    if [ $LEN -lt 20 ]; then
         echo "Android Device is : "  $UDID
         #if [ "$APP" == "xes" ]; then
         #    echo "Uninstalling app..."
         #    $CMD -s $UDID uninstall com.xes.jazhanghui.activity
         #fi
-
         echo "Installing app..."
+        CMD=$ADB
         $CMD -s $UDID install -r -d ${APP_ROOT_DIR}${APP}"$EXT"
     else
         echo "iOS Device is : "  $UDID
