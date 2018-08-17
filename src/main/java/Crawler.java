@@ -17,7 +17,7 @@ public class Crawler {
     private static Map<String,String> summaryMap;//= new ListOrderedMap();
     private static boolean isMonkey = false;
     private static List<String> crashFileList;
-    private static File repoStepFile;
+    //private static File repoStepFile;
     private static boolean isReported = false;
     private static String udid;
 
@@ -39,8 +39,6 @@ public class Crawler {
     }
 
     private static void executeTask(){
-        //repoStepFile = new File(ConfigUtil.getRootDir() +"/reproduceStep.txt");
-        //Util.writeFile(repoStepFile,XPathUtil.getRepoStep().toString());
         generateReport();
         generateVideo();
         isReported = true;
@@ -51,7 +49,7 @@ public class Crawler {
     }
 
     public static void main(String []args) throws Exception{
-        String version = "2.11 ---Aug/1/2018";
+        String version = "2.14 ---Aug/17/2018";
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
 

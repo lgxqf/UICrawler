@@ -29,7 +29,6 @@ import java.io.FileOutputStream;
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
-//import io.appium.java_client.android.AndroidKeyCode;
 
 
 public final class Driver {
@@ -39,8 +38,7 @@ public final class Driver {
     private static int deviceHeight;
     private static int deviceWidth;
     private static final int APP_START_WAIT_TIME = 20;
-    //private static boolean isHideXml = ConfigUtil.getBooleanValue(ConfigUtil.DISABLE_DOM_DISPLAY);
-
+    private static int screenshotCount = 0;
 
     public static void startPerfRecordiOS(){
         log.info(MyLogger.getMethodName());
@@ -143,32 +141,42 @@ public final class Driver {
         //等待1秒再截图，不然界面还在变化，载图不是完整初始化后的页面
         sleep(1);
 
+        File screenShot = null;
+
         try {
 
-        File screenShot = driver.getScreenshotAs(OutputType.FILE);
+            if(Util.isAndroid()) {
+                screenShot = driver.getScreenshotAs(OutputType.FILE);
+            }else{
+                String fileName = ConfigUtil.getRootDir() + File.separator +"del.png";
+                screenShot = new File(fileName);
+                Util.exeCmd("idevicescreenshot -u " + ConfigUtil.getUdid() + " " + fileName);
+            }
 
-        log.info("screenShotName: " + screenShotName);
-
+            log.info("screenShotName: " + screenShotName);
 
             FileUtils.copyFile(screenShot, new File(screenShotName));
 
-            String path = ConfigUtil.getRootDir() + File.separator + ConfigUtil.SCREEN_SHOT;
+            if(++screenshotCount % 5 == 0) {
+                log.info("Screenshot count is " + screenshotCount);
+                String path = ConfigUtil.getRootDir() + File.separator + ConfigUtil.SCREEN_SHOT;
 
-            File file = new File(path);
+                File file = new File(path);
 
-            File[] array = file.listFiles();
+                File[] array = file.listFiles();
 
-            if(array.length > ConfigUtil.getScreenshotCount()) {
-                File delFile = array[0];
+                if (array.length > ConfigUtil.getScreenshotCount()) {
+                    File delFile = array[0];
 
-                for (File f : array) {
-                    if (f.getName().compareTo(delFile.getName()) < 0) {
-                        delFile = f;
+                    for (File f : array) {
+                        if (f.getName().compareTo(delFile.getName()) < 0) {
+                            delFile = f;
+                        }
                     }
-                }
 
-                log.info(delFile.toString());
-                delFile.delete();
+                    log.info(delFile.toString());
+                    delFile.delete();
+                }
             }
         } catch (Exception e) {
             log.info("Fail to take screenshot!");
@@ -351,7 +359,6 @@ public final class Driver {
         touchAction.press(PointOption.point(point.getX(),point.getY())).waitAction(WaitOptions.waitOptions(Duration.ofMillis(50))).release().perform();
     }
 
-
     /**
      * 按住元素的底部中间，向上滑动元素的高度
      *
@@ -416,8 +423,8 @@ public final class Driver {
             log.error("scroll from : startX " +startX + ", startY "+ startY+ ", to  endX "+ endX+ ",endY "+ endY);
             e.printStackTrace();
         }
-        //touchAction.press(startX, startY).waitAction(Duration.ofSeconds(1)).moveTo(endX, endY).release().perform();
     }
+
     /**
      * 向下滑动，从某个元素的顶部中间位置开始向下滑动一段距离
      * @param yDiff

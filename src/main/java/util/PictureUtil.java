@@ -67,12 +67,12 @@ public class PictureUtil {
 
     public static String takeAndModifyScreenShot(List<Point> list,String ext){
 
-        return takeAndModifyScreenShot(list,50,ext);
+        return takeAndModifyScreenShot(list,100,ext);
     }
 
     public static String takeAndModifyScreenShot(int x, int y){
 
-        return takeAndModifyScreenShot(x,y,50);
+        return takeAndModifyScreenShot(x,y,100);
     }
 
     public static String takeAndModifyScreenShot(int x, int y,int radius){
@@ -103,14 +103,6 @@ public class PictureUtil {
         return img;
     }
 
-//    public static void drawPoint(String srcImagePath,int x,int y,int width,int height,Color color){
-//        Point point = new Point(x,y);
-//        List<Point> list = new ArrayList<>();
-//        list.add(point);
-//
-//        drawPoint(srcImagePath, list, width, height, color);
-//    }
-
     public static void drawPoint(String srcImagePath,List<Point> pointList,int width,int height,Color color){
         FileOutputStream fos = null;
 
@@ -125,7 +117,7 @@ public class PictureUtil {
 
             for(Point point : pointList) {
                 g2d.setColor(Color.BLACK);
-                g2d.fillOval(point.x, point.y, 20, 20);
+                g2d.fillOval(point.x, point.y, 40, 40);
 
                 g2d.setColor(color);
                 g2d.fillOval(point.x, point.y, width, height);            //填充一个椭圆形
@@ -147,6 +139,7 @@ public class PictureUtil {
             }
         }
     }
+
     /**
      * 导入本地图片到缓冲区
      */

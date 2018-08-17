@@ -1070,12 +1070,12 @@ public class XPathUtil {
         Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
         NodeList nodes = (NodeList) xpath.evaluate(expression, document, XPathConstants.NODESET);
 
-        log.info(String.valueOf("tb nodes length : " + nodes.getLength()));
+        log.info(String.valueOf("tab bar nodes length : " + nodes.getLength()));
 
         int length = nodes.getLength();
 
         if(length == 0){
-            log.info("No tb elements found!");
+            log.info("No tab bar elements found!");
             return newXml;
         }
 

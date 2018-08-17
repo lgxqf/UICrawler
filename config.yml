@@ -99,10 +99,10 @@ MINI_PROGRAM:
 CRITICAL_ELEMENT:
   #Android包名和启动的Activity
   #微信小程序用以下面注释的包名
-  #ANDROID_PACKAGE: com.tencent.mm
-  #ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
-  ANDROID_PACKAGE: com.xes.jazhanghui.activity
-  ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
+  ANDROID_PACKAGE: com.tencent.mm
+  ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
+  #ANDROID_PACKAGE: com.xes.jazhanghui.activity
+  #ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
 
   #IOS Bundle ID com.apple.mobilesafari
   IOS_BUNDLE_ID: com.tencent.xin

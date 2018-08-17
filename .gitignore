@@ -1,16 +1,10 @@
 screenshot/
 build/
-mg-autoinstall/.gradle/
-mg-agent-driver/screenshot/
 .gradle/
-mg-agent-driver/task/
 .idea
-download/
 .DS_Store
-mg-agent-driver/node_modules/
 node_modules/*
 *.iml
 logs/
+log/
 target/
-log-stash-conf/
-log-stash-conf-backup/
