@@ -3,7 +3,6 @@
 * 去除Android7 android:id/statusBarBackground
 * 定义遍历优先级
 * 判断是不是同一个UI by tolerance
-* edittext 文本输入
 
 
 
@@ -32,9 +31,55 @@
 ## 遇到的问题(坑)
 * Xcode 9 运行 iOS11 没问题
 * Appium iOS左划问题
-* Android7 必须用Uiautomator2驱动  且用Xpath查找元素时 元素的属性值不能为空不然会查找失败,用Appium Desktop可以安装Uiautomator apk
-* Android6 千万不要装Uiautomator2 apk, 当遇到Android 6的机器getPageSource没反应时 1.卸载 uiautomator2 2.重启手机 3.一定要换个appium端口
+
 
 ## 支持的平台
 * Android 4-7 Android 4-5 未测试
 * IOS 10-11 IOS 10未测试
+
+
+# 环境搭建
+请参考https://www.cnblogs.com/yuer011/p/8067650.html
+
+## 安装Java 8 JDK
+
+## 安装node
+* https://nodejs.org/
+```aidl
+#安装appium 1.8.0
+http://appium.io/
+
+#检查appium环境正确性
+appium-doctor
+```
+
+
+## iOS
+### 安装XCODE 9
+### Install Brew https://brew.sh
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+### Install carthage
+```
+brew install carthage
+```
+### 安装 libimobile
+* https://www.jianshu.com/p/6423610d3293
+```aidl
+brew uninstall ideviceinstaller
+brew uninstall libimobiledevice
+brew install --HEAD libimobiledevice
+brew link --overwrite libimobiledevice
+brew install ideviceinstaller
+brew link --overwrite ideviceinstaller
+```
+### 安装ios-deploy
+```
+npm install -g ios-deploy
+```
+
+## Android
+### 安装UiAutomator2 apk
+### 安装Android SDK
+

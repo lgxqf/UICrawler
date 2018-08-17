@@ -20,7 +20,7 @@ GENERAL:
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: true
   #控制视频方向，竖屏或模屏
-  VIDEO_VERTICAL: false
+  VIDEO_VERTICAL: true
 
 #输出更多的log,主要用于调试工具用
 LOG:
@@ -164,7 +164,7 @@ LIST:
   - '123'
   - 'ABC'
 
-  #当发现App跳转到一下app时 会触发back键
+  #当发现App跳转到以下app时 会触发back键
   PRESS_BACK_KEY_PACKAGE_LIST:
   - 高德地图
   - com.autonavi.minimap
