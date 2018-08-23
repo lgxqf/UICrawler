@@ -846,7 +846,6 @@ public final class Driver {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, ConfigUtil.getDeviceName() );
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.2");
         capabilities.setCapability(MobileCapabilityType.UDID, uuid);
         capabilities.setCapability("bundleId", bundleId);
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
