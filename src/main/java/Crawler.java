@@ -24,6 +24,7 @@ public class Crawler {
     private static class CtrlCHandler extends Thread{
         @Override
         public void run(){
+            log.info("Pressing Ctrl + C...\n");
             PerfUtil.closeDataFile();
 
             if(!isMonkeyMode()){
@@ -31,9 +32,9 @@ public class Crawler {
             }
 
             if(!isReported) {
-                log.info("Handling Ctrl +C or process shut down event...");
+                log.info("Handling Ctrl + C shut down event...");
                 executeTask();
-                log.info("Everything is done.Both video and report are generated.");
+                log.info("Everything is done. Both video and report are generated.");
             }
         }
     }
@@ -49,7 +50,8 @@ public class Crawler {
     }
 
     public static void main(String []args) throws Exception{
-        String version = "2.15 ---Aug/23/2018";
+        String version = "2.16 ---Aug/23/2018";
+
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
 
@@ -75,7 +77,7 @@ public class Crawler {
         options.addOption("x", "write_to_db", false, "write performance data to influxDB");
 
         CommandLine commandLine = parser.parse( options, args );
-        String configFile;// = System.getProperty("user.dir") +  File.separator + "config.yml";
+        String configFile;
 
         if( commandLine.hasOption('h') ) {
             log.info(

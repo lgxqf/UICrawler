@@ -268,6 +268,7 @@ public class PictureUtil {
 
         int size = list.size();
         int index = 0;
+
         try {
             out = NIOUtils.writableFileChannel(fileName);
             encoder = new AWTSequenceEncoder(out, Rational.R(1, 1));

@@ -122,7 +122,7 @@ CRITICAL_ELEMENT:
   IOS_USERNAME:
     XPATH: '//*[@type="XCUIElementTypeTextField"]'
     ACTION: input
-    VALUE: '13810179702'
+    VALUE: '13691034108'
   IOS_PASSWORD:
     XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
     ACTION: input
@@ -135,8 +135,6 @@ CRITICAL_ELEMENT:
 LIST:
   #当遇到下列文字、控件类型时会触发Back Key
   BACK_KEY_TRIGGER_LIST:
-  #- 联系顾问老师
-  #- 托班
   - 百度
 
   INPUT_CLASS_LIST:
@@ -188,7 +186,6 @@ LIST:
   - 第四个
   - 第五个
   - 立即升级
-  - 立即升级
 
   IOS_EXCLUDE_BAR:
   #手机状态栏
@@ -218,8 +215,6 @@ LIST:
 
   #Android
   #- text
-
-
 
 
 214be01a3254152a362fb9107ceb2db22ad3d559:
