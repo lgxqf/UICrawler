@@ -303,7 +303,6 @@ public class PictureUtil {
 
         boolean isVertical = ConfigUtil.isVideoVertial();
 
-        isVertical = false;
         //竖屏
         if(isVertical && w < h ){
             log.info("vertical");

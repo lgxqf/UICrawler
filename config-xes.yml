@@ -1,0 +1,226 @@
+GENERAL:
+  #截屏数量
+  SCREENSHOT_COUNT: 1000
+  #遍历深度
+  MAX_DEPTH: 800
+  #点击次数
+  MAX_CLICK_COUNT: 100000
+  #TIME
+  DEFAULT_WAIT_SEC: 10
+  #查找元素的间隔时间
+  DEFAULT_POLLING_INTERVAL_SEC: 5
+  #Crash时截图显示步骤数量
+  CRASH_PIC_COUNT: 10
+  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
+  IGNORE_CRASH: true
+  #是否屏蔽DOM树在Log中的显示
+  DISABLE_DOM_DISPLAY: false
+  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
+  ENABLE_VERTICAL_SWIPE: false
+  #UI遍历的时间限制(分钟)
+  CRAWLER_RUNNING_TIME: 5
+  #忽略底部元素Bounds值
+  REMOVE_BOTTOM_BOUND: false
+  #控制视频方向，竖屏或模屏
+  VIDEO_VERTICAL: false
+
+DEFAULT_VALUE:
+  #Appium server IP， 0.0.0.0代表Server在本地
+  APPIUM_SERVER_IP: 0.0.0.0
+  #Appium端口
+  PORT: 4723
+  #IOS 才会用到WDA_PORT
+  IOS_WDA_PORT: 8100
+
+
+#设置事件百分比 各事件百分比之和为100
+MONKEY:
+  #以下各项值总和为100即可
+  SWIPE_RATIO: 4
+  CLICK_RATIO: 70
+  #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
+  CLICK_SPECIAL_POINT_RATIO: 4
+  RESTART_APP_RATIO: 0
+  LONG_PRESS_RATIO: 1
+  #Android Only
+  HOME_KEY_RATIO: 1
+
+  #手势操作
+  #双击
+  DOUBLE_TAP_RATIO: 5
+  #缩小(两指)
+  PINCH_RATIO: 5
+  #放大(两指)
+  UNPINCH_RATIO: 5
+  #拖拽
+  DRAG_RATIO: 5
+
+
+#Monkey相关的一些值
+MONKEY_LIST:
+  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
+  MONKEY_SPECIAL_POINT_LIST:
+  - '80,160'
+  - '50,50'
+
+  #根据坐标长按某点10秒
+  LONG_PRESS_LIST:
+  - '980,560'
+  - '100,250'
+
+  #设置不点击的区域， radius用来设置以下列坐标为圆心，不想点击的半径区域
+  MONKEY_BLACKLIST_POINT_LIST:
+  - 'radius,10'
+  - '0,0'
+
+
+#小程序
+MINI_PROGRAM:
+  #小程序的名字
+  MINI_PROGRAM_NAME: 学而思营业厅
+  #小程序的进程
+  MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
+
+
+#以下的内容很关键，而且需要根据不同的APP定制
+CRITICAL_ELEMENT:
+  #Android 包名和启动的Activity
+  ANDROID_PACKAGE: com.xes.jazhanghui.activity
+  ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
+
+  #IOS Bundle ID
+  IOS_BUNDLE_ID: com.xes.studentClient
+  #手机桌面上显示的APP的名字
+  IOS_BUNDLE_NAME: 学而思test
+  #IPA名字的前缀
+  IOS_IPA_NAME: xesapp
+
+#构建XPATH需要的一些内容   #注意属性值要加引号''
+  #UI底部TabBar
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
+  IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
+
+  #注意属性值要加引号''
+  ANDROID_CLICK_XPATH_HEADER: '( @clickable="true" and string-length(@text)<30 or contains(@text,"允许") ) '
+  IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
+
+  ANDROID_USERNAME:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
+    ACTION: input
+    VALUE: '13691034108'
+
+  ANDROID_PASSWORD:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
+    ACTION: input
+    VALUE: '123456'
+
+  ANDROID_LOGIN_BUTTON:
+    XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
+    ACTION: click
+
+  #IOS LOGIN_ELEMENT
+  IOS_USERNAME:
+    XPATH: '//*[@type="XCUIElementTypeTextField"]'
+    ACTION: input
+    VALUE: '13810179702'
+  IOS_PASSWORD:
+    XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
+    ACTION: input
+    VALUE: '123456'
+  IOS_LOGIN_BUTTON:
+    XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
+    ACTION: click
+
+
+LIST:
+  #当遇到下列文字、控件类型时会触发Back Key
+  BACK_KEY_TRIGGER_LIST:
+  #- 联系顾问老师
+  #- 托班
+  - 百度
+
+  INPUT_CLASS_LIST:
+  - android.widget.EditText
+  - XCUIElementTypeTextField
+  - XCUIElementTypeSecureTextField
+
+  INPUT_TEXT_LIST:
+  - '123'
+  - 'ABC'
+
+  PRESS_BACK_KEY_PACKAGE_LIST:
+  - 高德地图
+  - com.autonavi.minimap
+  - com.android.settings
+
+  #除了APP本身的包名外 根据以下包名判断是否跳出了APP
+  ANDROID_VALID_PACKAGE_LIST:
+  - com.miui.securitycenter
+  - com.android.server.telecom
+  - com.lbe.security.miui
+  - gallery
+  - installer
+
+  IOS_VALID_BUNDLE_LIST:
+  - 照片
+
+  ITEM_WHITE_LIST:
+  - 确定
+  - 允许
+  - 退出
+  - 取消
+  - 关闭
+  - 已解决
+  - 下次再说
+
+  #不点击包含以下文本的控件
+  ITEM_BLACKLIST:
+  - 立即更新
+  - 客服
+  - 电话
+  - '0571 - 8522 5188'
+  - 不允许
+  - 拒绝
+  - 拍照
+  - 禁止
+  - 呼叫
+  - '10108899'
+  - 第四个
+  - 第五个
+  - 立即升级
+  - 立即升级
+
+  IOS_EXCLUDE_BAR:
+  #手机状态栏
+  - XCUIElementTypeStatusBar
+  #键盘
+  - XCUIElementTypeKeyboard
+
+  IOS_EXCLUDE_TYPE:
+  - XCUIElementTypeOther
+  - XCUIElementTypeKey
+  - XCUIElementTypeWindow
+
+  ANDROID_EXCLUDE_TYPE:
+  - android.widget.FrameLayout
+
+  NODE_NAME_EXCLUDE_LIST:
+  - selected
+  - instance
+  - checked
+  - naf
+  - content
+
+  STRUCTURE_NODE_NAME_EXCLUDE_LIST:
+  #iOS
+  #- value
+  - name
+
+  #Android
+  #- text
+
+
+
+
+214be01a3254152a362fb9107ceb2db22ad3d559:
+  DEVICE_NAME: Justin's iPhone

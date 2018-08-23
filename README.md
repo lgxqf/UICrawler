@@ -61,7 +61,8 @@ QQ 技术交流群 ： 728183683
 * 根据执行步骤重现bug
 * 黑名单支持XPath
 * 减少配置项
-
+* ID Monkey
+* ctrl c
 
 ## 运行工具
 
@@ -290,3 +291,7 @@ Android 查看apk 和 Main activity
 
 ### 2018-08-17 v2.14
 * 修改iOS的截图方式为 idevicescreenshot 提高截图效率
+
+### 2018-08-23 v2.15
+* 修改视频生成只能是横屏的bug
+* 删掉Appium iOS启动的参数 PLATFORM_VERSION

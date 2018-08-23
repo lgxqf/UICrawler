@@ -49,7 +49,7 @@ public class Crawler {
     }
 
     public static void main(String []args) throws Exception{
-        String version = "2.14 ---Aug/17/2018";
+        String version = "2.15 ---Aug/23/2018";
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
 
@@ -292,8 +292,6 @@ public class Crawler {
         //Generate full video
         try {
             log.info("Generating full video file, please wait...");
-
-            //PictureUtil.picToVideo(ConfigUtil.getRootDir() + File.separator + "testing_steps.mp4", fullList, Driver.getScreenActualWidth(), Driver.getScreenActualHeight());
             PictureUtil.picToVideo(ConfigUtil.getRootDir() + File.separator + "testing_steps.mp4", fullList);
         }catch (Exception e){
             log.error("Fail to generate full.mp4 file");
@@ -303,6 +301,8 @@ public class Crawler {
         //Generate crash video
         try{
             if(crashFileList.size() > 0){
+
+                log.info("Generating " + crashFileList.size() +" crash video files...");
                 List<String> fullListWithoutPath = Util.getFileList(ConfigUtil.getScreenShotDir(), ".png",false);
                 log.info("Generating crash video file, please wait...");
                 int beginIndex = 0;
