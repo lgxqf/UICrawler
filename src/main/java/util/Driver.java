@@ -1039,7 +1039,7 @@ public final class Driver {
     }
 
     public static String startLogRecord(){
-        String logName = ConfigUtil.getRootDir() + File.separator + ConfigUtil.getUdid() + "-" + Util.getDatetime() + ".log";
+        String logName = ConfigUtil.getRootDir() + File.separator + ConfigUtil.getDeviceName() + "-" + Util.getDatetime() + ".log";
 
         Runnable newRunnable = () -> {
 

@@ -50,7 +50,7 @@ public class Crawler {
     }
 
     public static void main(String []args) throws Exception{
-        String version = "2.16 ---Aug/23/2018";
+        String version = "2.17 ---Sep/05/2018";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));

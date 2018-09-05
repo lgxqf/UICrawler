@@ -22,7 +22,7 @@ GENERAL:
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: false
   #控制视频方向，竖屏或模屏
-  VIDEO_VERTICAL: false
+  VIDEO_VERTICAL: true
 
 DEFAULT_VALUE:
   #Appium server IP， 0.0.0.0代表Server在本地
@@ -217,5 +217,5 @@ LIST:
   #- text
 
 
-214be01a3254152a362fb9107ceb2db22ad3d559:
-  DEVICE_NAME: Justin's iPhone
+5f5fa944c51bb0073b91736a6d7828a57f0a1b98:
+  DEVICE_NAME: Justin's_iPhone

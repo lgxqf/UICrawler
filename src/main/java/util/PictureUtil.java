@@ -302,7 +302,7 @@ public class PictureUtil {
         int h = oldBufferedImage.getHeight();
         int degree = 90;
 
-        boolean isVertical = ConfigUtil.isVideoVertial();
+        boolean isVertical = ConfigUtil.isVideoVertical();
 
         //竖屏
         if(isVertical && w < h ){
@@ -320,7 +320,7 @@ public class PictureUtil {
             degree = 270;
         }
 
-        log.info("Rotate image : degree " + degree +" w " + w + " h " + h + " vertical video "+ ConfigUtil.isVideoVertial());
+        log.info("Rotate image : degree " + degree +" w " + w + " h " + h + " vertical video "+ ConfigUtil.isVideoVertical());
 
         int type = oldBufferedImage.getColorModel().getTransparency();
 

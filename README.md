@@ -295,3 +295,10 @@ Android 查看apk 和 Main activity
 ### 2018-08-23 v2.15
 * 修改视频生成只能是横屏的bug
 * 删掉Appium iOS启动的参数 PLATFORM_VERSION
+
+### 2018-09-05 v2.17
+* 在Config中增加DeviceName支持,用于输出的目录名字
+```
+5f5fa944c51bb0073b91736a6d7828a57f0a1b98:
+  DEVICE_NAME: Justin's_iPhone
+```

@@ -20,14 +20,9 @@ public class ConfigUtil {
     private static Map<String,Object> configItems;
     private static  String rootDir;
     private static boolean showDomXML = false;
-
     private static boolean dbLogEnabled = false;
     private static boolean perLogEnabled = false;
-
-
-
-
-    private static boolean videoVertial = true;
+    private static boolean videoVertical = true;
 
     public static boolean isShowDomXML() {
         return showDomXML;
@@ -120,17 +115,12 @@ public class ConfigUtil {
 
     public static ConfigUtil initialize(String file, String udid){
         log.info("Method: initialize");
+        setUdid(udid);
 
-        rootDir = System.getProperty("user.dir") + File.separator + udid + "-" + Util.getCurrentTimeFormat();
-//
-//        if(null != configUtil){
-//            return configUtil;
-//        }
+        configItems = new HashMap<>();
 
         try {
             log.info("Reading config file " + file);
-
-            setUdid(udid);
 
             InputStream input = new FileInputStream(new File(file));
             Yaml yaml = new Yaml();
@@ -138,10 +128,9 @@ public class ConfigUtil {
 
             Map<String, Object> map = yaml.load(input);
 
-            configItems = new HashMap<>();
             //初始化的顺序很重要
             //1.先设通用的值 GENERAL  2.设默认值 DEFAULT_VALUE 3.根据serial值去覆盖默认的属性值 4.然后其它值
-            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","MONKEY_LIST","MINI_PROGRAM","LOG"));
+            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","MONKEY_LIST","MINI_PROGRAM","LOG",udid));
             if(map.get(udid)!=null){
                 keyList.add(udid);
             }
@@ -160,7 +149,9 @@ public class ConfigUtil {
             dbLogEnabled = ConfigUtil.getBooleanValue(DB_LOG);
             perLogEnabled = ConfigUtil.getBooleanValue(PERF_LOG);
             showDomXML = ConfigUtil.getBooleanValue(DOM_DISPLAY,true);
-            videoVertial = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
+            videoVertical = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
+
+            rootDir = System.getProperty("user.dir") + File.separator + "crawler_output" + File.separator + getDeviceName() + "-" + Util.getCurrentTimeFormat();
 
             //Create Root dir
             Util.createDir(rootDir);
@@ -175,8 +166,8 @@ public class ConfigUtil {
         return configUtil;
     }
 
-    public static boolean isVideoVertial() {
-        return videoVertial;
+    public static boolean isVideoVertical() {
+        return videoVertical;
     }
 
     public static boolean isDbLogEnabled() {
@@ -283,9 +274,7 @@ public class ConfigUtil {
         setLongValue(MAX_DEPTH,depth);
     }
 
-//    public static void setMonkeyRunningTime(String minutes){
-//        configItems.put(ConfigUtil.MONKEY_RUNNING_TIME,Integer.parseInt(minutes));
-//    }
+
 
     public static void setCrawlerRunningTime(String time){
          setLongValue(ConfigUtil.CRAWLER_RUNNING_TIME,time);
@@ -310,15 +299,16 @@ public class ConfigUtil {
     public static String getDeviceName(){
         String deviceName = getStringValue("DEVICE_NAME");
 
-        return deviceName == null? udid:deviceName;
+        return deviceName.equals("null")? udid:deviceName;
     }
 
     public static String getStringValue(String key) {
         String value = String.valueOf(configItems.get(key));
         log.info("Config : " + key + " = " + value);
 
-        return value == null || value.equals("null")? null:value.trim();
+        return value.trim();
     }
+
     public static void setStringValue(String key,String value){
         configItems.put(key,value);
     }
