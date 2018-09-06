@@ -123,6 +123,7 @@ CRITICAL_ELEMENT:
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
+
 #自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素
 #注意xpath中的属性值要加双引号""
 LOGIN_ELEMENTS:
