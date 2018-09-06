@@ -946,6 +946,11 @@ public final class Driver {
         TouchAction dragAction = new TouchAction( driver);
         List<PointOption> pointOptionList = new ArrayList<>();
 
+        if(pointsList.size()%2 != 0){
+            log.error("drag value is not configured correctly: " + pointOptionList.toString());
+            return;
+        }
+
         try {
             for(int i = 0; i < pointsList.size(); i = i +2){
                 int x = Integer.valueOf(pointsList.get(i));
