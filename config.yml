@@ -1,6 +1,6 @@
 GENERAL:
   #截屏数量 
-  SCREENSHOT_COUNT: 500
+  SCREENSHOT_COUNT: 1000
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
   #遍历深度
@@ -18,7 +18,7 @@ GENERAL:
   #运行时间限制(分钟)
   CRAWLER_RUNNING_TIME: 1800
   #忽略底部元素Bounds值
-  REMOVE_BOTTOM_BOUND: true
+  REMOVE_BOTTOM_BOUND: false
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
 
@@ -100,7 +100,6 @@ MINI_PROGRAM:
 
 #以下的内容很关键，而且需要根据不同的APP定制
 CRITICAL_ELEMENT:
-
   #微信小程序用下面的包名
   #ANDROID_PACKAGE: com.tencent.mm
   #ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
@@ -116,9 +115,7 @@ CRITICAL_ELEMENT:
   #IPA名字的前缀
   IOS_IPA_NAME: wechat
 
-
-#构建XPATH需要的一些内容
-  #UI底部TabBar 多个id时用or拼接 如'@resource-id="id1" or @resource-id="id2"'
+  #构建XPATH需要的一些内容,UI底部TabBar 多个id时用or拼接 如'@resource-id="id1" or @resource-id="id2"'
   ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.huxiu:id/footer_bar"'
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
@@ -127,10 +124,9 @@ CRITICAL_ELEMENT:
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
 
-#自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素
-#注意xpath中的属性值要加双引号""
+#自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
 LOGIN_ELEMENTS:
-
+  #Android 登录相关元素及操作
   LOGIN_ELEMENTS_ANDROID:
     - ANDOIRD_LOGIN_CHANGE:
         XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/login_change"]'
@@ -146,7 +142,7 @@ LOGIN_ELEMENTS:
     - ANDROID_LOGIN_BUTTON:
         XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
         ACTION: click
-
+  #iOS登录相关元素及操作
   LOGIN_ELEMENTS_IOS:
     - IOS_USERNAME:
         XPATH: '//*[@type="XCUIElementTypeTextField"]'
@@ -167,8 +163,8 @@ LOGIN_ELEMENTS:
 
 LIST:
   #当遇到下列文字时会触发Back Key
-  #BACK_KEY_TRIGGER_LIST:
-  #- la la la
+  BACK_KEY_TRIGGER_LIST:
+  - huitui
 
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
@@ -218,7 +214,6 @@ LIST:
   - 呼叫
   - 低电量模式
   - 关闭
-
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:
