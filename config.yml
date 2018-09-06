@@ -16,7 +16,7 @@ GENERAL:
   #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
   ENABLE_VERTICAL_SWIPE: false
   #运行时间限制(分钟)
-  CRAWLER_RUNNING_TIME: 1800
+  CRAWLER_RUNNING_TIME: 2400
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: false
   #控制视频方向，竖屏或模屏
