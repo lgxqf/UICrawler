@@ -22,6 +22,7 @@ GENERAL:
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
 
+
 #输出更多的log,主要用于调试工具用
 LOG:
   #将性能数据写入数据库相关的log
@@ -41,9 +42,11 @@ DEFAULT_VALUE:
   #IOS 才会用到WDA_PORT
   IOS_WDA_PORT: 8100
 
+
 INFLUXDB:
   DB_PORT: 8086
   DB_IP: localhost
+
 
 #设置事件百分比 各事件百分比之和为100
 MONKEY:
