@@ -69,11 +69,6 @@ public final class Driver {
         }
     }
 
-    public static void switchTo(){
-        log.info(MyLogger.getMethodName());
-        driver.switchTo();
-    }
-
     public static void ios_launchApp(){
         log.info(MyLogger.getMethodName());
         driver.launchApp();
@@ -294,10 +289,6 @@ public final class Driver {
 
     public static int getDeviceHeight(){
         log.info(MyLogger.getMethodName());
-//        log.info(util.MyLogger.getMethodName());
-//
-//        Dimension dimensions = driver.manage().window().getSize();
-//        return dimensions.getHeight();
 
         if(isLandscape()){
             return deviceWidth;
@@ -308,11 +299,7 @@ public final class Driver {
 
     public static int getDeviceWidth(){
         log.info(MyLogger.getMethodName());
-//        log.info(util.MyLogger.getMethodName());
-//
-//        Dimension dimensions = driver.manage().window().getSize();
-//        return dimensions.getWidth();
-        //if(driver.getOrientation().equals(ScreenOrientation.LANDSCAPE)){
+
         if(isLandscape()){
             return deviceHeight;
         }
@@ -758,19 +745,6 @@ public final class Driver {
 
         return findElement(MobileBy.iOSNsPredicateString(str), seconds);
     }
-
-
-//
-//    public static void iterateElementsById(String str){
-//
-//        List<MobileElement> list = util.Driver.findElementsById(str);
-//
-//        log.info("iterateElement with : " + str + " size is " +list.size());
-//
-//        for(MobileElement e :list){
-//            log.info(e.getText());
-//        }
-//    }
 
     public static MobileElement getFirstbyPredicateIOS(String str){
         MobileElement elem;
@@ -1288,7 +1262,6 @@ public final class Driver {
         int screenHeight = dimensions.getHeight();
 
         //Xiao Mi 1080,1920  //iPhone 414  736
-
         int startX = 0;
         int endX = screenWidth / 2;
 
@@ -1299,11 +1272,6 @@ public final class Driver {
 
         int startY = screenHeight / 2;
         int endY = startY;
-
-//        startX = 0;
-//        endX = 100;
-//        startY = 100;
-//        endY = 100;
 
         if(!Util.isAndroid()){
             //TODO: 解决ios 相对坐标问题，  升级Java-client版本？？？

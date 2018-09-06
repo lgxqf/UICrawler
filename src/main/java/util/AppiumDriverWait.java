@@ -2,9 +2,7 @@ package util;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.FluentWait;
-
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class AppiumDriverWait extends FluentWait<AppiumDriver> {
     public static  AppiumDriverWait getInstance(AppiumDriver driver,int seconds){

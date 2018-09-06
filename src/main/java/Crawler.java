@@ -1,7 +1,6 @@
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.cli.*;
 import org.apache.commons.collections.map.ListOrderedMap;
-import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.*;
@@ -17,9 +16,9 @@ public class Crawler {
     private static Map<String,String> summaryMap;//= new ListOrderedMap();
     private static boolean isMonkey = false;
     private static List<String> crashFileList;
-    //private static File repoStepFile;
     private static boolean isReported = false;
     private static String udid;
+    //private static File repoStepFile;
 
     private static class CtrlCHandler extends Thread{
         @Override
@@ -45,12 +44,13 @@ public class Crawler {
         isReported = true;
     }
 
-    public static boolean isMonkeyMode(){
+    private static boolean isMonkeyMode(){
         return isMonkey;
     }
 
+    @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.17 ---Sep/05/2018";
+        String version = "2.18 ---Sep/06/2018";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
@@ -141,7 +141,7 @@ public class Crawler {
 
             log.info("Crawler loop No is " + (i +1));
 
-            summaryMap = new ListOrderedMap();
+            summaryMap = (Map<String,String>) new ListOrderedMap();
             isReported = false;
             beginTime = new Date();
 
@@ -198,7 +198,7 @@ public class Crawler {
 
             Util.createDir(ConfigUtil.getRootDir());
 
-            AppiumDriver appiumDriver = null;
+            AppiumDriver appiumDriver;
 
             //启动Appium
             if (Util.isAndroid(udid)) {
@@ -224,7 +224,7 @@ public class Crawler {
                 Driver.sleep(15);
 
                 if (commandLine.hasOption("e") && Util.isAndroid()) {
-                    PerfUtil.writeDataToFileAsyn(writeToDB);
+                    PerfUtil.writeDataToFileAsync(writeToDB);
                 }
 
                 if (commandLine.hasOption("e") && !Util.isAndroid()) {
@@ -274,17 +274,16 @@ public class Crawler {
         }
     }
 
-    private static void showClickedItems(){
-        HashSet<String> clickedSet = XPathUtil.getSet();
-        log.info(clickedSet.size() + " elements are clicked");
-
-        for(String str: clickedSet){
-            log.info(str);
-        }
-
-        log.info("==============list end==========");
-    }
-
+//    private static void showClickedItems(){
+//        HashSet<String> clickedSet = XPathUtil.getSet();
+//        log.info(clickedSet.size() + " elements are clicked");
+//
+//        for(String str: clickedSet){
+//            log.info(str);
+//        }
+//
+//        log.info("==============list end==========");
+//    }
 
     private static void generateVideo(){
         log.info("Method : generateVideo()");
@@ -332,8 +331,8 @@ public class Crawler {
         log.info("Complete generating video file!");
     }
 
-    public static List<String> getCrashSteps(String crashName){
-        List<String> stepList = new ArrayList();
+    private static List<String> getCrashSteps(String crashName){
+        List<String> stepList = new ArrayList<>();
 
         int picCount = (int)ConfigUtil.getLongValue(ConfigUtil.CRASH_PIC_COUNT);
         List<String> screenshotList = Util.getFileList(ConfigUtil.getScreenShotDir(),".png",false);
@@ -370,7 +369,7 @@ public class Crawler {
         return stepList;
     }
 
-    public static void initReport(){
+    private static void initReport(){
         summaryMap.put("手机系统 - Mobile operating system",Driver.getPlatformName());
         summaryMap.put("系统版本 - OS version",Driver.getPlatformVersion());
         summaryMap.put("设备UUID - Device UUID",udid);
@@ -493,6 +492,6 @@ public class Crawler {
         ReportUtil.setDetailedList(detailedList);
         ReportUtil.setClickedList(clickedList);
         ReportUtil.generateReport(report);
-        log.info("\n\n------------------------------Test report :" + reportName + "\n\n");
+        log.info("\n\n------------------------------Test report : " + reportName + "\n\n");
     }
 }

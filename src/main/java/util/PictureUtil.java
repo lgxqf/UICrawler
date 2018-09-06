@@ -24,17 +24,17 @@ class PictureRunnable implements Runnable{
     private List<Point> list;
     private String gesture;
 
-    public PictureRunnable(int x, int y){
+    PictureRunnable(int x, int y){
         mX = x;
         mY = y;
     }
 
-    public PictureRunnable(List<Point> pointList, String ext){
+    PictureRunnable(List<Point> pointList, String ext){
         list = pointList;
         gesture = ext;
     }
 
-    public  void run(){
+    public void run(){
         if(list !=null){
             PictureUtil.takeAndModifyScreenShot(list,gesture);
         }else{
@@ -47,7 +47,6 @@ public class PictureUtil {
     public static Logger log = LoggerFactory.getLogger(PictureUtil.class);
 
     private Font font = new Font("", Font.PLAIN, 20);// 添加字体的属性设置
-    private Graphics2D g = null;
     private int fontSize;
     private int x;
     private int y;
@@ -57,36 +56,34 @@ public class PictureUtil {
     private String fontStyle;
     private Color color;
 
-    public static void takeAndModifyScreenShotAsyn(int x, int y){
+    static void takeAndModifyScreenShotAsyn(int x, int y){
         new  Thread(new PictureRunnable(x,y)).start();
     }
 
-    public static void takeAndModifyScreenShotAsyn(List<Point> list, String ext){
+    static void takeAndModifyScreenShotAsyn(List<Point> list, String ext){
         new Thread(new PictureRunnable(list,ext)).start();
     }
 
-    public static String takeAndModifyScreenShot(List<Point> list,String ext){
-
+    static String takeAndModifyScreenShot(List<Point> list,String ext){
         return takeAndModifyScreenShot(list,100,ext);
     }
 
-    public static String takeAndModifyScreenShot(int x, int y){
-
+    static String takeAndModifyScreenShot(int x, int y){
         return takeAndModifyScreenShot(x,y,100);
     }
 
-    public static String takeAndModifyScreenShot(int x, int y,int radius){
+    static String takeAndModifyScreenShot(int x, int y,int radius){
 
         return takeAndModifyScreenShot(x,y,radius,"click");
     }
 
-    public static String takeAndModifyScreenShot(int x, int y,int radius,String ext){
+    static String takeAndModifyScreenShot(int x, int y,int radius,String ext){
         List<Point> list = new ArrayList<>();
         list.add(new Point(x,y));
         return takeAndModifyScreenShot(list,radius,ext);
     }
 
-    public static String takeAndModifyScreenShot(List<Point> pointList,int radius,String ext){
+    static String takeAndModifyScreenShot(List<Point> pointList,int radius,String ext){
 
         String img = Driver.takeScreenShot();
         drawPoint(img,pointList,radius,radius,Color.RED);
@@ -103,7 +100,7 @@ public class PictureUtil {
         return img;
     }
 
-    public static void drawPoint(String srcImagePath,List<Point> pointList,int width,int height,Color color){
+    private static void drawPoint(String srcImagePath,List<Point> pointList,int width,int height,Color color){
         FileOutputStream fos = null;
 
         try {
@@ -143,7 +140,7 @@ public class PictureUtil {
     /**
      * 导入本地图片到缓冲区
      */
-    public BufferedImage loadImageLocal(String imgSrcPath) {
+    private BufferedImage loadImageLocal(String imgSrcPath) {
         try {
             this.imgSrcPath = imgSrcPath;
             return ImageIO.read(new File(this.imgSrcPath));
@@ -156,7 +153,7 @@ public class PictureUtil {
     /**
      * 生成新图片到本地
      */
-    public void writeImageLocal(String imgDesPath, BufferedImage img) {
+    private void writeImageLocal(String imgDesPath, BufferedImage img) {
         if (imgDesPath != null && img != null) {
             try {
                 this.imgDesPath = imgDesPath;
@@ -171,7 +168,7 @@ public class PictureUtil {
     /**
      * 设定文字的字体等
      */
-    public void setFont(String fontStyle, int fontSize) {
+    private void setFont(String fontStyle, int fontSize) {
         this.fontSize = fontSize;
         this.fontStyle = fontStyle;
         this.font = new Font(this.fontStyle, Font.PLAIN, this.fontSize);
@@ -179,11 +176,8 @@ public class PictureUtil {
 
     /**
      * 设定文字在图片中的位置以及文字的颜色
-     * @param x
-     * @param y
-     * @param color
      */
-    public void setLocalColor(int x,int y,Color color){
+    private void setLocalColor(int x,int y,Color color){
         this.x = x;
         this.y = y;
         this.color=color;
@@ -192,7 +186,9 @@ public class PictureUtil {
     /**
      * 修改图片,返回修改后的图片缓冲区（只输出一行文本）
      */
-    public BufferedImage modifyImage(BufferedImage img, String content) {
+    private BufferedImage modifyImage(BufferedImage img, String content) {
+        Graphics2D g = null;
+
         try {
             int w = img.getWidth();
             int h = img.getHeight();
@@ -244,23 +240,7 @@ public class PictureUtil {
         setLocalColor(x,y,color);
     }
 
-    public static synchronized void jpgToGif(String pic[], String newPic, int delay) {
-        try {
-            AnimatedGifEncoder e = new AnimatedGifEncoder();
-            e.setRepeat(0);
-            e.start(newPic);
-            BufferedImage src[] = new BufferedImage[pic.length];
-            for (int i = 0; i < src.length; i++) {
-                e.setDelay(delay); //设置播放的延迟时间
-                src[i] = ImageIO.read(new File(pic[i])); // 读入需要播放的jpg文件
-                e.addFrame(src[i]);  //添加到帧中
-            }
-            e.finish();
-        } catch (Exception e) {
-            System.out.println( "jpgToGif Failed:");
-            e.printStackTrace();
-        }
-    }
+
 
     public static void picToVideo(String fileName, List<String> list){
         SeekableByteChannel out = null;
@@ -297,7 +277,7 @@ public class PictureUtil {
         }
     }
 
-    public static BufferedImage rotateImage(final BufferedImage oldBufferedImage) {
+    private static BufferedImage rotateImage(final BufferedImage oldBufferedImage) {
         int w = oldBufferedImage.getWidth();
         int h = oldBufferedImage.getHeight();
         int degree = 90;
@@ -306,13 +286,13 @@ public class PictureUtil {
 
         //竖屏
         if(isVertical && w < h ){
-            log.info("vertical");
+            //log.info("vertical");
             return oldBufferedImage;
         }
 
         //横屏
         if(!isVertical && w > h){
-            log.info("Horizonal");
+            //log.info("Horizontal");
             return oldBufferedImage;
         }
 
@@ -338,14 +318,55 @@ public class PictureUtil {
             h = w;
         }
 
-        graphics2d.rotate(Math.toRadians(degree), h / 2, h / 2);
+        graphics2d.rotate(Math.toRadians(degree), h / 2f, h / 2f);
         graphics2d.drawImage(oldBufferedImage, 0, 0,null);
         graphics2d.dispose();
 
         return img;
     }
 
-    //   public static void picToVideo(String filename, List<String> fileList,int width, int height) throws Exception {
+
+    public static synchronized void jpgToGif(String pic[], String newPic, int delay) {
+        try {
+            AnimatedGifEncoder e = new AnimatedGifEncoder();
+            e.setRepeat(0);
+            e.start(newPic);
+            BufferedImage src[] = new BufferedImage[pic.length];
+            for (int i = 0; i < src.length; i++) {
+                e.setDelay(delay); //设置播放的延迟时间
+                src[i] = ImageIO.read(new File(pic[i])); // 读入需要播放的jpg文件
+                e.addFrame(src[i]);  //添加到帧中
+            }
+            e.finish();
+        } catch (Exception e) {
+            System.out.println( "jpgToGif Failed:");
+            e.printStackTrace();
+        }
+    }
+
+
+    public static BufferedImage convertToType(BufferedImage sourceImage, int targetType){
+        BufferedImage image;
+
+        // if the source image is already the target type, return the source image
+        if (sourceImage.getType() == targetType) {
+            image = sourceImage;
+        }
+        else {
+            // otherwise create a new image of the target type and draw the new image
+            image = new BufferedImage(sourceImage.getWidth(),
+                    sourceImage.getHeight(), targetType);
+            image.getGraphics().drawImage(sourceImage, 0, 0, null);
+        }
+
+        return image;
+    }
+
+}
+
+
+
+//       public static void picToVideo(String filename, List<String> fileList,int width, int height) throws Exception {
 //        int picPerSecond = 1;
 //        final Rational frameRate = Rational.make(1, picPerSecond);
 //
@@ -450,20 +471,5 @@ public class PictureUtil {
 //        muxer.close();
 //    }
 
-    public static BufferedImage convertToType(BufferedImage sourceImage, int targetType){
-        BufferedImage image;
 
-        // if the source image is already the target type, return the source image
-        if (sourceImage.getType() == targetType) {
-            image = sourceImage;
-        }
-        else {
-            // otherwise create a new image of the target type and draw the new image
-            image = new BufferedImage(sourceImage.getWidth(),
-                    sourceImage.getHeight(), targetType);
-            image.getGraphics().drawImage(sourceImage, 0, 0, null);
-        }
 
-        return image;
-    }
-}

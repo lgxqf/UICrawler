@@ -35,16 +35,16 @@ public class ConfigUtil {
     public static final String IOS_EXCLUDE_BAR = "IOS_EXCLUDE_BAR";
     public static final String ANDROID_USERNAME = "ANDROID_USERNAME";
     public static final String ANDROID_PASSWORD = "ANDROID_PASSWORD";
-    public static final String ANDROID_LOGIN_BUTTON = "ANDROID_LOGIN_BUTTON";
+    public static final String ANDROID_LOGIN_ELEMENTS = "LOGIN_ELEMENTS_ANDROID";
     public static final String ANDROID_BACK_KEY = "ANDROID_BACK_KEY";
+    public static final String LOGIN_ELEMENTS_ANDROID = "LOGIN_ELEMENTS_ANDROID";
 
     //iOS
     public static final String IOS_EXCLUDE_TYPE = "IOS_EXCLUDE_TYPE";
     public static final String IOS_BOTTOM_TAB_BAR_TYPE = "IOS_BOTTOM_TAB_BAR_TYPE";
     public static final String IOS_CLICK_XPATH_HEADER = "IOS_CLICK_XPATH_HEADER";
-    public static final String IOS_USERNAME = "IOS_USERNAME";
-    public static final String IOS_PASSWORD = "IOS_PASSWORD";
-    public static final String IOS_LOGIN_BUTTON = "IOS_LOGIN_BUTTON";
+
+    public static final String IOS_LOGIN_ELEMENTS = "LOGIN_ELEMENTS_IOS";
     public static final String IOS_IPA_NAME = "IOS_IPA_NAME";
     public static final String IOS_WDA_PORT = "IOS_WDA_PORT";
     public static final String IOS_BUNDLE_ID = "IOS_BUNDLE_ID";
@@ -105,12 +105,11 @@ public class ConfigUtil {
     public static final ArrayList<String> MONKEY_EVENT_RATION_LIST = new ArrayList<>(Arrays.asList(RESTART_APP_RATIO,CLICK_RATIO,SWIPE_RATIO,
             LONG_PRESS_RATIO,CLICK_SPECIAL_POINT_RATIO,HOME_KEY_RATIO,
             DOUBLE_TAP_RATIO,PINCH_RATIO,UNPINCH_RATIO,DRAG_RATIO,BACK_KEY_RATIO));
-    public static final String MONKEY_RUNNING_TIME = "MONKEY_RUNNING_TIME";
     private static long clickCount;
 
     //MINI Programme
     public static final String MINI_PROGRAM_NAME = "MINI_PROGRAM_NAME";
-    public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS";
+    //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS";
 
 
     public static ConfigUtil initialize(String file, String udid){
@@ -130,7 +129,7 @@ public class ConfigUtil {
 
             //初始化的顺序很重要
             //1.先设通用的值 GENERAL  2.设默认值 DEFAULT_VALUE 3.根据serial值去覆盖默认的属性值 4.然后其它值
-            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","MONKEY_LIST","MINI_PROGRAM","LOG",udid));
+            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","LOGIN_ELEMENTS","MONKEY_LIST","MINI_PROGRAM","LOG",udid));
             if(map.get(udid)!=null){
                 keyList.add(udid);
             }
@@ -166,6 +165,20 @@ public class ConfigUtil {
         return configUtil;
     }
 
+    public static void setDbLogEnabled(boolean dbLogEnabled) {
+        ConfigUtil.dbLogEnabled = dbLogEnabled;
+    }
+    public static long getRetryCount() {
+        return getLongValue("RETRY_COUNT");
+    }
+    public static void setPerLogEnabled(boolean perLogEnabled) {
+        ConfigUtil.perLogEnabled = perLogEnabled;
+    }
+    public static void setMaxDepth(String depth) {
+        setLongValue(MAX_DEPTH,depth);
+    }
+    public static void setScreenshotCount(String count) { configItems.put("SCREENSHOT_COUNT",count);}
+
     public static boolean isVideoVertical() {
         return videoVertical;
     }
@@ -174,16 +187,8 @@ public class ConfigUtil {
         return dbLogEnabled;
     }
 
-    public static void setDbLogEnabled(boolean dbLogEnabled) {
-        ConfigUtil.dbLogEnabled = dbLogEnabled;
-    }
-
     public static boolean isPerLogEnabled() {
         return perLogEnabled;
-    }
-
-    public static void setPerLogEnabled(boolean perLogEnabled) {
-        ConfigUtil.perLogEnabled = perLogEnabled;
     }
 
     public static boolean boundRemoved(){
@@ -212,10 +217,6 @@ public class ConfigUtil {
 
     public static long getDefaultPollingIntervalSec() {
         return getLongValue("DEFAULT_POLLING_INTERVAL_SEC");
-    }
-
-    public static long getRetryCount() {
-        return getLongValue("RETRY_COUNT");
     }
 
     public static String getPackageName() {
@@ -248,7 +249,6 @@ public class ConfigUtil {
     }
 
     public static long getScreenshotCount() { return getLongValue("SCREENSHOT_COUNT");}
-    public static void setScreenshotCount(String count) { configItems.put("SCREENSHOT_COUNT",count);}
 
     public static String getActivityName() {
         return getStringValue("ANDROID_MAIN_ACTIVITY");
@@ -270,11 +270,6 @@ public class ConfigUtil {
     public static long getDepth(){
         return getLongValue(MAX_DEPTH);
     }
-    public static void setMaxDepth(String depth) {
-        setLongValue(MAX_DEPTH,depth);
-    }
-
-
 
     public static void setCrawlerRunningTime(String time){
          setLongValue(ConfigUtil.CRAWLER_RUNNING_TIME,time);
@@ -283,7 +278,6 @@ public class ConfigUtil {
     public static String getPort() {
         return port;
     }
-
     public static void setPort(String port) {
         ConfigUtil.port = port;
         setStringValue("PORT",port);
@@ -299,22 +293,31 @@ public class ConfigUtil {
     public static String getDeviceName(){
         String deviceName = getStringValue("DEVICE_NAME");
 
-        return deviceName.equals("null")? udid:deviceName;
+        return deviceName ==  null ? udid : deviceName;
     }
 
     public static String getStringValue(String key) {
         String value = String.valueOf(configItems.get(key));
         log.info("Config : " + key + " = " + value);
 
-        return value.trim();
+        return value.equals("null") ? null : value.trim();
     }
 
     public static void setStringValue(String key,String value){
         configItems.put(key,value);
     }
 
+    @SuppressWarnings("unchecked")
     public static ArrayList<String> getListValue(String key) {
         ArrayList<String> list =(ArrayList) configItems.get(key);
+        log.info("Config : " + key + " = " + list);
+
+        return list == null? new ArrayList<>():list;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static ArrayList<Map> getListMapValue(String key) {
+        ArrayList<Map> list =(ArrayList) configItems.get(key);
         log.info("Config : " + key + " = " + list);
 
         return list == null? new ArrayList<>():list;
@@ -346,9 +349,9 @@ public class ConfigUtil {
         return getBooleanValue(key,false);
     }
 
-    public static Map<String,Object> getMapValue(String key){
-        Map<String,Object> map = (Map)configItems.get(key);
-        log.info("Config : " + key + " = " + map);
-        return map;
-    }
+//    public static Map<String,Object> getMapValue(String key){
+//        Map<String,Object> map = (Map)configItems.get(key);
+//        log.info("Config : " + key + " = " + map);
+//        return map;
+//    }
 }

@@ -15,16 +15,7 @@ import java.util.*;
 public final class Util {
     public static Logger log = LoggerFactory.getLogger(Util.class);
 
-    public static String multiplyStringValue(String a, String b) {
-        double quantity = Double.valueOf(a);
-        double price = Double.valueOf(b);
 
-        return getStringDoubleFormat(quantity * price);
-    }
-
-    public static String getStringDoubleFormat(String str) {
-        return getStringDoubleFormat(Double.valueOf(str));
-    }
 
     public static String getStringDoubleFormat(Double str) {
         DecimalFormat df = new DecimalFormat("######0.00");
@@ -39,14 +30,6 @@ public final class Util {
         return udid.length() < 20;
     }
 
-    public static String getCurrentTimeString(){
-        long timeStamp = System.currentTimeMillis();  //获取当前时间戳,也可以是你自已给的一个随机的或是别人给你的时间戳(一定是long型的数据)
-
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//这个是你要转成后的时间的格式
-        String sd = sdf.format(new Date(timeStamp));   // 时间戳转换成时间
-
-        return sd;
-    }
 
     public static String getDatetime(){
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
@@ -206,7 +189,9 @@ public final class Util {
 
         if(fileName == null){
             log.error("renameAndCopyCrashFile() parameter fileName is null!");
+            return;
         }
+
         String newPic = fileName.replace(".png","-crash.png");
         renameFile(fileName,newPic);
         copyCrashFile(newPic);
@@ -303,10 +288,6 @@ public final class Util {
         return getFileList(dir,null,false);
     }
 
-    public static List<String> getFileList(String dir,boolean fileNameWithPath){
-        return getFileList(dir,null,fileNameWithPath);
-    }
-
     public static List<String> getFileList(String dir,String filterName, boolean fileNameWithPath){
         List<String> list = new ArrayList<>();
         File file = new File(dir);
@@ -318,6 +299,10 @@ public final class Util {
 
         if(file.exists() && file.isDirectory()){
             String []name = file.list(filter);
+
+            if(name == null){
+                return null;
+            }
             if(fileNameWithPath){
                 for(String str : name){
                     list.add(dir +File.separator + str);
@@ -338,9 +323,8 @@ public final class Util {
         long hour = (between / (60 * 60 * 1000) - day * 24);
         long min = ((between / (60 * 1000)) - day * 24 * 60 - hour * 60);
         long s = (between / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-        //long ms = (between - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000 - s * 1000);
-        String timeDifference = hour + "小时" + min + "分" + s + "秒";// + ms + "毫秒";
-        return timeDifference;
+
+        return hour + "小时" + min + "分" + s + "秒";// + ms + "毫秒";;
     }
 
 
@@ -360,7 +344,7 @@ public final class Util {
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
      */
-    public static final int internalNextInt(int origin, int bound) {
+    public static int internalNextInt(int origin, int bound) {
         Random random = new Random();
 
         if (origin < bound) {
@@ -395,6 +379,30 @@ public final class Util {
         }
 
         return grep;
+    }
+
+    public static String multiplyStringValue(String a, String b) {
+        double quantity = Double.valueOf(a);
+        double price = Double.valueOf(b);
+
+        return getStringDoubleFormat(quantity * price);
+    }
+
+    public static String getStringDoubleFormat(String str) {
+        return getStringDoubleFormat(Double.valueOf(str));
+    }
+
+    public static String getCurrentTimeString(){
+        long timeStamp = System.currentTimeMillis();  //获取当前时间戳,也可以是你自已给的一个随机的或是别人给你的时间戳(一定是long型的数据)
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//这个是你要转成后的时间的格式
+        String sd = sdf.format(new Date(timeStamp));   // 时间戳转换成时间
+
+        return sd;
+    }
+
+    public static List<String> getFileList(String dir,boolean fileNameWithPath){
+        return getFileList(dir,null,fileNameWithPath);
     }
 }
 

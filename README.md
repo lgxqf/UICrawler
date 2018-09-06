@@ -302,3 +302,8 @@ Android 查看apk 和 Main activity
 5f5fa944c51bb0073b91736a6d7828a57f0a1b98:
   DEVICE_NAME: Justin's_iPhone
 ```
+
+### 2018-09-06 v2.18 有重要更新！！！
+* 将登录相关的元素查找信息及操作移到了 LOGIN_ELEMENTS
+* 增加了DRAG操作的支持
+* 修改了代码中的一些Warning

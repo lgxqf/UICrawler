@@ -37,14 +37,15 @@ public class XPathUtil {
     private static List<String> clickFailureElementList = new ArrayList<>();
     private static String clickXpath;
     private static String tabBarXpath;
-    private static String loginBtnXpath;
+    private static String firstLoginElemXpath;
+    private static ArrayList<Map> loginElemList;
     private static int scale;
     private static boolean ignoreCrash;
     private static boolean removedBounds = false;
-    private static boolean testMode = true;
     private static boolean swipeVertical = ConfigUtil.getBooleanValue(ConfigUtil.ENABLE_VERTICAL_SWIPE);// = false;
 
-    private static int pressBackCount = 3;//按back键回到主屏后 重启app的次数
+    //按back键回到主屏后 重启app的次数
+    private static int pressBackCount = 3;
     private static long clickCount = 0;
     private static long maxDepth = 0;
     private static String pic = null;
@@ -59,21 +60,14 @@ public class XPathUtil {
     private static List<Point> longPressPointList = new ArrayList<>();
     private static long runningTime;
     private static long testStartTime;// = System.currentTimeMillis();
-
     private static StringBuilder repoStep = new StringBuilder();
-
-    public static StringBuilder getRepoStep(){
-        return repoStep;
-    }
 
     public static HashSet<String> getSet() {
         return set;
     }
-
     public static Map<String, Long> getClickedActivityMap() {
         return clickedActivityMap;
     }
-
     public static Map<String, Map<String, Long>> getMonkeyClickedMap() {
         return monkeyClickedMap;
     }
@@ -83,7 +77,7 @@ public class XPathUtil {
 
         int size = clickFailureElementList.size();
         if(size !=0){
-            log.error("\n\n==============================Fail to click " + clickFailureElementList.size() + " elements \n" );
+            log.error("\n==============================Fail to click " + clickFailureElementList.size() + " elements \n" );
 
             for(String str : clickFailureElementList){
                 log.info(str);
@@ -103,9 +97,11 @@ public class XPathUtil {
         }else{
             log.info("Congratulations ! All the xpath elements are found");
         }
+
+        log.error("\n==============================");
     }
 
-    public static void initMonkey(){
+    private static void initMonkey(){
         log.info("Method: initMonkey");
 
         testStartTime = System.currentTimeMillis();
@@ -147,7 +143,6 @@ public class XPathUtil {
 
         log.info("Monkey running time is " + runningTime + " seconds");
         log.info("Monkey event list and ratio : \n" + monkeyEventRatioMap );
-        //testStartTime = System.currentTimeMillis();
     }
 
     public static void initialize(String udid){
@@ -200,15 +195,18 @@ public class XPathUtil {
             e.printStackTrace();
         }
 
-        //登录按钮Xpath
-        Map<String,Object> map;
+        //获取第一个登录操作元素的Xpath
         if(Util.isAndroid(udid)){
-            map = ConfigUtil.getMapValue(ConfigUtil.ANDROID_LOGIN_BUTTON);
+            loginElemList = ConfigUtil.getListMapValue(ConfigUtil.ANDROID_LOGIN_ELEMENTS);
+
         }else{
-            map = ConfigUtil.getMapValue(ConfigUtil.IOS_LOGIN_BUTTON);
+            loginElemList = ConfigUtil.getListMapValue(ConfigUtil.IOS_LOGIN_ELEMENTS);
         }
 
-        loginBtnXpath = map==null ? null:map.get(ConfigUtil.XPATH).toString();
+        if(loginElemList.size() != 0){
+            String key = (String)loginElemList.get(0).keySet().toArray()[0];
+            firstLoginElemXpath = (( Map<String,String>)loginElemList.get(0).get(key)).get("XPATH");
+        }
 
         //构建查找元素时用到的Xpath
         StringBuilder clickBuilder;
@@ -217,14 +215,13 @@ public class XPathUtil {
         //Android
         if(Util.isAndroid(udid)){
             //构建查找tab bar的Xpath
-            String androidBottomBarid =  ConfigUtil.getStringValue(ConfigUtil.ANDROID_BOTTOM_TAB_BAR_ID);
+            String androidBottomBarID =  ConfigUtil.getStringValue(ConfigUtil.ANDROID_BOTTOM_TAB_BAR_ID);
             clickBuilder = new StringBuilder("//*[");
             clickBuilder.append(ConfigUtil.getStringValue(ConfigUtil.ANDROID_CLICK_XPATH_HEADER));//@clickable="true"
-            if(androidBottomBarid != null) {
-                //tabBuilder = new StringBuilder("//*[@resource-id=\"" + androidBottomBarid + "\"]/descendant-or-self::*[@clickable=\"true\"]");
-                tabBuilder = new StringBuilder("//*[" + androidBottomBarid +"]/descendant-or-self::*[@clickable=\"true\"]");
-                //clickBuilder.append(" and not(ancestor-or-self::*[@resource-id=" + "\"" + androidBottomBarid + "\"])");
-                clickBuilder.append(" and not(ancestor-or-self::*[" +androidBottomBarid +"])");
+            if(androidBottomBarID != null) {
+                //tabBuilder = new StringBuilder("//*[@resource-id=\"" + androidBottomBarID + "\"]/descendant-or-self::*[@clickable=\"true\"]");
+                tabBuilder = new StringBuilder("//*[" + androidBottomBarID +"]/descendant-or-self::*[@clickable=\"true\"]");
+                clickBuilder.append(" and not(ancestor-or-self::*[" +androidBottomBarID +"])");
             }
 
             //构建查找元素的xPath
@@ -407,14 +404,12 @@ public class XPathUtil {
                 for(String elemClass : inputClassList){
                     temp = elemClass;
                     if(elemStr.contains(elemClass)){
-                        if(size > 0){
-                            int index = Util.internalNextInt(0,size);
-                            String text = inputTextList.get(index);
-                            elem.setValue(text );
-                            repoStep.append("INPUT :" + elem.toString() + " ; " + text + "\n");
-                            log.info("Element " + temp + " set text : " + text);
-                            break;
-                        }
+                        int index = Util.internalNextInt(0,size);
+                        String text = inputTextList.get(index);
+                        elem.setValue(text );
+                        repoStep.append("INPUT :" + elem.toString() + " ; " + text + "\n");
+                        log.info("Element " + temp + " set text : " + text);
+                        break;
                     }
                 }
             }catch (Exception e){
@@ -620,7 +615,6 @@ public class XPathUtil {
                     if(isSamePage(previousPageStructure,afterPageStructure)){
                         log.info("Parent page stay the same after returning from child page");
                         //页面未变化， 继续遍历
-                        continue;
                     }else{
                         log.info("Parent page changed after returning from child page");
                         //从子页面返回后 父页面发了生变化 停止遍历当前页面
@@ -631,7 +625,7 @@ public class XPathUtil {
                 }
             }else {
                 //元素已经点击过
-                log.info("---existed--- " + nodeXpath.toString() + "\n");
+                log.info("---existed--- " + nodeXpath + "\n");
             }
         }
 
@@ -736,15 +730,13 @@ public class XPathUtil {
     }
 
 
-    public static NodeList getNodeListByXpath(String xml, String xpathExpr) throws Exception{
+    private static NodeList getNodeListByXpath(String xml, String xpathExpr) throws Exception{
         Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
-        NodeList nodes = (NodeList) xpath.evaluate(xpathExpr, document, XPathConstants.NODESET);
-
-        return nodes;
+        return (NodeList) xpath.evaluate(xpathExpr, document, XPathConstants.NODESET);
     }
 
 
-    public static String getAppName(String xml){
+    private static String getAppName(String xml){
         log.info("Method: getAPPName");
         String name = null;
         NodeList nodeList = null;
@@ -790,51 +782,28 @@ public class XPathUtil {
         return name;
     }
 
-    private static void triggerElementAction(String xpath, String action, Object value){
-        MobileElement element = Driver.findElement(By.xpath(xpath));
-
-        log.info("Trigger element : " + xpath + " action : " + action + " value : " + null );
-
-        switch (action.toCharArray()[0]){
-            case 'c'://click
-                element.click();
-                break;
-            case 'i'://input
-                element.clear();
-                element.setValue(value.toString());
-                break;
-            default:
-                break;
-        }
-    }
-
+    @SuppressWarnings("unchecked")
     public static String userLogin(String xml){
         log.info("Method: userLogin");
 
-        if(loginBtnXpath == null){
+        if(firstLoginElemXpath == null){
             return xml;
         }
         try {
             Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
-            NodeList nodes = (NodeList) xpath.evaluate(loginBtnXpath, document, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) xpath.evaluate(firstLoginElemXpath, document, XPathConstants.NODESET);
 
-            log.info("loginBtnXpath : " +loginBtnXpath + " login element  : " + nodes.getLength());
+            log.info("firstLoginElemXpath : " + firstLoginElemXpath + " login element  : " + nodes.getLength());
 
+            //找到了登录元素
             if(nodes.getLength() == 1){
-                List<String> list;
-
-                //找到了登录元素
-                if(Util.isAndroid()){
-                    list = new ArrayList<>(Arrays.asList(ConfigUtil.ANDROID_USERNAME, ConfigUtil.ANDROID_PASSWORD, ConfigUtil.ANDROID_LOGIN_BUTTON));
-                }else{
-                    list = new ArrayList<>(Arrays.asList(ConfigUtil.IOS_USERNAME, ConfigUtil.IOS_PASSWORD, ConfigUtil.IOS_LOGIN_BUTTON));
-                }
-
-                for(String item : list){
-                    Map<String,Object> map = ConfigUtil.getMapValue(item);
+                for(Map map : loginElemList){
+                    String key = (String) map.keySet().toArray()[0];
+                    map = ((Map<String,String>) map.get(key));
                     String xpath = map.get(ConfigUtil.XPATH).toString();
                     String action =  map.get(ConfigUtil.ACTION).toString();
                     String value =  String.valueOf(map.get(ConfigUtil.VALUE));
+
                     try {
                         triggerElementAction(xpath, action, value);
                     }catch (Exception e){
@@ -853,6 +822,23 @@ public class XPathUtil {
         return xml;
     }
 
+    private static void triggerElementAction(String xpath, String action, Object value){
+        MobileElement element = Driver.findElement(By.xpath(xpath));
+
+        log.info("Trigger element : " + xpath + " action : " + action + " value : " + null );
+
+        switch (action.toCharArray()[0]){
+            case 'c'://click
+                element.click();
+                break;
+            case 'i'://input
+                element.clear();
+                element.setValue(value.toString());
+                break;
+            default:
+                break;
+        }
+    }
 
     protected static boolean isSamePage(String pre,String after){
         log.info("Method: isSamePage");
@@ -868,7 +854,7 @@ public class XPathUtil {
         return ret;
     }
 
-    public static String getNodeXpath(Node node){
+    private static String getNodeXpath(Node node){
         return getNodeXpath(node,false);
     }
 
@@ -880,9 +866,6 @@ public class XPathUtil {
         //xpath中排除以下属性, android和iOS  小写字母
         //inal List<String> structureNodeNameExcludeList = new ArrayList<>(Arrays.asList("value","lable","name" ,"text"));
 
-        //log.info("Node Attribute Count========" + String.valueOf(length));
-
-        //boolean removeBound = false;
         String bounds = "[" + deviceWidth + ","  + deviceHeight + "]";
 
         while(--length >= 0){
@@ -1094,36 +1077,6 @@ public class XPathUtil {
         return newXml;
     }
 
-
-    public static String showNodes(String xml, String oldNodePath) throws Exception{
-        Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
-        NodeList nodes = (NodeList) xpath.evaluate(clickXpath, document, XPathConstants.NODESET);
-
-        int length = nodes.getLength();
-
-        log.info(String.valueOf("UI nodes length : " + length));
-        String temp = oldNodePath;
-
-        //String ary[] = {"[567,1239][1039,1421]","¥123"};
-
-        while(--length >=0 && testMode){
-            Node node = nodes.item(length);
-            String xpath = getNodeXpath(node);
-            if(null != xpath) {
-                log.info("getNodeXpath: " + xpath +"\n");
-//                for (String str : ary) {
-//                    if (xpath.contains(str)) {
-//                        temp = xpath;
-//                        testMode = false;
-//                    }
-//                }
-            }
-        }
-
-        log.info("!!!!! " + temp);
-        return temp;
-    }
-
     public static long getClickCount() {
         log.info("Method: getClickCount");
         return clickCount;
@@ -1136,7 +1089,7 @@ public class XPathUtil {
 
         for(String event : monkeyEventRatioMap.keySet()){
             array.add(event);
-            monkeyEventSummaryRatioMap.put(event,Long.valueOf(0));
+            monkeyEventSummaryRatioMap.put(event,0L);
         }
 
         log.info(array.toString());
@@ -1146,7 +1099,6 @@ public class XPathUtil {
 
 
     public static void monkey(){
-
         initMonkey();
 
         boolean isLandscape = Driver.isLandscape();
@@ -1249,7 +1201,7 @@ public class XPathUtil {
                 Long eventCount = 1L;
 
                 if(eventCountMap == null){
-                    eventCountMap = new HashMap();
+                    eventCountMap = new HashMap<>();
                 }else{
                     eventCount = eventCountMap.get(eventType);
 
@@ -1378,6 +1330,32 @@ public class XPathUtil {
             PictureUtil.takeAndModifyScreenShotAsyn(v * scale, v * scale);
             v = v+ step;
         }
+    }
+
+    public static StringBuilder getRepoStep(){
+        return repoStep;
+    }
+
+    public static String showNodes(String xml, String oldNodePath) throws Exception{
+        Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
+        NodeList nodes = (NodeList) xpath.evaluate(clickXpath, document, XPathConstants.NODESET);
+
+        int length = nodes.getLength();
+
+        log.info(String.valueOf("UI nodes length : " + length));
+        String temp = oldNodePath;
+
+
+        while(--length >=0){
+            Node node = nodes.item(length);
+            String xpath = getNodeXpath(node);
+            if(null != xpath) {
+                log.info("getNodeXpath: " + xpath +"\n");
+            }
+        }
+
+        log.info("!!!!! " + temp);
+        return temp;
     }
 }
 

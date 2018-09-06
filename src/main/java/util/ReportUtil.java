@@ -15,7 +15,8 @@ public class ReportUtil {
         ReportUtil.summaryMap = summaryMap;
     }
 
-    public static Map<String,String> summaryMap = new ListOrderedMap();
+    @SuppressWarnings("unchecked")
+    private static Map<String,String> summaryMap = new ListOrderedMap();
 
     public static void setDetailedList(List<ArrayList<String>> detailedList) {
         ReportUtil.detailedList = detailedList;
@@ -48,8 +49,6 @@ public class ReportUtil {
         }
 
         builder.append("</body>\n" + "</html>\n");
-
-        //File report = new File("report.html");
         Util.writeFile(file,builder.toString());
     }
 
@@ -76,30 +75,6 @@ public class ReportUtil {
     }
 
     private static void addDetailedTable(){
-//        builder.append("<br/>\n<h2>Crash信息</h2>\n");
-//        builder.append("<table width=\"100%\" border=\"1\" align=\"center\" cellspacing=\"1\">\n");
-//        builder.append(" <tbody>\n");
-//
-//        for(ArrayList<String> list : detailedList){
-//            builder.append("    <tr align=\"center\">\n");
-//            if(list.get(0).equals("HEAD")){
-//                list.remove("HEAD");
-//                for(String str : list){
-//                    builder.append("        <th class=\"left\" >"+str+"</th>\n");
-//                }
-//            }else{
-//                for(String str : list){
-//                    builder.append("        <td>"+str+"</td>\n");
-//                }
-//            }
-//            builder.append("    </tr>\n");
-//        }
-//
-//        if(detailedList == null || detailedList.size()== 0){
-//            builder.append("        <td class=\"left\">"+"No crash found during testing."+"</td>\n");
-//        }
-//
-//        builder.append(" </tbody>\n</table>\n");
         generateTable("Crash信息 - Crash information",detailedList,"No crash found during testing.");
 
     }
@@ -128,7 +103,7 @@ public class ReportUtil {
             builder.append("    </tr>\n");
         }
 
-        if(rowList == null || rowList.size()== 0){
+        if(rowList.size()== 0){
             builder.append("        <td class=\"left\">"+info+"</td>\n");
         }
 

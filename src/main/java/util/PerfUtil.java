@@ -53,7 +53,7 @@ public class PerfUtil {
         }
     }
 
-    public static Map<String,String> getMemInfo(){
+    private static Map<String,String> getMemInfo(){
 
         Map<String,String> map = new HashMap<>();
 
@@ -77,14 +77,13 @@ public class PerfUtil {
         return map;
     }
 
-    public static String getMemString(String output,String key){
+    private static String getMemString(String output,String key){
         int index = output.indexOf(key) + key.length();
-        String nativeHeap = output.substring(index , index + 9).trim();
 
-        return nativeHeap;
+        return output.substring(index , index + 9).trim();
     }
 
-    public static String getCPUInfo(){
+    private static String getCPUInfo(){
         String info;
         //String cmd = "adb -s " + udid + " shell dumpsys cpuinfo " + packageName + " | " + grep + " "+ packageName;
         String cmd = "adb -s " + udid + "  shell top -n 1 | " + grep + " " + name;
@@ -119,7 +118,7 @@ public class PerfUtil {
         return info;
     }
 
-    public static void writeDataToFile(boolean writeToDb){
+    private static void writeDataToFile(boolean writeToDb){
         initialize();
 
         String filePath = ConfigUtil.getRootDir() + File.separator + "perf_data.txt";
@@ -183,7 +182,7 @@ public class PerfUtil {
         }
     }
 
-    public static Thread writeDataToFileAsyn(boolean writeToDb){
+    public static Thread writeDataToFileAsync(boolean writeToDb){
         Runnable newRunnable = () -> {
             writeDataToFile(writeToDb);
         };
@@ -196,20 +195,18 @@ public class PerfUtil {
     }
 
     public static void main(String args[]){
-        String file = System.getProperty("user.dir") + File.separator + "config/config-xes.yml";
+        String file = System.getProperty("user.dir") + File.separator + "config/config.yml";
         ConfigUtil.initialize(file,"SJE0217B29005225");
 
-        writeDataToFileAsyn(false);
+        writeDataToFileAsync(false);
 
-        String res = "5912 u0_a229      10 -10 1.9G 193M 120M S  6.8   5.1  27:47.97 com.xes.jazhang+";
+        //String res = "5912 u0_a229      10 -10 1.9G 193M 120M S  6.8   5.1  27:47.97 com.xes.jazhang+";
         int i = 10;
 
         while (i > 0){
             i--;
             Driver.sleep(1);
         }
-
-        String [] str = res.split(" ");
 
         isRunning = false;
     }

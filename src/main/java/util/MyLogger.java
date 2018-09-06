@@ -16,20 +16,14 @@ public class MyLogger {
     }
 
     public static void info(Object obj){
-        info(String.valueOf(obj));
+        log.info(String.valueOf(obj));
     }
 
     public static String getMethodName() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
         StackTraceElement e = stacktrace[2];
         String methodName = e.getMethodName();
-
         return "===== Method : " + methodName + "   ";
     }
 
-    public static String getClassName(Object obj) {
-        String methodName = obj.getClass().getName();
-
-        return "===== Method : " + methodName + "   ";
-    }
 }
