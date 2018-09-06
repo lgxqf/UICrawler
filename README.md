@@ -305,5 +305,5 @@ Android 查看apk 和 Main activity
 
 ### 2018-09-06 v2.18 有重要更新！！！
 * 将登录相关的元素查找信息及操作移到了 LOGIN_ELEMENTS
-* 增加了DRAG操作的支持
+* 增加了Drag 拖拽操作的支持
 * 修改了代码中的一些Warning

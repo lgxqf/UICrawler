@@ -941,6 +941,30 @@ public final class Driver {
         pressBack();
     }
 
+    public static void drag(List<String> pointsList){
+        log.info(MyLogger.getMethodName());
+        TouchAction dragAction = new TouchAction( driver);
+        List<PointOption> pointOptionList = new ArrayList<>();
+
+        try {
+            for(int i = 0; i < pointsList.size(); i = i +2){
+                int x = Integer.valueOf(pointsList.get(i));
+                int y = Integer.valueOf(pointsList.get(i+1));
+                pointOptionList.add(PointOption.point(x, y));
+            }
+            for ( int i = 0; i < pointOptionList.size(); i++ ){
+                if(i == 0){
+                    dragAction.press(pointOptionList.get(i)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)));
+                }else{
+                    dragAction.moveTo(pointOptionList.get(i)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)));
+                }
+            }
+            dragAction.release().perform();
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("Fail to perform drag operation");
+        }
+    }
 
     public static void pressBack(){
         log.info("Method : pressBack");

@@ -10,6 +10,7 @@ import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -835,6 +836,9 @@ public class XPathUtil {
                 element.clear();
                 element.setValue(value.toString());
                 break;
+            case 'd'://drag
+                List<String> pointsList = Arrays.asList(value.toString().split(","));
+                Driver.drag(pointsList);
             default:
                 break;
         }
@@ -1320,17 +1324,17 @@ public class XPathUtil {
         }
     }
 
-    public static void test(){
-        Driver.sleep(10);
-        scale = 3;
-        int step = 10;
-        int v = 30;
-        for(int i=0; i< 3; i++) {
-            Driver.clickByCoordinate(v,v);
-            PictureUtil.takeAndModifyScreenShotAsyn(v * scale, v * scale);
-            v = v+ step;
-        }
-    }
+//    public static void test(){
+//        Driver.sleep(10);
+//        scale = 3;
+//        int step = 10;
+//        int v = 30;
+//        for(int i=0; i< 3; i++) {
+//            Driver.clickByCoordinate(v,v);
+//            PictureUtil.takeAndModifyScreenShotAsyn(v * scale, v * scale);
+//            v = v+ step;
+//        }
+//    }
 
     public static StringBuilder getRepoStep(){
         return repoStep;
