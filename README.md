@@ -21,6 +21,7 @@ QQ 技术交流群 ： 728183683
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
 * 支持根据关键字和控件类型触发Back key(Android)
+* 支持自动登录时的自定义操作：点击、拖拽、文本输入。 详见Config.yml中LOGIN_ELEMENTS部分内容
 
 
 ### 2.Monkey功能及以下事件 Android/iOS 
@@ -57,11 +58,9 @@ QQ 技术交流群 ： 728183683
 
 ### 5.待开发功能
 * 划动半屏  划动一屏
-* 将性能数据通过grafana显示 
 * 根据执行步骤重现bug
 * 黑名单支持XPath
 * 减少配置项
-* ID Monkey
 * ctrl c
 
 ## 运行工具
