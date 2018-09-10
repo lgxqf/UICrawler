@@ -51,7 +51,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.19 ---Sep/10/2018";
+        String version = "2.20 ---Sep/10/2018";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
@@ -249,15 +249,17 @@ public class Crawler {
                 //初始化Xpath内容
                 XPathUtil.initialize(udid);
 
+                String pageSource = Driver.getPageSource();
+
                 if (commandLine.hasOption("m")) {
                     //开始Monkey测试
                     log.info("----------------Run in monkey mode-----------");
                     isMonkey = true;
-                    XPathUtil.monkey();
+                    XPathUtil.monkey(pageSource);
                 } else {
                     //开始遍历UI
                     log.info("------------Run in crawler mode----------------");
-                    XPathUtil.getNodesFromFile(Driver.getPageSource(), 0);
+                    XPathUtil.getNodesFromFile(pageSource, 0);
                     //Driver.getPageSource();
                     //String xpath = "//android.widget.Button[@text=\"允许\" and @scrollable=\"false\" and @resource-id=\"android:id/button1\" and @password=\"false\" and @package=\"com.lbe.security.miui\" and @long-clickable=\"false\" and @index=\"1\" and @focused=\"false\" and @focusable=\"true\" and @enabled=\"true\" and @clickable=\"true\" and @class=\"android.widget.Button\" and @checkable=\"false\"]";
                     //Driver.findElement(By.xpath(xpath));

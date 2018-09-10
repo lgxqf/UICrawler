@@ -54,8 +54,8 @@ MONKEY:
   SWIPE_RATIO: 4
   CLICK_RATIO: 70
   #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 4
-  RESTART_APP_RATIO: 0
+  CLICK_SPECIAL_POINT_RATIO: 1
+  RESTART_APP_RATIO: 1
   LONG_PRESS_RATIO: 1
   #Android Only
   HOME_KEY_RATIO: 1
@@ -63,13 +63,16 @@ MONKEY:
   BACK_KEY_RATIO: 1
   #手势操作
   #双击
-  DOUBLE_TAP_RATIO: 5
+  DOUBLE_TAP_RATIO: 1
   #缩小(两指)
-  PINCH_RATIO: 5
+  PINCH_RATIO: 1
   #放大(两指)
-  UNPINCH_RATIO: 5
+  UNPINCH_RATIO: 1
   #拖拽
-  DRAG_RATIO: 5
+  DRAG_RATIO: 1
+  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST中填写待查找元素的xpath列表
+  CLICK_ITEM_BY_XPATH_RATIO: 5
+
 
 
 #Monkey相关的一些值
@@ -89,6 +92,9 @@ MONKEY_LIST:
   - 'radius,10'
   - '0,0'
 
+  CLICK_ITEM_XPATH_LIST:
+  - '//*[@resource-id="com.xes.jazhanghui.activity:id/iv_class_entrance_img"]'
+  - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
 
 #小程序
 MINI_PROGRAM:

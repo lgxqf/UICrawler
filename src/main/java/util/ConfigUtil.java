@@ -91,6 +91,7 @@ public class ConfigUtil {
     //Monkey
     public static final String SWIPE_RATIO = "SWIPE_RATIO";
     public static final String CLICK_RATIO = "CLICK_RATIO";
+    public static final String CLICK_ITEM_BY_XPATH_RATIO = "CLICK_ITEM_BY_XPATH_RATIO";
     public static final String CLICK_SPECIAL_POINT_RATIO = "CLICK_SPECIAL_POINT_RATIO";
     public static final String RESTART_APP_RATIO = "RESTART_APP_RATIO";
     public static final String HOME_KEY_RATIO = "HOME_KEY_RATIO";
@@ -107,9 +108,11 @@ public class ConfigUtil {
 
     public static final String MONKEY_SPECIAL_POINT_LIST = "MONKEY_SPECIAL_POINT_LIST";
     public static final String LONG_PRESS_LIST = "LONG_PRESS_LIST";
+    public static final String CLICK_ITEM_XPATH_LIST = "CLICK_ITEM_XPATH_LIST";
+
     public static final ArrayList<String> MONKEY_EVENT_RATION_LIST = new ArrayList<>(Arrays.asList(RESTART_APP_RATIO,CLICK_RATIO,SWIPE_RATIO,
             LONG_PRESS_RATIO,CLICK_SPECIAL_POINT_RATIO,HOME_KEY_RATIO,
-            DOUBLE_TAP_RATIO,PINCH_RATIO,UNPINCH_RATIO,DRAG_RATIO,BACK_KEY_RATIO));
+            DOUBLE_TAP_RATIO,PINCH_RATIO,UNPINCH_RATIO,DRAG_RATIO,BACK_KEY_RATIO,CLICK_ITEM_BY_XPATH_RATIO));
     private static long clickCount;
 
     //MINI Programme

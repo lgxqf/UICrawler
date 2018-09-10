@@ -59,6 +59,7 @@ public class XPathUtil {
     private static Map<String,Long> monkeyEventSummaryRatioMap = new HashMap<>();
     private static List<Point> specialPointList = new ArrayList<>();
     private static List<Point> longPressPointList = new ArrayList<>();
+    private static List<String> xpathItemList = new ArrayList<>();
     private static long runningTime;
     private static long testStartTime;// = System.currentTimeMillis();
     private static StringBuilder repoStep = new StringBuilder();
@@ -142,6 +143,7 @@ public class XPathUtil {
             log.info("Long press point x: " + x + " y: " + y);
         }
 
+        xpathItemList = ConfigUtil.getListValue(ConfigUtil.CLICK_ITEM_XPATH_LIST);
         log.info("Monkey running time is " + runningTime + " seconds");
         log.info("Monkey event list and ratio : \n" + monkeyEventRatioMap );
     }
@@ -1102,7 +1104,10 @@ public class XPathUtil {
 
 
 
-    public static void monkey(){
+    public static void monkey(String pageSource){
+
+        userLogin(pageSource);
+
         initMonkey();
 
         boolean isLandscape = Driver.isLandscape();
@@ -1111,7 +1116,6 @@ public class XPathUtil {
         int GAP_Y = 80;
         int x,y;
         int index;
-        String xml;
 
         if(!Util.isAndroid()){
             GAP_X = 50;
@@ -1151,6 +1155,9 @@ public class XPathUtil {
         int longPressPointSize = longPressPointList.size();
         int lpIndex = 0;
 
+        int xpathListSize = xpathItemList.size();
+        int xpIndex = 0;
+
         while (true) {
             long endTime = System.currentTimeMillis();
 
@@ -1181,7 +1188,6 @@ public class XPathUtil {
             index = Util.internalNextInt(0, length);
             String event = ratioList.get(index);
 
-            //log.info("\n\nindex is "  + index + "\n\n");
             log.info("index is "  + index );
 
             Long count = monkeyEventSummaryRatioMap.get(event);
@@ -1267,7 +1273,6 @@ public class XPathUtil {
                         PictureUtil.takeAndModifyScreenShotAsyn(x * scale, y * scale);
                         Driver.clickByCoordinate(point.x, point.y);
                         break;
-
                     case ConfigUtil.LONG_PRESS_RATIO:
                         //random = Util.internalNextInt(0,size);
                         lpIndex = lpIndex % longPressPointSize;
@@ -1294,16 +1299,33 @@ public class XPathUtil {
                         break;
                     case ConfigUtil.BACK_KEY_RATIO:
                         Driver.pressBack();
-                        //pointList = new ArrayList<>();
-                        //pointList.add(new Point(200,200));
-                        //PictureUtil.takeAndModifyScreenShotAsyn(pointList,"back");
+                    case ConfigUtil.CLICK_ITEM_BY_XPATH_RATIO:
+                        if(xpathListSize == 0){
+                            log.error("xpath list is 0");
+                            break;
+                        }
+
+                        log.info("Xpath item list size : " + specialPointSize);
+                        log.info("Xpath item list  : " + specialPointList);
+                        log.info("xpathIndex is " + xpIndex++);
+
+                        xpIndex = xpIndex % xpathListSize;
+
+                        MobileElement elem = Driver.findElementWithoutException(By.xpath(xpathItemList.get(xpIndex)));
+                        if(elem == null){
+                            log.error("!!!Element is not found by xpath : " + xpathItemList.get(xpIndex));
+                        }else{
+                            log.info("Element is found by xpath : " + xpathItemList.get(xpIndex));
+                            PictureUtil.takeAndModifyScreenShotAsyn(elem.getCenter().getX() * scale, elem.getCenter().getY() * scale);
+                        }
+
                         break;
                 }
 
                 log.info(monkeyEventRatioMap.toString());
                 log.info(monkeyEventSummaryRatioMap.toString());
 
-                xml = Driver.getPageSource(0);
+                String xml = Driver.getPageSource(0);
                 String packageName=getAppName(xml);
 
                 if (PackageStatus.VALID != isValidPackageName(packageName, ignoreCrash)) {
