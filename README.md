@@ -312,4 +312,3 @@ Android 查看apk 和 Main activity
 * 增加自定义输出路径 -o
 * 在输出的目录中将udid中的":"替换成"_"
 
-

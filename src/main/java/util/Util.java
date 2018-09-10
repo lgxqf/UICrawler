@@ -240,7 +240,7 @@ public final class Util {
             charsetName = "GBK";
         }
 
-        log.info("charetName is set to : " + charsetName);
+        log.info("charset Name is set to : " + charsetName);
 
         try {
             fop = new FileOutputStream(file);
