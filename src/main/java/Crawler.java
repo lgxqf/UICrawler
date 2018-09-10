@@ -18,6 +18,7 @@ public class Crawler {
     private static List<String> crashFileList;
     private static boolean isReported = false;
     private static String udid;
+    private static String outputDir;
     //private static File repoStepFile;
 
     private static class CtrlCHandler extends Thread{
@@ -50,7 +51,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.18 ---Sep/06/2018";
+        String version = "2.19 ---Sep/10/2018";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
@@ -68,6 +69,7 @@ public class Crawler {
         options.addOption("l", "loop count", true, "Crawler loop count");
         options.addOption("m", "run monkey", false, "run in monkey mode");
         options.addOption("n", "ios_bundle_name", false, "ios bundle");
+        options.addOption("o", "output_dir", true, "ouptut directory" );
         options.addOption("p", "package", true, "Android package name" );
         options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
         options.addOption("t", "port", true, "appium port");
@@ -81,8 +83,9 @@ public class Crawler {
 
         if( commandLine.hasOption('h') ) {
             log.info(
-                    "\n    -a  Android package's main activity\n" +
-                    "    -b  iOS bundle id\n" +
+                    "\n"+
+                    "    -a  Android package's main activity\n" +
+                    "    -b  iOS bundle ID\n" +
                     "    -c  Maximum click count \n" +
                     "    -d  Maximum crawler UI depth \n" +
                     "    -e  Record performance data \n" +
@@ -91,6 +94,7 @@ public class Crawler {
                     "    -i  Ignore crash\n" +
                     "    -l  Execution loop count\n" +
                     "    -m  Run monkey\n" +
+                    "    -o  Output directory"+
                     "    -p  Android package name\n" +
                     "    -r  Crawler running time\n" +
                     "    -t  Appium port\n" +
@@ -121,6 +125,17 @@ public class Crawler {
         }else{
             log.info("Please provide device serial");
             return;
+        }
+
+        if( commandLine.hasOption("o") ) {
+            outputDir = commandLine.getOptionValue('o').trim();
+
+            if(Util.isDir(outputDir)){
+                ConfigUtil.setOutputDir(outputDir);
+            }else{
+                log.info("output directory " + outputDir + " is not a directory or doesn't exist");
+                return;
+            }
         }
 
         int loopCount = 1;
@@ -274,17 +289,6 @@ public class Crawler {
         }
     }
 
-//    private static void showClickedItems(){
-//        HashSet<String> clickedSet = XPathUtil.getSet();
-//        log.info(clickedSet.size() + " elements are clicked");
-//
-//        for(String str: clickedSet){
-//            log.info(str);
-//        }
-//
-//        log.info("==============list end==========");
-//    }
-
     private static void generateVideo(){
         log.info("Method : generateVideo()");
 
@@ -349,7 +353,6 @@ public class Crawler {
         int endIndex = index + 2;
 
         log.info("Init StartIndex " + startIndex + " Init EndIndex " + endIndex);
-
 
         if(startIndex < 0){
             while(startIndex !=0){
@@ -495,3 +498,15 @@ public class Crawler {
         log.info("\n\n------------------------------Test report : " + reportName + "\n\n");
     }
 }
+
+
+//    private static void showClickedItems(){
+//        HashSet<String> clickedSet = XPathUtil.getSet();
+//        log.info(clickedSet.size() + " elements are clicked");
+//
+//        for(String str: clickedSet){
+//            log.info(str);
+//        }
+//
+//        log.info("==============list end==========");
+//    }

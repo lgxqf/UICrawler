@@ -19,6 +19,7 @@ public class ConfigUtil {
     private static ConfigUtil configUtil;
     private static Map<String,Object> configItems;
     private static  String rootDir;
+    private static  String outputDir;
     private static boolean showDomXML = false;
     private static boolean dbLogEnabled = false;
     private static boolean perLogEnabled = false;
@@ -26,6 +27,10 @@ public class ConfigUtil {
 
     public static boolean isShowDomXML() {
         return showDomXML;
+    }
+
+    public static void setOutputDir (String dir){
+        outputDir = dir;
     }
 
     //Android
@@ -150,7 +155,13 @@ public class ConfigUtil {
             showDomXML = ConfigUtil.getBooleanValue(DOM_DISPLAY,true);
             videoVertical = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
 
-            rootDir = System.getProperty("user.dir") + File.separator + "crawler_output" + File.separator + getDeviceName() + "-" + Util.getCurrentTimeFormat();
+            if(outputDir == null) {
+                rootDir = System.getProperty("user.dir");
+            }else{
+                rootDir = outputDir ;
+            }
+
+            rootDir = rootDir + File.separator+ "crawler_output" + File.separator + getDeviceName().replace(":","_") + "-" + Util.getCurrentTimeFormat();;
 
             //Create Root dir
             Util.createDir(rootDir);

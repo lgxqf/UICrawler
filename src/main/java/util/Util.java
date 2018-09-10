@@ -371,6 +371,22 @@ public final class Util {
         return System.getProperty("os.name").toLowerCase().contains("window");
     }
 
+    public static boolean isDir(String dir){
+        if(dir == null) {
+            return false;
+        }
+
+        boolean isDirectory = false;
+
+        File file = new File(dir);
+
+        if(file.exists() && file.isDirectory()){
+            isDirectory = true;
+        }
+
+        return isDirectory;
+    }
+
     public static String getGrep(){
         String grep = "grep";
 
