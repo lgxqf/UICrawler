@@ -237,8 +237,7 @@ public final class Util {
         String charsetName = "UTF-8";
 
         if(Util.isWin()){
-            //charsetName = "GBK";
-            charsetName = "GB2312";
+            charsetName = "GBK";
         }
 
         log.info("charetName is set to : " + charsetName);
