@@ -55,7 +55,7 @@ public class Crawler {
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
-
+        log.info("System File Encoding: " + System.getProperty("file.encoding"));
         CommandLineParser parser = new DefaultParser( );
         Options options = new Options( );
         options.addOption("h", "help", false, "Print this usage information");
