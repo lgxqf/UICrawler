@@ -318,3 +318,4 @@ Android 查看apk 和 Main activity
 ### 2018-09-11 v2.21
 * UI遍历功能加入自动登录检查的间隔以提高运行效率 USER_LOGIN_INTERVVAL
 * 加入参数 -s 指定 Appium Server IP
+* 支持黑名单Xpath ITEM_BLACKLIST
