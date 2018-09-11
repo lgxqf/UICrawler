@@ -22,7 +22,7 @@ QQ 技术交流群 ： 728183683
 * 支持滑动动作
 * 支持根据关键字和控件类型触发Back key(Android)
 * 支持自动登录时的自定义操作：点击、拖拽、文本输入。 详见Config.yml中LOGIN_ELEMENTS部分内容
-
+* 黑名单支持XPath
 
 ### 2.Monkey功能及以下事件 Android/iOS 
 * 随机位置点击
@@ -57,9 +57,10 @@ QQ 技术交流群 ： 728183683
 
 
 ### 5.待开发功能
-* 划动半屏  划动一屏
+* 划动半屏，划动一屏
 * 根据执行步骤重现bug
-* 黑名单支持XPath
+
+
 
 ## 运行工具
 
@@ -222,7 +223,7 @@ Android 查看apk 和 Main activity
 * SpringAOP https://blog.csdn.net/zknxx/article/details/53240959
 
 
-## Chnage History
+## Change History
 ### 2018-06-14  
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME 
 
@@ -313,3 +314,7 @@ Android 查看apk 和 Main activity
 * 为Monkey增加自动登录功能 
 * 为Monkey增加待点击元素xpath列表
 
+
+### 2018-09-11 v2.21
+* UI遍历功能加入自动登录检查的间隔以提高运行效率 USER_LOGIN_INTERVVAL
+* 加入参数 -s 指定 Appium Server IP

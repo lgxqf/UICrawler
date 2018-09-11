@@ -832,7 +832,7 @@ public final class Driver {
         //capabilities.setCapability("autoWebview", true);
         //capabilities.setCapability("xcodeOrgId", "7Q6C9D7LVN");//capabilities.setCapability("xcodeSigningId", "iPhone Developer");
 
-        String url = "http://" + ConfigUtil.getServerIP() + ":" + appiumPort + "/wd/hub";
+        String url = "http://" + ConfigUtil.getServerIp() + ":" + appiumPort + "/wd/hub";
         log.info(url);
         driver = new IOSDriver(new URL(url), capabilities);
         setWindowSize();
@@ -871,7 +871,7 @@ public final class Driver {
         capabilities.setCapability("unicodeKeyboard",true); //支持中文输入
         capabilities.setCapability("resetKeyboard",true); //重置输入法为系统默认
 
-        String url = "http://"+ ConfigUtil.getServerIP() +":" + port+"/wd/hub";
+        String url = "http://"+ ConfigUtil.getServerIp() +":" + port+"/wd/hub";
         log.info(url);
         driver = new AndroidDriver(new URL(url), capabilities);
         //初始化屏幕大小

@@ -16,11 +16,13 @@ GENERAL:
   #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
   ENABLE_VERTICAL_SWIPE: false
   #运行时间限制(分钟)
-  CRAWLER_RUNNING_TIME: 2400
+  CRAWLER_RUNNING_TIME: 240
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: false
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
+  #每个UI变化X次时，检测是否需要自动登录
+  USER_LOGIN_INTERVVAL: 5
 
 
 #输出更多的log,主要用于调试工具用
@@ -220,6 +222,7 @@ LIST:
   - 呼叫
   - 低电量模式
   - 关闭
+  - '//*[@text="去付款"]'
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:

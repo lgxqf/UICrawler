@@ -10,7 +10,6 @@ import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class XPathUtil {
     private static Map<String, Long> clickedActivityMap = new HashMap<>();
     private static HashSet<String> set = new LinkedHashSet<>();
     private static DocumentBuilder builder;
-    private static boolean  stop = false;
+    private static boolean stop = false;
     private static String appName;
     private static String appNameXpath;
     private static List<String> packageNameList;
@@ -40,10 +39,14 @@ public class XPathUtil {
     private static String tabBarXpath;
     private static String firstLoginElemXpath;
     private static ArrayList<Map> loginElemList;
+    private static Set<String> xpathBlackSet;
+    private static Set<String> nodeXpathBlackSet;
     private static int scale;
     private static boolean ignoreCrash;
     private static boolean removedBounds = false;
-    private static boolean swipeVertical = ConfigUtil.getBooleanValue(ConfigUtil.ENABLE_VERTICAL_SWIPE);// = false;
+    private static boolean swipeVertical = ConfigUtil.getBooleanValue(ConfigUtil.ENABLE_VERTICAL_SWIPE);
+    private static long userLoginInterval;
+    private static long userLoginCount = 0;
 
     //按back键回到主屏后 重启app的次数
     private static int pressBackCount = 3;
@@ -144,8 +147,22 @@ public class XPathUtil {
         }
 
         xpathItemList = ConfigUtil.getListValue(ConfigUtil.CLICK_ITEM_XPATH_LIST);
+
         log.info("Monkey running time is " + runningTime + " seconds");
         log.info("Monkey event list and ratio : \n" + monkeyEventRatioMap );
+    }
+
+    private static Set<String> getBlackKeyXpathSet(List<String> list){
+        Set<String> set = new HashSet<>();
+
+        for(String item : list){
+            if(Util.isXpath(item)){
+                set.add(item);
+            }
+        }
+
+        log.info("Blacklist length is " + set.size());
+        return set;
     }
 
     public static void initialize(String udid){
@@ -154,6 +171,11 @@ public class XPathUtil {
         runningTime = ConfigUtil.getLongValue(ConfigUtil.CRAWLER_RUNNING_TIME);
         testStartTime = System.currentTimeMillis();
         removedBounds = ConfigUtil.boundRemoved();
+        userLoginInterval = ConfigUtil.getLongValue(ConfigUtil.USER_LOGIN_INTERVVAL);
+
+        if(userLoginInterval <= 0){
+            userLoginInterval = 1;
+        }
 
         log.info("Running time is " + runningTime);
 
@@ -186,6 +208,7 @@ public class XPathUtil {
         //黑名单
         nodeBlackList = new ArrayList<>();
         nodeBlackList.addAll(ConfigUtil.getListValue(ConfigUtil.ITEM_BLACKLIST));
+        xpathBlackSet = getBlackKeyXpathSet(nodeBlackList);
 
         //白名单
         nodeWhiteList = new ArrayList<>();
@@ -443,6 +466,33 @@ public class XPathUtil {
         return  page;
     }
 
+    private static Set<String> getBlackNodeXpathSet(Document document) {
+        String xpathStr = "";
+        Set<String> nodeSet =  new HashSet<>();
+
+        try {
+            for (String item : xpathBlackSet) {
+                xpathStr = item;
+                NodeList nodes = (NodeList) xpath.evaluate(item, document, XPathConstants.NODESET);
+                int length = nodes.getLength();
+
+                while(-- length >= 0){
+                    Node tmpNode = nodes.item(length);
+                    String nodeXpath = getNodeXpath(tmpNode);
+
+                    if(nodeXpath != null){
+                        nodeSet.add(nodeXpath);
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("Fail to deal with black key xpath " + xpathStr);
+        }
+
+        log.info("Black xpath set length is : "  + nodeSet.size());
+        return nodeSet;
+    }
 
     public static String getNodesFromFile(String xml, long currentDepth) throws Exception{
         log.info("Method: getNodesFromFile");
@@ -450,11 +500,17 @@ public class XPathUtil {
         log.info("Context: " + Driver.driver.getContextHandles().toString());
 
         try {
-            xml = userLogin(xml);
+            if( 0 == userLoginCount % userLoginInterval) {
+                log.info("Processing login operation");
+                xml = userLogin(xml);
+            }
         }catch (Exception e){
             e.printStackTrace();
             log.error("Fail to log in!");
         }
+
+        log.info("userLoginCount is " + userLoginCount);
+        userLoginCount ++;
 
         //检查运行时间
         long endTime = System.currentTimeMillis();
@@ -525,10 +581,9 @@ public class XPathUtil {
         currentDepth++;
         log.info("------Depth: " + currentDepth);
         if(currentDepth > maxDepth){
-            //stop = true;
+            stop = true;
             log.info("Return because exceed max depth: " + maxDepth);
-            //currentDepth--;
-            Driver.pressBack(repoStep);
+            //Driver.pressBack(repoStep);
             currentXML = Driver.getPageSource();
             return currentXML;
         }
@@ -542,6 +597,11 @@ public class XPathUtil {
 
         showTabBarElement(currentXML,tabBarXpath);
 
+        //处理黑名单xpath
+        nodeXpathBlackSet =  getBlackNodeXpathSet(document);
+        int blackNodeXpathSize = nodeXpathBlackSet.size();
+        log.info("black node Xpath size is " + blackNodeXpathSize);
+
         //遍历UI内的Node元素
         while(--length >= 0 && !stop){
             log.info("Element index is : " + length);
@@ -549,12 +609,19 @@ public class XPathUtil {
             Node tmpNode = nodes.item(length);
             String nodeXpath = getNodeXpath(tmpNode);
 
-            if(nodeXpath==null){
+            if(nodeXpath == null){
                 log.error("Null nodeXpath , continue.");
                 continue;
             }
 
-            //TODO:comment this if not in test mode
+            if(blackNodeXpathSize != 0){
+                if(nodeXpathBlackSet.contains(nodeXpath)){
+                    log.info("Ignore black xpath item : " + nodeXpath);
+                    continue;
+                }
+            }
+
+            //Comment this if not in test mode
             //nodeXpath = showNodes(currentXML,nodeXpath);
 
             //判断当前元素是否点击过
@@ -885,14 +952,7 @@ public class XPathUtil {
                 continue;
             }
 
-            //TODO: Fix this.  当允许出现在底部时 ，Xpath中若有bounds的值  查找该元素会失败。
-//            if(nodeValue.contains("允许")){
-//                removeBound = true;
-//            }
-//            if(removeBound && nodeName.contains("bounds")){
-//                continue;
-//            }
-            //TODO: 当bounds的值为width时 Xpath无法找到该元素
+            //TODO: 当bounds的值为width时 Xpath无法找到该元素。如：当"允许"出现在底部时 ，Xpath中若有bounds的值  查找该元素会失败。
             if(removedBounds && nodeValue.contains(bounds)){
                 log.info("Remove bounds,since its value is "+ nodeValue +  " same as screen height and width");
                 continue;
@@ -1105,9 +1165,9 @@ public class XPathUtil {
 
 
     public static void monkey(String pageSource){
+        log.info("Method: monkey");
 
         userLogin(pageSource);
-
         initMonkey();
 
         boolean isLandscape = Driver.isLandscape();

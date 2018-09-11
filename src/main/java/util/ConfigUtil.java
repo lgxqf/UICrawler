@@ -18,12 +18,14 @@ public class ConfigUtil {
     private static String port;
     private static ConfigUtil configUtil;
     private static Map<String,Object> configItems;
-    private static  String rootDir;
-    private static  String outputDir;
+    private static String rootDir;
+    private static String outputDir;
+    private static String serverIp = "0.0.0.0";
     private static boolean showDomXML = false;
     private static boolean dbLogEnabled = false;
     private static boolean perLogEnabled = false;
     private static boolean videoVertical = true;
+    private static List<String> blackKeyList = new ArrayList<>();
 
     public static boolean isShowDomXML() {
         return showDomXML;
@@ -65,6 +67,8 @@ public class ConfigUtil {
     public static final String DOM_DISPLAY = "DOM_DISPLAY" ;
     public static final String REMOVE_BOTTOM_BOUND = "REMOVE_BOTTOM_BOUND";
     public static final String VIDEO_VERTICAL = "VIDEO_VERTICAL";
+    public static final String USER_LOGIN_INTERVVAL = "USER_LOGIN_INTERVVAL";
+    public static final String APPIUM_SERVER_IP = "APPIUM_SERVER_IP";
 
     //INFLUXDB
     public static final String DB_PORT = "DB_PORT";
@@ -169,6 +173,9 @@ public class ConfigUtil {
             //Create Root dir
             Util.createDir(rootDir);
 
+            serverIp = getStringValue("APPIUM_SERVER_IP");
+            blackKeyList = getListValue(ITEM_BLACKLIST);
+
             log.info("rootDir is " + rootDir);
 
         }catch (Exception e){
@@ -192,6 +199,18 @@ public class ConfigUtil {
         setLongValue(MAX_DEPTH,depth);
     }
     public static void setScreenshotCount(String count) { configItems.put("SCREENSHOT_COUNT",count);}
+
+    public static List<String> getBlackKeyList(){
+        return blackKeyList;
+    }
+
+    public static String getServerIp() {
+        return serverIp;
+    }
+
+    public static void setServerIp(String ip) {
+        serverIp = ip;
+    }
 
     public static boolean isVideoVertical() {
         return videoVertical;
@@ -219,10 +238,6 @@ public class ConfigUtil {
 
     public static String getScreenShotDir(){
         return rootDir + File.separator + SCREEN_SHOT + File.separator;
-    }
-
-    public static String getServerIP(){
-        return getStringValue("APPIUM_SERVER_IP");
     }
 
     public static long getDefaultWaitSec() {
@@ -345,7 +360,7 @@ public class ConfigUtil {
         Integer value =(Integer) configItems.get(key);
         log.info("Config : " + key + " = " + value);
 
-        return value == null? -100:value.longValue();
+        return value == null? -100 : value.longValue();
     }
 
     public static void setBooleanValue(String key, boolean val){

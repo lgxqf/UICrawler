@@ -419,5 +419,9 @@ public final class Util {
     public static List<String> getFileList(String dir,boolean fileNameWithPath){
         return getFileList(dir,null,fileNameWithPath);
     }
+
+    public static boolean isXpath(String xpath){
+        return xpath.startsWith("//");
+    }
 }
 

@@ -72,6 +72,7 @@ public class Crawler {
         options.addOption("o", "output_dir", true, "ouptut directory" );
         options.addOption("p", "package", true, "Android package name" );
         options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
+        options.addOption("s", "server_ip", true, "appium server ip");
         options.addOption("t", "port", true, "appium port");
         options.addOption("u", "udid", true, "device serial");
         options.addOption("v", "version", false, "build version with date");
@@ -97,6 +98,7 @@ public class Crawler {
                     "    -o  Output directory"+
                     "    -p  Android package name\n" +
                     "    -r  Crawler running time\n" +
+                    "    -s  Appium server ip\n" +
                     "    -t  Appium port\n" +
                     "    -u  Device serial\n" +
                     "    -v  Version\n" +
@@ -162,6 +164,10 @@ public class Crawler {
 
             //初始化配置文件
             ConfigUtil.initialize(configFile, udid);
+
+            if( commandLine.hasOption("s") ) {
+                ConfigUtil.setServerIp(commandLine.getOptionValue('s').trim());
+            }
 
             if (commandLine.hasOption("a")) {
                 ConfigUtil.setActivityName(commandLine.getOptionValue('a'));
