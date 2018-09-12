@@ -51,7 +51,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.20 ---Sep/10/2018";
+        String version = "2.21 ---Sep/11/2018";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
