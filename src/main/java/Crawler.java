@@ -402,8 +402,8 @@ public class Crawler {
         int index = 0;
         List<ArrayList<String>> detailedList = new ArrayList<>();
         List<ArrayList<String>> clickedList = new ArrayList<>();
-        //String crashDir = ConfigUtil.getRootDir() + File.separator + "crash" + File.separator;
-        String crashDir = "./crash" + File.separator;
+        String crashDir = ConfigUtil.getRootDir() + File.separator + "crash" + File.separator;
+        //String crashDir = "./crash" + File.separator;
         crashFileList = Util.getFileList(crashDir);
         int crashCount = crashFileList.size();
 
