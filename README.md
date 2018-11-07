@@ -319,3 +319,6 @@ Android 查看apk 和 Main activity
 * 支持黑名单Xpath ITEM_BLACKLIST
 * 加入参数 -s 指定 Appium Server IP
 * UI遍历功能加入自动登录检查的间隔以提高运行效率 USER_LOGIN_INTERVVAL
+
+### 2018-11-16 v2.21
+* 修改crash后report中crash count显示为0的问题
