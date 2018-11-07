@@ -35,7 +35,7 @@ public class DBUtil {
             serverIP = "localhost";
         }
 
-        dbName = ConfigUtil.getUdid();
+        dbName = "db_" + ConfigUtil.getUdid();
         createDB(dbName);
         log.info("influx db host is " + host);
     }
