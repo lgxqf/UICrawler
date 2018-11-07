@@ -14,14 +14,18 @@ public class DBUtil {
 
     private static String serverIP ="localhost";
     private static String port ="8086";
-    private static String host = "http://"+ serverIP + ":"+port;
-    private static String query = host+ "/query";
-    private static String write = host + "/write?db=";
+    private static String host ;
+    private static String query;
+    private static String write;
     private static String dbName = "";
 
     public static void initialize(){
         port = ConfigUtil.getStringValue(ConfigUtil.DB_PORT);
         serverIP = ConfigUtil.getStringValue(ConfigUtil.DB_IP);
+
+        host = "http://"+ serverIP + ":"+port;
+        query = host+ "/query";
+        write = host + "/write?db=";
 
         if(port == null){
             port = "8086";
