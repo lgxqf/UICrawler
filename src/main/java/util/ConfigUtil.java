@@ -171,7 +171,7 @@ public class ConfigUtil {
             rootDir = rootDir + File.separator+ "crawler_output" + File.separator + getDeviceName().replace(":","_") + "-" + Util.getCurrentTimeFormat();;
 
             //Create Root dir
-            Util.createDir(rootDir);
+            Util.createDirs(rootDir);
 
             serverIp = getStringValue("APPIUM_SERVER_IP");
             blackKeyList = getListValue(ITEM_BLACKLIST);

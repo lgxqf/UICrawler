@@ -207,6 +207,16 @@ public final class Util {
         return file.mkdir();
     }
 
+    public static boolean createDirs(String dir){
+        File file = new File(dir);
+
+        if(file.exists()){
+            return false;
+        }
+
+        return file.mkdirs();
+    }
+
     public static void copyCrashFile(String src){
         log.info("copyCrashFile");
 
