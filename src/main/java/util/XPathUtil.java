@@ -895,11 +895,15 @@ public class XPathUtil {
     private static void triggerElementAction(String xpath, String action, Object value){
         MobileElement element = Driver.findElement(By.xpath(xpath));
 
-        log.info("Trigger element : " + xpath + " action : " + action + " value : " + null );
+        log.info("Trigger element : " + xpath + " action : " + action + " value : " + value );
 
         switch (action.toCharArray()[0]){
             case 'c'://click
                 element.click();
+
+                if(value != null){
+                    Driver.sleep(Integer.parseInt(value.toString()));
+                }
                 break;
             case 'i'://input
                 element.clear();

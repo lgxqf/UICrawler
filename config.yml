@@ -150,6 +150,8 @@ LOGIN_ELEMENTS:
     - ANDROID_LOGIN_BUTTON:
         XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
         ACTION: click
+        VALUE: '1'
+
   #iOS登录相关元素及操作
   LOGIN_ELEMENTS_IOS:
     - IOS_USERNAME:

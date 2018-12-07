@@ -323,3 +323,6 @@ Android 查看apk 和 Main activity
 
 ### 2018-11-06 v2.22
 * 修改crash后report中crash count显示为0的问题
+
+### 2018-12-07
+* 自动登录时 click后操作增加休眠时间设定
