@@ -325,4 +325,4 @@ Android 查看apk 和 Main activity
 * 修改crash后report中crash count显示为0的问题
 
 ### 2018-12-07
-* 自动登录时 click后操作增加休眠时间设定
+* 自动登录时，click操作后增加休眠时间设定, 通过VALUE的值设定休眠的时间
