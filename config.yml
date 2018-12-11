@@ -31,7 +31,7 @@ LOG:
   DB_LOG: false
   #性能数据相关log
   PERF_LOG: false
-  #是否屏蔽DOM树在log中的显示
+  #是否开启DOM树在log中的显示
   DOM_DISPLAY: false
 
 
