@@ -326,3 +326,6 @@ Android 查看apk 和 Main activity
 
 ### 2018-12-07
 * 自动登录时，click操作后增加休眠时间设定, 通过VALUE的值设定休眠的时间
+
+### 2018-12-12
+* 修改DOM_DISPLAY的注释说明
