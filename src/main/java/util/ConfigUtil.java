@@ -24,6 +24,7 @@ public class ConfigUtil {
     private static boolean showDomXML = false;
     private static boolean dbLogEnabled = false;
     private static boolean perLogEnabled = false;
+    private static boolean generateVideo = true;
     private static boolean videoVertical = true;
     private static List<String> blackKeyList = new ArrayList<>();
 
@@ -66,6 +67,7 @@ public class ConfigUtil {
     public static final String ENABLE_VERTICAL_SWIPE = "ENABLE_VERTICAL_SWIPE";
     public static final String DOM_DISPLAY = "DOM_DISPLAY" ;
     public static final String REMOVE_BOTTOM_BOUND = "REMOVE_BOTTOM_BOUND";
+    public static final String GENERATE_VIDEO = "GENERATE_VIDEO";
     public static final String VIDEO_VERTICAL = "VIDEO_VERTICAL";
     public static final String USER_LOGIN_INTERVVAL = "USER_LOGIN_INTERVVAL";
     public static final String APPIUM_SERVER_IP = "APPIUM_SERVER_IP";
@@ -160,6 +162,7 @@ public class ConfigUtil {
             dbLogEnabled = ConfigUtil.getBooleanValue(DB_LOG);
             perLogEnabled = ConfigUtil.getBooleanValue(PERF_LOG);
             showDomXML = ConfigUtil.getBooleanValue(DOM_DISPLAY,true);
+            generateVideo = ConfigUtil.getBooleanValue(GENERATE_VIDEO,true);
             videoVertical = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
 
             if(outputDir == null) {
@@ -210,6 +213,10 @@ public class ConfigUtil {
 
     public static void setServerIp(String ip) {
         serverIp = ip;
+    }
+
+    public static boolean isGenerateVideo() {
+        return generateVideo;
     }
 
     public static boolean isVideoVertical() {

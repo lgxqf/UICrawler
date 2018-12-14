@@ -41,7 +41,9 @@ public class Crawler {
 
     private static void executeTask(){
         generateReport();
-        generateVideo();
+        if (ConfigUtil.isGenerateVideo()) {
+            generateVideo();
+        }
         isReported = true;
     }
 

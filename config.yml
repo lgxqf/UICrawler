@@ -19,6 +19,8 @@ GENERAL:
   CRAWLER_RUNNING_TIME: 240
   #忽略底部元素Bounds值
   REMOVE_BOTTOM_BOUND: false
+  #控制是否生成视频
+  GENERATE_VIDEO: true
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
   #每个UI变化X次时，检测是否需要自动登录
