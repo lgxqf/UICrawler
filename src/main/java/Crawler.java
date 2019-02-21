@@ -54,9 +54,6 @@ public class Crawler {
     public static void main(String []args) throws Exception{
         String version = "2.25 ---Feb/21/2019";
 
-        log.info("Version is " + version);
-        log.info("PC platform : " +  System.getProperty("os.name"));
-        log.info("System File Encoding: " + System.getProperty("file.encoding"));
         CommandLineParser parser = new DefaultParser( );
         Options options = new Options( );
         options.addOption("h", "help", false, "Print this usage information");
@@ -111,6 +108,8 @@ public class Crawler {
 
         if( commandLine.hasOption("v")){
             log.info(version);
+            //log.info("PC platform : " +  System.getProperty("os.name"));
+            log.info("System File Encoding: " + System.getProperty("file.encoding"));
             return;
         }
 
