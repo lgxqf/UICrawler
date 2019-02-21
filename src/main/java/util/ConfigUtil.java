@@ -171,7 +171,7 @@ public class ConfigUtil {
                 rootDir = outputDir ;
             }
 
-            rootDir = rootDir + File.separator+ "crawler_output" + File.separator + getDeviceName().replace(":","_") + "-" + Util.getCurrentTimeFormat();;
+            rootDir = rootDir + File.separator+ "crawler_output" + File.separator + getDeviceName().replace(":","_").replace(" ","_") + "-" + Util.getCurrentTimeFormat();;
 
             //Create Root dir
             Util.createDirs(rootDir);

@@ -1,30 +1,42 @@
 GENERAL:
-  #截屏数量 
+  #截屏数量
   SCREENSHOT_COUNT: 1000
+
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
+
   #遍历深度
   MAX_DEPTH: 800
+
   #点击次数
   MAX_CLICK_COUNT: 100000
+
   #TIME
   DEFAULT_WAIT_SEC: 10
+
   #查找元素的间隔时间
   DEFAULT_POLLING_INTERVAL_SEC: 5
+
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
   IGNORE_CRASH: true
+
   #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
   ENABLE_VERTICAL_SWIPE: false
+
   #运行时间限制(分钟)
   CRAWLER_RUNNING_TIME: 240
-  #忽略底部元素Bounds值
-  REMOVE_BOTTOM_BOUND: false
+
   #控制是否生成视频
   GENERATE_VIDEO: true
+
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
+
   #每个UI变化X次时，检测是否需要自动登录
   USER_LOGIN_INTERVVAL: 5
+
+  #忽略底部元素Bounds值
+  #REMOVE_BOTTOM_BOUND: false
 
 
 #输出更多的log,主要用于调试工具用
@@ -39,14 +51,15 @@ LOG:
 
 #一些默认值
 DEFAULT_VALUE:
-  #Appium server IP， 0.0.0.0代表Server在本地
+  #0.0.0.0代表Server在本地
   APPIUM_SERVER_IP: 0.0.0.0
   #Appium端口
   PORT: 4723
-  #IOS 才会用到WDA_PORT
+  #IOS WDA_PORT
   IOS_WDA_PORT: 8100
 
 
+#时序数据库 用于记录性能数据 与-e 一起使用
 INFLUXDB:
   DB_PORT: 8086
   DB_IP: localhost
@@ -57,7 +70,7 @@ MONKEY:
   #以下各项值总和为100即可
   SWIPE_RATIO: 4
   CLICK_RATIO: 70
-  #点击MONKEY_SPECIAL_POINT_LIST中的坐标 主要用于触发"返回"功能
+  #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
   CLICK_SPECIAL_POINT_RATIO: 1
   RESTART_APP_RATIO: 1
   LONG_PRESS_RATIO: 1
@@ -74,7 +87,7 @@ MONKEY:
   UNPINCH_RATIO: 1
   #拖拽
   DRAG_RATIO: 1
-  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST中填写待查找元素的xpath列表
+  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST 中填写待查找元素的xpath列表
   CLICK_ITEM_BY_XPATH_RATIO: 5
 
 
@@ -91,7 +104,7 @@ MONKEY_LIST:
   - '980,560'
   - '100,250'
 
-  #设置不点击的区域， radius用来设置以下列坐标为圆心，不想点击的半径区域
+  #设置不点击的区域(圆形)， radius为圆半径， 坐标为不想点击区域的圆心
   MONKEY_BLACKLIST_POINT_LIST:
   - 'radius,10'
   - '0,0'
@@ -126,7 +139,7 @@ CRITICAL_ELEMENT:
   IOS_IPA_NAME: wechat
 
   #构建XPATH需要的一些内容,UI底部TabBar 多个id时用or拼接 如'@resource-id="id1" or @resource-id="id2"'
-  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.huxiu:id/footer_bar"'
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
   #注意值要加引号''
@@ -138,39 +151,39 @@ CRITICAL_ELEMENT:
 LOGIN_ELEMENTS:
   #Android 登录相关元素及操作
   LOGIN_ELEMENTS_ANDROID:
-    - ANDOIRD_LOGIN_CHANGE:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/login_change"]'
-        ACTION: click
-    - ANDROID_USERNAME:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
-        ACTION: input
-        VALUE: '13691034108'
-    - ANDROID_PASSWORD:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
-        ACTION: input
-        VALUE: '123456'
-    - ANDROID_LOGIN_BUTTON:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
-        ACTION: click
-        VALUE: '1'
+  - ANDOIRD_LOGIN_CHANGE:
+      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/login_change"]'
+      ACTION: click
+  - ANDROID_USERNAME:
+      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
+      ACTION: input
+      VALUE: '13691034108'
+  - ANDROID_PASSWORD:
+      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
+      ACTION: input
+      VALUE: '123456'
+  - ANDROID_LOGIN_BUTTON:
+      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
+      ACTION: click
+      VALUE: '1'
 
   #iOS登录相关元素及操作
   LOGIN_ELEMENTS_IOS:
-    - IOS_USERNAME:
-        XPATH: '//*[@type="XCUIElementTypeTextField"]'
-        ACTION: input
-        VALUE: '13691034108'
-    - IOS_PASSWORD:
-        XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
-        ACTION: input
-        VALUE: '123456'
-    - IOS_LOGIN_BUTTON:
-        XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
-        ACTION: click
-    - DRAG:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
-        ACTION: drag
-        VALUE: '250,1050,800,1050,800,1550'
+  - IOS_USERNAME:
+      XPATH: '//*[@type="XCUIElementTypeTextField"]'
+      ACTION: input
+      VALUE: '13691034108'
+  - IOS_PASSWORD:
+      XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
+      ACTION: input
+      VALUE: '123456'
+  - IOS_LOGIN_BUTTON:
+      XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
+      ACTION: click
+  - DRAG:
+      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
+      ACTION: drag
+      VALUE: '250,1050,800,1050,800,1550'
 
 
 LIST:

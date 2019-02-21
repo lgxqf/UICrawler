@@ -329,3 +329,7 @@ Android 查看apk 和 Main activity
 
 ### 2018-12-12
 * 修改DOM_DISPLAY的注释说明
+
+### 2019-02-21
+* 处理Device ID中有空格的情况
+* 升级Java-Client到7.0 支持Appium 1.10.1

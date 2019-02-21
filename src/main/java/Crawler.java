@@ -13,13 +13,12 @@ public class Crawler {
     public static Logger log = LoggerFactory.getLogger(Crawler.class);
     private static Date beginTime = new Date();
     private static String logName;
-    private static Map<String,String> summaryMap;//= new ListOrderedMap();
+    private static Map<String,String> summaryMap;
     private static boolean isMonkey = false;
     private static List<String> crashFileList;
     private static boolean isReported = false;
     private static String udid;
     private static String outputDir;
-    //private static File repoStepFile;
 
     private static class CtrlCHandler extends Thread{
         @Override
@@ -53,7 +52,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.24 ---DEC/12/2018";
+        String version = "2.25 ---Feb/21/2019";
 
         log.info("Version is " + version);
         log.info("PC platform : " +  System.getProperty("os.name"));
