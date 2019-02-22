@@ -111,8 +111,8 @@
 
 
 ### 2019-02-23 v2.26
-* 更新config.yml文档结果及部分注释
+* 更新config.yml文档结构及部分注释
 * 新增配置 PRESS_BACK_ACTIVITY_LIST 和 RUN_IN_WECHAT_MINI_PROGRAM_MODE
 * 将Change history移到单独的文档
 * 处理在运行小程序测试时 PRESS_BACK_KEY_PACKAGE_LIST 中包含微信包名的情况
-* 支持将activity加入back key list
+* 根据PRESS_BACK_ACTIVITY_LIST 中配置的activity的名字来触发返回键
