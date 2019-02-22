@@ -47,17 +47,20 @@ public class ConfigUtil {
     public static final String ANDROID_BACK_KEY = "ANDROID_BACK_KEY";
     public static final String LOGIN_ELEMENTS_ANDROID = "LOGIN_ELEMENTS_ANDROID";
 
+    public static String ANDROID_PACKAGE = "ANDROID_PACKAGE";
+    public static String ANDROID_MAIN_ACTIVITY = "ANDROID_MAIN_ACTIVITY";
+
     //iOS
+    public static String IOS_IPA_NAME = "IOS_IPA_NAME";
+    public static String IOS_BUNDLE_NAME = "IOS_BUNDLE_NAME";
+    public static String IOS_BUNDLE_ID = "IOS_BUNDLE_ID";
+
     public static final String IOS_EXCLUDE_TYPE = "IOS_EXCLUDE_TYPE";
     public static final String IOS_BOTTOM_TAB_BAR_TYPE = "IOS_BOTTOM_TAB_BAR_TYPE";
     public static final String IOS_CLICK_XPATH_HEADER = "IOS_CLICK_XPATH_HEADER";
-
     public static final String IOS_LOGIN_ELEMENTS = "LOGIN_ELEMENTS_IOS";
-    public static final String IOS_IPA_NAME = "IOS_IPA_NAME";
     public static final String IOS_WDA_PORT = "IOS_WDA_PORT";
-    public static final String IOS_BUNDLE_ID = "IOS_BUNDLE_ID";
     public static final String IOS_BACK_KEY = "IOS_BACK_KEY";
-    public static final String IOS_BUNDLE_NAME = "IOS_BUNDLE_NAME";
 
     //GENERAL CONFIG ITEM
     public static final String MAX_DEPTH = "MAX_DEPTH";
@@ -122,16 +125,15 @@ public class ConfigUtil {
     private static long clickCount;
 
     //MINI Programme
-    public static final String MINI_PROGRAM_NAME = "MINI_PROGRAM_NAME";
-    //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS";
+    public static final String WECHAT_MINI_PROGRAM_NAME = "WECHAT_MINI_PROGRAM_NAME";
+    //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS"; //com.tencent.mm:appbrand1
 
-
+    public static final String RUN_IN_WECHAT_MINI_PROGRAM_MODE = "RUN_IN_WECHAT_MINI_PROGRAM_MODE";
     public static ConfigUtil initialize(String file, String udid){
         log.info("Method: initialize");
         setUdid(udid);
 
         configItems = new HashMap<>();
-
         try {
             log.info("Reading config file " + file);
 
@@ -143,7 +145,7 @@ public class ConfigUtil {
 
             //初始化的顺序很重要
             //1.先设通用的值 GENERAL  2.设默认值 DEFAULT_VALUE 3.根据serial值去覆盖默认的属性值 4.然后其它值
-            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","LOGIN_ELEMENTS","MONKEY_LIST","MINI_PROGRAM","LOG","INFLUXDB",udid));
+            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","WECHAT_CONFIG","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","LOGIN_ELEMENTS","MONKEY_LIST","LOG","INFLUXDB",udid));
             if(map.get(udid)!=null){
                 keyList.add(udid);
             }
@@ -164,6 +166,15 @@ public class ConfigUtil {
             showDomXML = ConfigUtil.getBooleanValue(DOM_DISPLAY,true);
             generateVideo = ConfigUtil.getBooleanValue(GENERATE_VIDEO,true);
             videoVertical = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
+            boolean runInWechatMode = ConfigUtil.getBooleanValue(RUN_IN_WECHAT_MINI_PROGRAM_MODE,false);
+
+            if(runInWechatMode){
+                ANDROID_PACKAGE = "WECHAT_" + ANDROID_PACKAGE;
+                ANDROID_MAIN_ACTIVITY = "WECHAT_" + ANDROID_MAIN_ACTIVITY;
+                IOS_BUNDLE_ID = "WECHAT_" + IOS_BUNDLE_ID;
+                IOS_BUNDLE_NAME = "WECHAT_" + IOS_BUNDLE_NAME;
+                IOS_IPA_NAME = "WECHAT_" + IOS_IPA_NAME;
+            }
 
             if(outputDir == null) {
                 rootDir = System.getProperty("user.dir");
@@ -232,7 +243,7 @@ public class ConfigUtil {
     }
 
     public static boolean boundRemoved(){
-        return getBooleanValue(REMOVE_BOTTOM_BOUND,true);
+        return getBooleanValue(REMOVE_BOTTOM_BOUND,false);
     }
 
     public static String getIPAName(){
@@ -256,8 +267,9 @@ public class ConfigUtil {
     }
 
     public static String getPackageName() {
-        return getStringValue("ANDROID_PACKAGE");
+        return getStringValue(ANDROID_PACKAGE);
     }
+
     public static void setPackageName(String name) {
         setStringValue("ANDROID_PACKAGE",name);
     }
@@ -287,7 +299,7 @@ public class ConfigUtil {
     public static long getScreenshotCount() { return getLongValue("SCREENSHOT_COUNT");}
 
     public static String getActivityName() {
-        return getStringValue("ANDROID_MAIN_ACTIVITY");
+        return getStringValue(ANDROID_MAIN_ACTIVITY);
     }
     public static void setActivityName(String activityName) {
         setStringValue("ANDROID_MAIN_ACTIVITY",activityName);

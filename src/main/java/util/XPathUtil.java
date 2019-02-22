@@ -297,6 +297,9 @@ public class XPathUtil {
         structureNodeNameExcludeList = ConfigUtil.getListValue(ConfigUtil.STRUCTURE_NODE_NAME_EXCLUDE_LIST);
         maxDepth = ConfigUtil.getDepth();
         pressBackPackageList = ConfigUtil.getListValue(ConfigUtil.PRESS_BACK_KEY_PACKAGE_LIST);
+        if(Driver.isMicroProgramme(appName)){
+            pressBackPackageList.remove("com.tencent.mm");
+        }
 
         if(Util.isAndroid()){
             backKeyXpath = ConfigUtil.getStringValue(ConfigUtil.ANDROID_BACK_KEY);
@@ -509,7 +512,6 @@ public class XPathUtil {
             log.error("Fail to log in!");
         }
 
-        log.info("userLoginCount is " + userLoginCount);
         userLoginCount ++;
 
         //检查运行时间
@@ -546,7 +548,7 @@ public class XPathUtil {
                 if (currentXML.contains(key)){
                     log.info("Back key trigger : " + key + " is found, press back key");
                     Driver.takeScreenShot();
-                    Driver.pressBack(repoStep);
+                    Driver.pressBack();
                     currentXML = Driver.getPageSource();
                     return currentXML;
                 }

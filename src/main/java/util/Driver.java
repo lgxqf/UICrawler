@@ -835,15 +835,8 @@ public final class Driver {
         String url = "http://" + ConfigUtil.getServerIp() + ":" + appiumPort + "/wd/hub";
         log.info(url);
         driver = new IOSDriver(new URL(url), capabilities);
-        setWindowSize();
-        log.info("Server started.");
 
-        if(false == isMicroProgramme(bundleId)){
-            driver = null;
-            log.info("Micro programme failed to start.");
-        }else {
-            log.info("Server started.");
-        }
+        performWechatAction(bundleId);
 
         return driver;
     }
@@ -874,43 +867,45 @@ public final class Driver {
         String url = "http://"+ ConfigUtil.getServerIp() +":" + port+"/wd/hub";
         log.info(url);
         driver = new AndroidDriver(new URL(url), capabilities);
-        //初始化屏幕大小
-        setWindowSize();
 
-        if(false == isMicroProgramme(appPackage)){
-            driver = null;
-            log.info("Micro programme failed to start.");
-        }else {
-            log.info("Server started.");
-        }
+        performWechatAction(appPackage);
 
         return driver;
     }
 
-    public static boolean isMicroProgramme(String appPackage){
-        boolean ret = false;
+    public static void performWechatAction(String appPackage){
 
+        //初始化屏幕大小
+        setWindowSize();
+
+        if(isMicroProgramme(appPackage)){
+            log.info("Wechat mini program testing started.");
+            enterWechat();
+        }else {
+            log.info("App testing started.");
+        }
+    }
+
+    private static void enterWechat(){
         try {
-            if (appPackage.contains("tencent")) {
-                Driver.findElementByText("发现").click();
+            Driver.findElementByText("发现").click();
 
-                if(Util.isAndroid()){
-                    //Scrollintoview,在微信中会从顶部和询问划动 但操作无效
-                    Driver.swipeVertical(false);
-                }
-
-                Driver.findElementByText("小程序").click();
-                Driver.findElementByText(ConfigUtil.getStringValue(ConfigUtil.MINI_PROGRAM_NAME)).click();
-
+            if(Util.isAndroid()){
+                Driver.swipeVertical(false);
             }
 
-            ret = true;
+            Driver.findElementByText("小程序").click();
+            Driver.findElementByText(ConfigUtil.getStringValue(ConfigUtil.WECHAT_MINI_PROGRAM_NAME)).click();
+
         }catch (Exception e){
             e.printStackTrace();
             log.error("Fail to prepare for micro programme");
         }
+    }
 
-        return ret;
+    public static boolean isMicroProgramme(String appPackage){
+
+        return appPackage.contains("com.tencent");
     }
 
     private static void setWindowSize(){
@@ -933,11 +928,6 @@ public final class Driver {
 
     public static void takesScreenShotAndPressBack(StringBuilder builder){
         takeScreenShot();
-        pressBack(builder);
-    }
-
-    public static void pressBack(StringBuilder builder){
-        builder.append("BACK : \n");
         pressBack();
     }
 

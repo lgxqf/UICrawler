@@ -1,153 +1,33 @@
-GENERAL:
-  #截屏数量
-  SCREENSHOT_COUNT: 1000
-
-  #Crash时截图显示步骤数量
-  CRASH_PIC_COUNT: 10
-
-  #遍历深度
-  MAX_DEPTH: 800
-
-  #点击次数
-  MAX_CLICK_COUNT: 100000
-
-  #TIME
-  DEFAULT_WAIT_SEC: 10
-
-  #查找元素的间隔时间
-  DEFAULT_POLLING_INTERVAL_SEC: 5
-
-  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
-  IGNORE_CRASH: true
-
-  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
-  ENABLE_VERTICAL_SWIPE: false
-
-  #运行时间限制(分钟)
-  CRAWLER_RUNNING_TIME: 240
-
-  #控制是否生成视频
-  GENERATE_VIDEO: true
-
-  #控制视频方向，竖屏或模屏
-  VIDEO_VERTICAL: true
-
-  #每个UI变化X次时，检测是否需要自动登录
-  USER_LOGIN_INTERVVAL: 5
-
-  #忽略底部元素Bounds值
-  #REMOVE_BOTTOM_BOUND: false
-
-
-#输出更多的log,主要用于调试工具用
-LOG:
-  #将性能数据写入数据库相关的log
-  DB_LOG: false
-  #性能数据相关log
-  PERF_LOG: false
-  #是否开启DOM树在log中的显示
-  DOM_DISPLAY: false
-
-
-#一些默认值
-DEFAULT_VALUE:
-  #0.0.0.0代表Server在本地
-  APPIUM_SERVER_IP: 0.0.0.0
-  #Appium端口
-  PORT: 4723
-  #IOS WDA_PORT
-  IOS_WDA_PORT: 8100
-
-
-#时序数据库 用于记录性能数据 与-e 一起使用
-INFLUXDB:
-  DB_PORT: 8086
-  DB_IP: localhost
-
-
-#设置事件百分比 各事件百分比之和为100
-MONKEY:
-  #以下各项值总和为100即可
-  SWIPE_RATIO: 4
-  CLICK_RATIO: 70
-  #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 1
-  RESTART_APP_RATIO: 1
-  LONG_PRESS_RATIO: 1
-  #Android Only
-  HOME_KEY_RATIO: 1
-  #触发Back Key
-  BACK_KEY_RATIO: 1
-  #手势操作
-  #双击
-  DOUBLE_TAP_RATIO: 1
-  #缩小(两指)
-  PINCH_RATIO: 1
-  #放大(两指)
-  UNPINCH_RATIO: 1
-  #拖拽
-  DRAG_RATIO: 1
-  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST 中填写待查找元素的xpath列表
-  CLICK_ITEM_BY_XPATH_RATIO: 5
-
-
-
-#Monkey相关的一些值
-MONKEY_LIST:
-  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
-  MONKEY_SPECIAL_POINT_LIST:
-  - '80,160'
-  - '50,50'
-
-  #根据坐标长按某点10秒
-  LONG_PRESS_LIST:
-  - '980,560'
-  - '100,250'
-
-  #设置不点击的区域(圆形)， radius为圆半径， 坐标为不想点击区域的圆心
-  MONKEY_BLACKLIST_POINT_LIST:
-  - 'radius,10'
-  - '0,0'
-
-  CLICK_ITEM_XPATH_LIST:
-  - '//*[@resource-id="com.xes.jazhanghui.activity:id/iv_class_entrance_img"]'
-  - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
-
-#小程序
-MINI_PROGRAM:
-  #小程序的名字
-  MINI_PROGRAM_NAME: 学而思营业厅
-  #小程序的进程
-  MINI_PROGRAM_PROCESS: com.tencent.mm:appbrand1
-
-
-#以下的内容很关键，而且需要根据不同的APP定制
+#以下的内容很运行工具的关键，需要根据不同的APP定制
 CRITICAL_ELEMENT:
-  #微信小程序用下面的包名
-  #ANDROID_PACKAGE: com.tencent.mm
-  #ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
 
-  #App包名和启动的Activity
+  #微信小程序的名字
+  WECHAT_MINI_PROGRAM_NAME: 学而思营业厅
+  #运行小程序测试 此值为true时用WECHAT_CONFIG的值 打开微信
+  RUN_IN_WECHAT_MINI_PROGRAM_MODE: false
+
+  #Android App测试时，需指定App包名和启动的Activity
   ANDROID_PACKAGE: com.xes.jazhanghui.activity
   ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
 
-  #IOS Bundle ID com.apple.mobilesafari
-  IOS_BUNDLE_ID: com.tencent.xin
+  #iOS App测试时需指定以下内容
+  IOS_BUNDLE_ID: com.xes
   #手机桌面上显示的APP的名字
-  IOS_BUNDLE_NAME: 微信
+  IOS_BUNDLE_NAME: 学而思
   #IPA名字的前缀
-  IOS_IPA_NAME: wechat
+  IOS_IPA_NAME: 学而思test
 
   #构建XPATH需要的一些内容,UI底部TabBar 多个id时用or拼接 如'@resource-id="id1" or @resource-id="id2"'
   ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
 
-  #注意值要加引号''
+  #通过xpath指定要点击的元素范围 注意值要加引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
 
-#自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
+#（可选）自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
+#如果不需要自动登录功能以下值不需要修改
 LOGIN_ELEMENTS:
   #Android 登录相关元素及操作
   LOGIN_ELEMENTS_ANDROID:
@@ -172,7 +52,7 @@ LOGIN_ELEMENTS:
   - IOS_USERNAME:
       XPATH: '//*[@type="XCUIElementTypeTextField"]'
       ACTION: input
-      VALUE: '13691034108'
+      VALUE: '1361234567'
   - IOS_PASSWORD:
       XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
       ACTION: input
@@ -186,10 +66,18 @@ LOGIN_ELEMENTS:
       VALUE: '250,1050,800,1050,800,1550'
 
 
+#（可选）以下各值主要用于提高测试的效率，根据app着情修改或者不改
 LIST:
-  #当遇到下列文字时会触发Back Key
+  #当UI DOM中出现下列文字时会触发Back Key(iOS 由左向右划触发返回操作)
   BACK_KEY_TRIGGER_LIST:
-  - huitui
+  - 返回
+
+  #当发现App跳转到以下app时 会触发back键 返回待测App
+  PRESS_BACK_KEY_PACKAGE_LIST:
+  - 高德地图
+  - com.autonavi.minimap
+  - com.android.settings
+  - com.tencent.mm
 
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
@@ -201,12 +89,6 @@ LIST:
   INPUT_TEXT_LIST:
   - '123'
   - 'ABC'
-
-  #当发现App跳转到以下app时 会触发back键
-  PRESS_BACK_KEY_PACKAGE_LIST:
-  - 高德地图
-  - com.autonavi.minimap
-  - com.android.settings
 
   #除了APP本身的包名外 根据以下包名判断是否跳出了APP,当app跳转到以下app时被认为是合法，会继续遍历操作
   ANDROID_VALID_PACKAGE_LIST:
@@ -248,13 +130,14 @@ LIST:
   #键盘
   - XCUIElementTypeKeyboard
 
-  #点击时排除以下类型的元素
+  #不点击以下类型的元素
   IOS_EXCLUDE_TYPE:
   - XCUIElementTypeOther
   - XCUIElementTypeKey
   - XCUIElementTypeWindow
   - XCUIElementTypeApplication
 
+  #不点击以下类型的元素
   ANDROID_EXCLUDE_TYPE:
   - android.widget.FrameLayout
   - android.widget.ImageButton
@@ -270,15 +153,142 @@ LIST:
   #解释待续
   STRUCTURE_NODE_NAME_EXCLUDE_LIST:
   #iOS
-  #- value
   - name
 
   #Android
   - text
 
 
-#设备udid 对应的设备名称
+#执行Monkey测试的一些配置项
+#设置事件百分比 各事件百分比之和为100
+MONKEY:
+  #以下各项值总和为100即可
+  SWIPE_RATIO: 4
+  CLICK_RATIO: 70
+  #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
+  CLICK_SPECIAL_POINT_RATIO: 1
+  RESTART_APP_RATIO: 1
+  LONG_PRESS_RATIO: 1
+  #Android Only
+  HOME_KEY_RATIO: 1
+  #触发Back Key
+  BACK_KEY_RATIO: 1
+  #手势操作
+  #双击
+  DOUBLE_TAP_RATIO: 1
+  #缩小(两指)
+  PINCH_RATIO: 1
+  #放大(两指)
+  UNPINCH_RATIO: 1
+  #拖拽
+  DRAG_RATIO: 1
+  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST 中填写待查找元素的xpath列表
+  CLICK_ITEM_BY_XPATH_RATIO: 5
+
+
+#（可选）Monkey操作相关的一些值
+MONKEY_LIST:
+  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
+  MONKEY_SPECIAL_POINT_LIST:
+  - '80,160'
+
+  #根据坐标长按某点10秒
+  LONG_PRESS_LIST:
+  - '100,250'
+
+  #设置不点击的区域(圆形)， radius为圆半径， 坐标为不想点击区域的圆心
+  MONKEY_BLACKLIST_POINT_LIST:
+  - 'radius,10'
+  - '0,0'
+
+  #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制
+  CLICK_ITEM_XPATH_LIST:
+  - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
+
+
+#(可选)设备udid 对应的设备名称
 d6744554:
   DEVICE_NAME: XiaoMi4
+
+
+#*******************以下内容通常不需要修改**************************
+#一些全局的配置
+GENERAL:
+  #截屏数量
+  SCREENSHOT_COUNT: 5000
+
+  #Crash时截图显示步骤数量
+  CRASH_PIC_COUNT: 10
+
+  #遍历深度
+  MAX_DEPTH: 800
+
+  #点击次数
+  MAX_CLICK_COUNT: 1000000
+
+  #查找元素的时间
+  DEFAULT_WAIT_SEC: 10
+
+  #查找元素的间隔时间
+  DEFAULT_POLLING_INTERVAL_SEC: 5
+
+  #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
+  IGNORE_CRASH: true
+
+  #遍历的过程中进行向上划动操作  ！！！此项会加长遍历时间！！！
+  ENABLE_VERTICAL_SWIPE: false
+
+  #运行时间限制(分钟)
+  CRAWLER_RUNNING_TIME: 720
+
+  #控制是否生成视频
+  GENERATE_VIDEO: true
+
+  #控制视频方向，竖屏或模屏
+  VIDEO_VERTICAL: true
+
+  #每个UI变化X次时，检测是否需要自动登录
+  USER_LOGIN_INTERVVAL: 5
+
+  #忽略底部元素Bounds值
+  #REMOVE_BOTTOM_BOUND: false
+
+
+#一些默认值
+DEFAULT_VALUE:
+  #0.0.0.0代表Server在本地
+  APPIUM_SERVER_IP: 0.0.0.0
+  #Appium端口
+  PORT: 4723
+  #IOS WDA_PORT
+  IOS_WDA_PORT: 8100
+
+
+#微信的配置 在运行小程序测试时会用到
+WECHAT_CONFIG:
+  #Android 配置
+  WECHAT_ANDROID_PACKAGE: com.tencent.mm
+  WECHAT_ANDROID_MAIN_ACTIVITY: com.tencent.mm.ui.LauncherUI
+
+  #iOS  配置
+  WECHAT_IOS_BUNDLE_ID: com.tencent.xin
+  WECHAT_IOS_BUNDLE_NAME: 微信
+  WECHAT_IOS_IPA_NAME: wechat
+
+
+#输出更多的log 主要用于调试工具用
+LOG:
+  #将性能数据写入数据库相关的log
+  DB_LOG: false
+  #性能数据相关log
+  PERF_LOG: false
+  #是否开启DOM树在log中的显示
+  DOM_DISPLAY: false
+
+
+#时序数据库 用于记录性能数据 与-e 一起使用
+INFLUXDB:
+  DB_PORT: 8086
+  DB_IP: localhost
 
 

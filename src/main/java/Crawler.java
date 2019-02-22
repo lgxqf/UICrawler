@@ -52,7 +52,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String []args) throws Exception{
-        String version = "2.25 ---Feb/21/2019";
+        String version = "2.26 ---Feb/23/2019";
 
         CommandLineParser parser = new DefaultParser( );
         Options options = new Options( );
@@ -239,7 +239,6 @@ public class Crawler {
 
             Runtime.getRuntime().addShutdownHook(new CtrlCHandler());
 
-            //TODO:add 左划三次
             try {
                 //等待App完全启动,否则遍历不到元素
                 Driver.sleep(15);
