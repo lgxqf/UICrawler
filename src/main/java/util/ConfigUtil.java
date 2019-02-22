@@ -89,13 +89,13 @@ public class ConfigUtil {
     public static final String ITEM_WHITE_LIST = "ITEM_WHITE_LIST";
     public static final String NODE_NAME_EXCLUDE_LIST = "NODE_NAME_EXCLUDE_LIST";
     public static final String STRUCTURE_NODE_NAME_EXCLUDE_LIST = "STRUCTURE_NODE_NAME_EXCLUDE_LIST";
-    public static final String PRESS_BACK_KEY_PACKAGE_LIST = "PRESS_BACK_KEY_PACKAGE_LIST";
+    public static final String PRESS_BACK_PACKAGE_LIST = "PRESS_BACK_PACKAGE_LIST";
     public static final String XPATH = "XPATH";
     public static final String ACTION = "ACTION";
     public static final String VALUE = "VALUE";
     public static final String INPUT_CLASS_LIST = "INPUT_CLASS_LIST";
     public static final String INPUT_TEXT_LIST = "INPUT_TEXT_LIST";
-    public static final String BACK_KEY_TRIGGER_LIST = "BACK_KEY_TRIGGER_LIST";
+    public static final String PRESS_BACK_TEXT_LIST = "PRESS_BACK_TEXT_LIST";
 
     //Monkey
     public static final String SWIPE_RATIO = "SWIPE_RATIO";

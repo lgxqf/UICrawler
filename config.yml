@@ -68,12 +68,12 @@ LOGIN_ELEMENTS:
 
 #（可选）以下各值主要用于提高测试的效率，根据app着情修改或者不改
 LIST:
-  #当UI DOM中出现下列文字时会触发Back Key(iOS 由左向右划触发返回操作)
-  BACK_KEY_TRIGGER_LIST:
+  #UI中出现下列文字时 触发back键(iOS 由左向右划触发返回操作)
+  PRESS_BACK_TEXT_LIST:
   - 返回
 
-  #当发现App跳转到以下app时 会触发back键 返回待测App
-  PRESS_BACK_KEY_PACKAGE_LIST:
+  #当pp跳转到以下app时 触发back键
+  PRESS_BACK_PACKAGE_LIST:
   - 高德地图
   - com.autonavi.minimap
   - com.android.settings

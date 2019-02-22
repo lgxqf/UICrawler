@@ -296,7 +296,7 @@ public class XPathUtil {
         //xpath中排除以下属性, android和iOS  小写字母
         structureNodeNameExcludeList = ConfigUtil.getListValue(ConfigUtil.STRUCTURE_NODE_NAME_EXCLUDE_LIST);
         maxDepth = ConfigUtil.getDepth();
-        pressBackPackageList = ConfigUtil.getListValue(ConfigUtil.PRESS_BACK_KEY_PACKAGE_LIST);
+        pressBackPackageList = ConfigUtil.getListValue(ConfigUtil.PRESS_BACK_PACKAGE_LIST);
         if(Driver.isMicroProgramme(appName)){
             pressBackPackageList.remove("com.tencent.mm");
         }
@@ -307,7 +307,7 @@ public class XPathUtil {
             backKeyXpath = ConfigUtil.getStringValue(ConfigUtil.IOS_BACK_KEY);
         }
 
-        backKeyTriggerList = ConfigUtil.getListValue(ConfigUtil.BACK_KEY_TRIGGER_LIST);
+        backKeyTriggerList = ConfigUtil.getListValue(ConfigUtil.PRESS_BACK_TEXT_LIST);
     }
 
     public static PackageStatus isValidPackageName(String packageName){
