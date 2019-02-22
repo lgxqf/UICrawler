@@ -23,7 +23,7 @@ v2.26版已支持 Appium 1.10.1
 * 支持对输入框的文本输入(需在文件中进行配置 INPUT_TEXT_LIST)
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
-* 支持根据关键字和控件类型触发Back key(Android)
+* 支持根据关键字、包名、Acitity的名字、控件类型触发Back key(Android)
 * 支持自动登录时的自定义操作：点击、拖拽、文本输入。 详见Config.yml中LOGIN_ELEMENTS部分内容
 * 黑名单支持XPath
 
