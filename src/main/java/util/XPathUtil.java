@@ -560,7 +560,7 @@ public class XPathUtil {
 
         if(pressBackActivityList.size() > 0){
             String currentActivity = Driver.getCurrentActivity();
-            log.error("Current activity " + currentActivity);
+            //log.error("Current activity " + currentActivity);
 
             for(String key : pressBackActivityList){
                 if (currentActivity.contains(key)){
