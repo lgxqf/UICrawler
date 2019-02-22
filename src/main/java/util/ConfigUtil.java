@@ -129,6 +129,9 @@ public class ConfigUtil {
     //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS"; //com.tencent.mm:appbrand1
 
     public static final String RUN_IN_WECHAT_MINI_PROGRAM_MODE = "RUN_IN_WECHAT_MINI_PROGRAM_MODE";
+    public static final String PRESS_BACK_ACTIVITY_LIST = "PRESS_BACK_ACTIVITY_LIST";
+
+
     public static ConfigUtil initialize(String file, String udid){
         log.info("Method: initialize");
         setUdid(udid);
@@ -145,7 +148,8 @@ public class ConfigUtil {
 
             //初始化的顺序很重要
             //1.先设通用的值 GENERAL  2.设默认值 DEFAULT_VALUE 3.根据serial值去覆盖默认的属性值 4.然后其它值
-            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","WECHAT_CONFIG","DEFAULT_VALUE","MONKEY","LIST","CRITICAL_ELEMENT","LOGIN_ELEMENTS","MONKEY_LIST","LOG","INFLUXDB",udid));
+            List<String> keyList = new ArrayList(Arrays.asList("GENERAL","WECHAT_CONFIG","DEFAULT_VALUE","MONKEY",
+                    "LIST","CRITICAL_ELEMENT","LOGIN_ELEMENTS","MONKEY_LIST","LOG","INFLUXDB",udid));
             if(map.get(udid)!=null){
                 keyList.add(udid);
             }

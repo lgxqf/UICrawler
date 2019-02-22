@@ -32,6 +32,7 @@ public class XPathUtil {
     private static List<String> nodeNameExcludeList;
     private static List<String> structureNodeNameExcludeList;
     private static List<String> pressBackPackageList;
+    private static List<String> pressBackActivityList;
     private static List<String> backKeyTriggerList;
     private static List<String> xpathNotFoundElementList = new ArrayList<>();
     private static List<String> clickFailureElementList = new ArrayList<>();
@@ -301,6 +302,8 @@ public class XPathUtil {
             pressBackPackageList.remove("com.tencent.mm");
         }
 
+        pressBackActivityList = ConfigUtil.getListValue(ConfigUtil.PRESS_BACK_ACTIVITY_LIST);
+
         if(Util.isAndroid()){
             backKeyXpath = ConfigUtil.getStringValue(ConfigUtil.ANDROID_BACK_KEY);
         }else{
@@ -543,10 +546,25 @@ public class XPathUtil {
         log.info("Back key list size is " + backKeyTriggerList.size());
 
         //根据关键字触发Back Key
-        if( (backKeyTriggerList != null)  && (backKeyTriggerList.size() > 0) ){
+        if( backKeyTriggerList.size() > 0 ){
             for(String key : backKeyTriggerList){
                 if (currentXML.contains(key)){
-                    log.info("Back key trigger : " + key + " is found, press back key");
+                    log.info("Back key trigger text: " + key + " is found, press back key");
+                    Driver.takeScreenShot();
+                    Driver.pressBack();
+                    currentXML = Driver.getPageSource();
+                    return currentXML;
+                }
+            }
+        }
+
+        if(pressBackActivityList.size() > 0){
+            String currentActivity = Driver.getCurrentActivity();
+            log.error("Current activity " + currentActivity);
+
+            for(String key : pressBackActivityList){
+                if (currentActivity.contains(key)){
+                    log.info("Back key trigger activity: " + key + " is found, press back key");
                     Driver.takeScreenShot();
                     Driver.pressBack();
                     currentXML = Driver.getPageSource();
