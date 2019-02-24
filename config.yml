@@ -82,6 +82,7 @@ LIST:
   #当前遇到以下Activity时 触发back键 (Android only)
   PRESS_BACK_ACTIVITY_LIST:
   - .mvp.servicecenter.view.ServiceCenterMapDetailActivity
+  - activity.SobotChatActivity
 
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
