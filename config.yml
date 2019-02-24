@@ -83,6 +83,7 @@ LIST:
   PRESS_BACK_ACTIVITY_LIST:
   - .mvp.servicecenter.view.ServiceCenterMapDetailActivity
   - activity.SobotChatActivity
+  - com.android.internal.app.ResolverActivity
 
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
