@@ -70,6 +70,7 @@ LOGIN_ELEMENTS:
 LIST:
   #UI中出现下列文字时 触发back键(iOS 由左向右划触发返回操作)
   PRESS_BACK_TEXT_LIST:
+  - 学而思在线客服
   - 返回
 
   #当pp跳转到以下app时 触发back键
