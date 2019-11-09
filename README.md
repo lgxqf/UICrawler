@@ -143,7 +143,7 @@ Android:
 iOS:
   instruments -s  devices
   idevice_id -l
-  idevicecrashreport -u -e .
+  idevicecrashreport -e .
   
 Android 查看app包名 和 Main activity
   Linux/Mac
