@@ -1,9 +1,7 @@
 screenshot/
 build/
-.gradle/
 .idea
 .DS_Store
-node_modules/*
 *.iml
 logs/
 log/
