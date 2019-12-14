@@ -1,7 +1,7 @@
 # UICrawler
 ## 基于Appium 1.8.1开发的App UI遍历 & Monkey 工具
 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/picToMov.gif)
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 QQ 技术交流群 ： 728183683
 
@@ -170,7 +170,7 @@ Android查看当前activity
 
 
 ## 测试报告 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/Test-Report.png)
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/Test-Report.png)
 
 
 ## 注意事项
