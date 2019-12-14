@@ -1,5 +1,5 @@
 # UICrawler
-## 基于Appium 1.8.1开发的App UI遍历 & Monkey 工具
+## 基于Appium的App UI遍历 & Monkey 工具
 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
