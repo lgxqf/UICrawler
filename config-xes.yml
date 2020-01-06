@@ -3,7 +3,7 @@ CRITICAL_ELEMENT:
 
   #微信小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 学而思营业厅
-  #运行小程序测试 此值为true时用WECHAT_CONFIG的值 打开微信
+  #运行小程序测试此值必须为true 程序会用WECHAT_CONFIG中配置的值打开微信
   RUN_IN_WECHAT_MINI_PROGRAM_MODE: false
 
   #Android App测试时，需指定App包名和启动的Activity
