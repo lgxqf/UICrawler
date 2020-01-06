@@ -1,3 +1,6 @@
+##TODO
+* Add wechat support in cmd
+* Reorder cmd
 
 ##待开发功能
 * 去除Android7 android:id/statusBarBackground

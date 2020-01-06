@@ -26,35 +26,28 @@ public class ConfigUtil {
     private static boolean perLogEnabled = false;
     private static boolean generateVideo = true;
     private static boolean videoVertical = true;
+    private static long clickCount;
     private static List<String> blackKeyList = new ArrayList<>();
 
-    public static boolean isShowDomXML() {
-        return showDomXML;
-    }
-
-    public static void setOutputDir (String dir){
-        outputDir = dir;
-    }
 
     //Android
+    public static String ANDROID_PACKAGE = "ANDROID_PACKAGE";
+    public static String ANDROID_MAIN_ACTIVITY = "ANDROID_MAIN_ACTIVITY";
     public static final String ANDROID_BOTTOM_TAB_BAR_ID = "ANDROID_BOTTOM_TAB_BAR_ID";
     public static final String ANDROID_EXCLUDE_TYPE = "ANDROID_EXCLUDE_TYPE";
     public static final String ANDROID_CLICK_XPATH_HEADER = "ANDROID_CLICK_XPATH_HEADER";
     public static final String IOS_EXCLUDE_BAR = "IOS_EXCLUDE_BAR";
-    public static final String ANDROID_USERNAME = "ANDROID_USERNAME";
-    public static final String ANDROID_PASSWORD = "ANDROID_PASSWORD";
     public static final String ANDROID_LOGIN_ELEMENTS = "LOGIN_ELEMENTS_ANDROID";
     public static final String ANDROID_BACK_KEY = "ANDROID_BACK_KEY";
     public static final String LOGIN_ELEMENTS_ANDROID = "LOGIN_ELEMENTS_ANDROID";
+    public static final String ANDROID_USERNAME = "ANDROID_USERNAME";
+    public static final String ANDROID_PASSWORD = "ANDROID_PASSWORD";
 
-    public static String ANDROID_PACKAGE = "ANDROID_PACKAGE";
-    public static String ANDROID_MAIN_ACTIVITY = "ANDROID_MAIN_ACTIVITY";
 
     //iOS
     public static String IOS_IPA_NAME = "IOS_IPA_NAME";
     public static String IOS_BUNDLE_NAME = "IOS_BUNDLE_NAME";
     public static String IOS_BUNDLE_ID = "IOS_BUNDLE_ID";
-
     public static final String IOS_EXCLUDE_TYPE = "IOS_EXCLUDE_TYPE";
     public static final String IOS_BOTTOM_TAB_BAR_TYPE = "IOS_BOTTOM_TAB_BAR_TYPE";
     public static final String IOS_CLICK_XPATH_HEADER = "IOS_CLICK_XPATH_HEADER";
@@ -62,7 +55,7 @@ public class ConfigUtil {
     public static final String IOS_WDA_PORT = "IOS_WDA_PORT";
     public static final String IOS_BACK_KEY = "IOS_BACK_KEY";
 
-    //GENERAL CONFIG ITEM
+    //General config item
     public static final String MAX_DEPTH = "MAX_DEPTH";
     public static final String CRASH_PIC_COUNT = "CRASH_PIC_COUNT";
     public static final String SCREEN_SHOT = "screenshot";
@@ -75,14 +68,7 @@ public class ConfigUtil {
     public static final String USER_LOGIN_INTERVVAL = "USER_LOGIN_INTERVVAL";
     public static final String APPIUM_SERVER_IP = "APPIUM_SERVER_IP";
 
-    //INFLUXDB
-    public static final String DB_PORT = "DB_PORT";
-    public static final String DB_IP = "DB_IP";
-
-    //DEFAULT VALUE ITEM
-    public static final String CRAWLER_RUNNING_TIME = "CRAWLER_RUNNING_TIME";
-
-    //LIST
+    //List
     public static final String ANDROID_VALID_PACKAGE_LIST = "ANDROID_VALID_PACKAGE_LIST";
     public static final String IOS_VALID_BUNDLE_LIST = "IOS_VALID_BUNDLE_LIST";
     public static final String ITEM_BLACKLIST = "ITEM_BLACKLIST";
@@ -96,6 +82,7 @@ public class ConfigUtil {
     public static final String INPUT_CLASS_LIST = "INPUT_CLASS_LIST";
     public static final String INPUT_TEXT_LIST = "INPUT_TEXT_LIST";
     public static final String PRESS_BACK_TEXT_LIST = "PRESS_BACK_TEXT_LIST";
+    public static final String PRESS_BACK_ACTIVITY_LIST = "PRESS_BACK_ACTIVITY_LIST";
 
     //Monkey
     public static final String SWIPE_RATIO = "SWIPE_RATIO";
@@ -110,27 +97,34 @@ public class ConfigUtil {
     public static final String UNPINCH_RATIO = "UNPINCH_RATIO";
     public static final String DRAG_RATIO = "DRAG_RATIO";
     public static final String BACK_KEY_RATIO = "BACK_KEY_RATIO";
-
-    //LOG
-    public static final String DB_LOG = "DB_LOG";
-    public static final String PERF_LOG = "PERF_LOG";
-
     public static final String MONKEY_SPECIAL_POINT_LIST = "MONKEY_SPECIAL_POINT_LIST";
     public static final String LONG_PRESS_LIST = "LONG_PRESS_LIST";
     public static final String CLICK_ITEM_XPATH_LIST = "CLICK_ITEM_XPATH_LIST";
-
     public static final ArrayList<String> MONKEY_EVENT_RATION_LIST = new ArrayList<>(Arrays.asList(RESTART_APP_RATIO,CLICK_RATIO,SWIPE_RATIO,
             LONG_PRESS_RATIO,CLICK_SPECIAL_POINT_RATIO,HOME_KEY_RATIO,
             DOUBLE_TAP_RATIO,PINCH_RATIO,UNPINCH_RATIO,DRAG_RATIO,BACK_KEY_RATIO,CLICK_ITEM_BY_XPATH_RATIO));
-    private static long clickCount;
 
-    //MINI Programme
+    //Log
+    public static final String DB_LOG = "DB_LOG";
+    public static final String PERF_LOG = "PERF_LOG";
+
+    //Influx db
+    public static final String DB_PORT = "DB_PORT";
+    public static final String DB_IP = "DB_IP";
+    public static final String CRAWLER_RUNNING_TIME = "CRAWLER_RUNNING_TIME";
+
+    //Wechat MINI Programme
     public static final String WECHAT_MINI_PROGRAM_NAME = "WECHAT_MINI_PROGRAM_NAME";
+    public static final String RUN_IN_WECHAT_MINI_PROGRAM_MODE = "RUN_IN_WECHAT_MINI_PROGRAM_MODE";
     //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS"; //com.tencent.mm:appbrand1
 
-    public static final String RUN_IN_WECHAT_MINI_PROGRAM_MODE = "RUN_IN_WECHAT_MINI_PROGRAM_MODE";
-    public static final String PRESS_BACK_ACTIVITY_LIST = "PRESS_BACK_ACTIVITY_LIST";
+    public static boolean isShowDomXML() {
+        return showDomXML;
+    }
 
+    public static void setOutputDir (String dir){
+        outputDir = dir;
+    }
 
     public static ConfigUtil initialize(String file, String udid){
         log.info("Method: initialize");
