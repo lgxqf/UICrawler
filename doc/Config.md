@@ -42,8 +42,9 @@
   * MONKEY_SPECIAL_POINT_LIST: 提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久         
     '80,160'       
     '50,50'      
+    
+    
   ### 构建XPATH需要的一些内容
-
   UI底部TabBar
   * ANDROID_BOTTOM_TAB_BAR_ID: com.xxx.yy:id/bottomBar
   * IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar

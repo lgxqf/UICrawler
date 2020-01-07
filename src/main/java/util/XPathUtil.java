@@ -505,17 +505,19 @@ public class XPathUtil {
 
         log.info("Context: " + Driver.driver.getContextHandles().toString());
 
-        try {
-            if( 0 == userLoginCount % userLoginInterval) {
-                log.info("Processing login operation");
-                xml = userLogin(xml);
+        if (ConfigUtil.isAutoLoginEnabled()) {
+            try {
+                if (0 == userLoginCount % userLoginInterval) {
+                    log.info("Processing login operation");
+                    xml = userLogin(xml);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("Fail to log in!");
             }
-        }catch (Exception e){
-            e.printStackTrace();
-            log.error("Fail to log in!");
-        }
 
-        userLoginCount ++;
+            userLoginCount++;
+        }
 
         //检查运行时间
         long endTime = System.currentTimeMillis();

@@ -1001,7 +1001,7 @@ public final class Driver {
     }
 
     public static int getSDKVersion(String udid){
-        int sdkversion = -1;
+        int sdkversion = 28;
         String findCmd = Util.getGrep();
 
         String cmd = "adb -s " + udid + " shell getprop | " + findCmd + " version.sdk";
@@ -1011,9 +1011,11 @@ public final class Driver {
         String res = Util.exeCmd(cmdList);
 
         if(res == null ||res.length() < 5){
+
             log.error("\n\nERROR:Fail to get sdk version!!!! The specified device udid : "+ udid + " is not found \n");
             String deviceList = Util.exeCmd("adb devices",false);
             String output ="List of devices attached";
+
             if(deviceList.length() < output.length() + 1){
                 log.error("ERROR: No devices are connected!!!\n");
             }else{

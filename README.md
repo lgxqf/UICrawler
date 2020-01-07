@@ -23,7 +23,7 @@ v2.26版已支持 Appium 1.10.1
 * 支持对输入框的文本输入(需在文件中进行配置 INPUT_TEXT_LIST)
 * 统计每个Activity点击数量(Android)
 * 支持滑动动作
-* 支持根据关键字、包名、Acitity的名字、控件类型触发Back key(Android)
+* 支持根据关键字、包名、Activity的名字、控件类型触发Back key(Android)
 * 支持自动登录时的自定义操作：点击、拖拽、文本输入。 详见Config.yml中LOGIN_ELEMENTS部分内容
 * 黑名单支持XPath
 
@@ -89,27 +89,29 @@ v2.26版已支持 Appium 1.10.1
 
 ### 4.启动appium
 ```bash
-appium --session-override -p 4723
+appium --session-override
 -p 设定appium server的端口 , 不加参数默认为4723
 ```
 
-### 5.1 运行元素遍历(必须有yml配置文件)
+### 5.1 运行元素遍历
 ```aidl
-java -jar UICrawler.jar -f config.yml -u udid -t 4723
+java -jar UICrawler.jar -u udid 
 -u 指定设备udid
 -t 指定appium server的端口（此项为可选项，默认值是4723)
+-f 指定yml配置文件 若无此参数 默认为config.yml 
 ```
 
 ### 5.2 运行 Monkey功能
 ```aidl
-java -jar UICrawler.jar -f config.yml -u udid -t 4723 -m
+java -jar UICrawler.jar -u udid -m
 ```
 
 ### 5.3 运行微信小程序测试，将RUN_IN_WECHAT_MINI_PROGRAM_MODE设为true 启动后会通过微信进入小程序
 ```
 CRITICAL_ELEMENT:
   MINI_PROGRAM_NAME: 此处值为待测的小程序的名字
-  RUN_IN_WECHAT_MINI_PROGRAM_MODE: true
+
+java -jar UICrawler.jar -u udid -w
 ```
 
 
@@ -119,22 +121,18 @@ java -jar UICrawler.jar -h
 
     -a  Android package's main activity
     -b  iOS bundle id
-    -c  Maximum click count
-    -d  Maximum crawler UI depth
     -e  Record performance data
     -f  Yaml config  file
     -h  Print this usage information
     -i  Ignore crash
-    -l  Execution loop count
     -m  Run monkey
     -p  Android package name
-    -r  Crawler running time
     -t  Appium port
     -u  Device serial
     -v  Version
-    -w  WDA port for ios
+    -z  WDA port for ios
     -x  Write data to influxDB
-
+    -w  Run in wechat mode
 ```
 
 ### 一些常用命令
