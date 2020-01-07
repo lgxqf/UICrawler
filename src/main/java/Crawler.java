@@ -4,7 +4,6 @@ import org.apache.commons.collections.map.ListOrderedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.*;
-
 import java.io.File;
 import java.util.*;
 
@@ -264,7 +263,7 @@ public class Crawler {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
-        String version = "2.26 ---Feb/23/2019";
+        String version = "2.3 ---Jan/07/2020";
 
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
