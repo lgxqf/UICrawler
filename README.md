@@ -9,7 +9,7 @@ QQ 技术交流群 ： 728183683
 
 环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
-v2.3版已支持 Appium 1.16.1, Java-client 7.3.0
+v2.3版已支持 Appium 1.16.0, Java-client 7.3.0
 
 ## 2.0 版 功能描述 
 
