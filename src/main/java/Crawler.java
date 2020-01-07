@@ -318,10 +318,10 @@ public class Crawler {
             return;
         }
 
-        if (commandLine.hasOption("v")) {
-            log.info(version);
-            //log.info("PC platform : " +  System.getProperty("os.name"));
-            log.info("System File Encoding: " + System.getProperty("file.encoding"));
+        if (commandLine.hasOption("u")) {
+            udid = commandLine.getOptionValue('u');
+        } else {
+            log.info("Please provide device serial");
             return;
         }
 
@@ -330,14 +330,15 @@ public class Crawler {
             configFile = configFile.trim();
             log.info(configFile);
         } else {
-            log.info("Please provide config file");
-            return;
+            configFile = System.getProperty("user.dir") + File.separator + "config.yml";
+            log.info("using default config file : config.yml");
         }
+        configFile = configFile.trim();
 
-        if (commandLine.hasOption("u")) {
-            udid = commandLine.getOptionValue('u');
-        } else {
-            log.info("Please provide device serial");
+        if (commandLine.hasOption("v")) {
+            log.info(version);
+            //log.info("PC platform : " +  System.getProperty("os.name"));
+            log.info("System File Encoding: " + System.getProperty("file.encoding"));
             return;
         }
 

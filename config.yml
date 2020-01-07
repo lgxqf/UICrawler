@@ -20,14 +20,9 @@ CRITICAL_ELEMENT:
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
   #此值为true时会进入 WECHAT_MINI_PROGRAM_NAME 指定的微信小程序
-  RUN_IN_WECHAT_MINI_PROGRAM_MODE: false
+  RUN_IN_WECHAT_MINI_PROGRAM_MODE: true
   #微信小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 学而思营业厅
-
-
-#(可选)设备udid 对应的设备名称
-d6744554:
-  DEVICE_NAME: XiaoMi4
 
 
 #（可选）自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
@@ -262,7 +257,7 @@ GENERAL:
 
 #一些默认值
 DEFAULT_VALUE:
-  #0.0.0.0代表Server在本地
+  #0.0.0.0代表Appium Server运行在本地
   APPIUM_SERVER_IP: 0.0.0.0
   #Appium端口
   PORT: 4723
