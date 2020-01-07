@@ -166,9 +166,6 @@ Android查看当前activity
     adb shell dumpsys activity | grep "mFoc"
 ```
 
-## [配置文件介绍](doc/Config.md)
-
-
 ## 测试报告 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/Test-Report.png)
 
