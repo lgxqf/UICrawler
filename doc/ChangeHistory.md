@@ -1,4 +1,10 @@
 # CHANGE HISTORY
+### 2020-01-12
+* 升级Java-client为7.3.0
+* 支持Appium 1.61.0
+* 去不常用的一些参数如 -c, -d, -l, -r
+* 优化配置文件项
+* 添加 -w 支持小程序遍历
 
 ### 2018-06-14
 * 添加 UICrawler运行时间限制 CRAWLER_RUNNING_TIME

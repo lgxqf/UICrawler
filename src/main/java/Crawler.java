@@ -270,23 +270,26 @@ public class Crawler {
         Options options = new Options();
         options.addOption("h", "help", false, "Print this usage information");
         options.addOption("a", "activity", true, "Android package's main activity");
+        options.addOption("p", "package", true, "Android package name");
         options.addOption("b", "ios_bundle_id", true, "iOS bundle id");
-        options.addOption("c", "run_count", true, "Maximum click count");
-        options.addOption("d", "crawler_ui_depth", true, "Maximum Crawler UI Depth");
+        options.addOption("n", "ios_bundle_name", false, "ios bundle");
+        options.addOption("z", "wda_port", true, "wda port for ios");
+
+        //options.addOption("c", "run_count", true, "Maximum click count");
+        //options.addOption("d", "crawler_ui_depth", true, "Maximum Crawler UI Depth");
+        //options.addOption("l", "loop count", true, "Crawler loop count");
+        //options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
+
         options.addOption("e", "performance", false, "record performance data");
         options.addOption("f", "config", true, "Yaml config  file");
         options.addOption("i", "ignore crash", false, "Ignore crash");
-        options.addOption("l", "loop count", true, "Crawler loop count");
         options.addOption("m", "run monkey", false, "run in monkey mode");
-        options.addOption("n", "ios_bundle_name", false, "ios bundle");
         options.addOption("o", "output_dir", true, "ouptut directory");
-        options.addOption("p", "package", true, "Android package name");
-        options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
         options.addOption("s", "server_ip", true, "appium server ip");
         options.addOption("t", "port", true, "appium port");
         options.addOption("u", "udid", true, "device serial");
         options.addOption("v", "version", false, "build version with date");
-        options.addOption("w", "wda_port", true, "wda port for ios");
+        options.addOption("w", "wechat_mode", false, "run in wechat mode");
         options.addOption("x", "write_to_db", false, "write performance data to influxDB");
 
         CommandLine commandLine = parser.parse(options, args);
@@ -297,23 +300,24 @@ public class Crawler {
                     "\n" +
                             "    -a  Android package's main activity\n" +
                             "    -b  iOS bundle ID\n" +
-                            "    -c  Maximum click count \n" +
-                            "    -d  Maximum crawler UI depth \n" +
+                            //"    -c  Maximum click count \n" +
+                            //"    -d  Maximum crawler UI depth \n" +
                             "    -e  Record performance data \n" +
                             "    -f  Yaml config  file\n" +
                             "    -h  Print this usage information\n" +
                             "    -i  Ignore crash\n" +
-                            "    -l  Execution loop count\n" +
+                            //"    -l  Execution loop count\n" +
                             "    -m  Run monkey\n" +
                             "    -o  Output directory" +
                             "    -p  Android package name\n" +
-                            "    -r  Crawler running time\n" +
+                            //"    -r  Crawler running time\n" +
                             "    -s  Appium server ip\n" +
                             "    -t  Appium port\n" +
                             "    -u  Device serial\n" +
                             "    -v  Version\n" +
-                            "    -w  WDA port for ios\n" +
-                            "    -x  Write data to influx db"
+                            "    -z  WDA port for ios\n" +
+                            "    -x  Write data to influx db\n" +
+                            "    -w  run in wechat mode"
             );
             return;
         }
@@ -325,6 +329,10 @@ public class Crawler {
             return;
         }
 
+        if (commandLine.hasOption("w")) {
+            ConfigUtil.setRunInWechatMode(true);
+        }
+
         if (commandLine.hasOption("f")) {
             configFile = System.getProperty("user.dir") + File.separator + commandLine.getOptionValue('f');
             configFile = configFile.trim();
@@ -333,6 +341,7 @@ public class Crawler {
             configFile = System.getProperty("user.dir") + File.separator + "config.yml";
             log.info("using default config file : config.yml");
         }
+
         configFile = configFile.trim();
 
         if (commandLine.hasOption("v")) {
@@ -426,10 +435,9 @@ public class Crawler {
                 ConfigUtil.setPort(commandLine.getOptionValue('t'));
             }
 
-            if (commandLine.hasOption("w")) {
-                ConfigUtil.setWdaPort(commandLine.getOptionValue('w'));
+            if (commandLine.hasOption("z")) {
+                ConfigUtil.setWdaPort(commandLine.getOptionValue('z'));
             }
-
             Util.createDir(ConfigUtil.getRootDir());
 
             AppiumDriver appiumDriver;
@@ -448,8 +456,8 @@ public class Crawler {
             }
 
             logName = Driver.startLogRecord();
-            initReport();
 
+            initReport();
             Runtime.getRuntime().addShutdownHook(new CtrlCHandler());
 
             try {

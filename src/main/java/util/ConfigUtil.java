@@ -26,6 +26,9 @@ public class ConfigUtil {
     private static boolean perLogEnabled = false;
     private static boolean generateVideo = true;
     private static boolean videoVertical = true;
+
+
+    private static boolean runInWechatMode = false;
     private static long clickCount;
     private static List<String> blackKeyList = new ArrayList<>();
 
@@ -66,6 +69,7 @@ public class ConfigUtil {
     public static final String GENERATE_VIDEO = "GENERATE_VIDEO";
     public static final String VIDEO_VERTICAL = "VIDEO_VERTICAL";
     public static final String USER_LOGIN_INTERVVAL = "USER_LOGIN_INTERVVAL";
+    public static final String ENABLE_AUTO_LOGIN = "ENABLE_AUTO_LOGIN";
     public static final String APPIUM_SERVER_IP = "APPIUM_SERVER_IP";
 
     //List
@@ -118,6 +122,11 @@ public class ConfigUtil {
     public static final String RUN_IN_WECHAT_MINI_PROGRAM_MODE = "RUN_IN_WECHAT_MINI_PROGRAM_MODE";
     //public static final String MINI_PROGRAM_PROCESS = "MINI_PROGRAM_PROCESS"; //com.tencent.mm:appbrand1
 
+
+    public static void setRunInWechatMode(boolean runInWechatMode) {
+        ConfigUtil.runInWechatMode = runInWechatMode;
+    }
+
     public static boolean isShowDomXML() {
         return showDomXML;
     }
@@ -164,7 +173,7 @@ public class ConfigUtil {
             showDomXML = ConfigUtil.getBooleanValue(DOM_DISPLAY,true);
             generateVideo = ConfigUtil.getBooleanValue(GENERATE_VIDEO,true);
             videoVertical = ConfigUtil.getBooleanValue(VIDEO_VERTICAL,true);
-            boolean runInWechatMode = ConfigUtil.getBooleanValue(RUN_IN_WECHAT_MINI_PROGRAM_MODE,false);
+            //boolean runInWechatMode = ConfigUtil.getBooleanValue(RUN_IN_WECHAT_MINI_PROGRAM_MODE,false);
 
             if(runInWechatMode){
                 ANDROID_PACKAGE = "WECHAT_" + ANDROID_PACKAGE;
@@ -242,6 +251,10 @@ public class ConfigUtil {
 
     public static boolean boundRemoved(){
         return getBooleanValue(REMOVE_BOTTOM_BOUND,false);
+    }
+
+    public static boolean isAutoLoginEnabled(){
+        return getBooleanValue(ENABLE_AUTO_LOGIN,false);
     }
 
     public static String getIPAName(){

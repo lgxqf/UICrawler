@@ -1,6 +1,7 @@
 #以下的内容很运行工具的关键，需要根据不同的APP定制
 CRITICAL_ELEMENT:
 
+  #Android
   #Android App测试时，需指定App包名和启动的Activity
   ANDROID_PACKAGE: com.xes.jazhanghui.activity
   ANDROID_MAIN_ACTIVITY: com.xes.jazhanghui.activity.mvp.start.StartActivity
@@ -9,7 +10,7 @@ CRITICAL_ELEMENT:
   #若App顶、底UI含有TabBar ,需指定TabBar的id, 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
   ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
 
-
+  #iOS
   #若执行iOS App测试，必需指定以下IOS_开头的内容
   IOS_BUNDLE_ID: com.xes
   #手机桌面上显示的APP的名字
@@ -19,50 +20,58 @@ CRITICAL_ELEMENT:
   IOS_BOTTOM_TAB_BAR_TYPE: XCUIElementTypeTabBar
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
-  #此值为true时会进入 WECHAT_MINI_PROGRAM_NAME 指定的微信小程序
-  RUN_IN_WECHAT_MINI_PROGRAM_MODE: true
-  #微信小程序的名字
+
+  #微信小程序
+  #微信小程序测试 使用参数 -y 时需指定小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 学而思营业厅
 
+#执行Monkey测试的一些配置项
+#设置事件百分比 各事件百分比之和为100
+MONKEY:
+  #以下各项值总和为100即可
+  SWIPE_RATIO: 4
+  CLICK_RATIO: 70
+  #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
+  CLICK_SPECIAL_POINT_RATIO: 1
+  RESTART_APP_RATIO: 1
+  LONG_PRESS_RATIO: 1
+  #Android Only
+  HOME_KEY_RATIO: 1
+  #触发Back Key
+  BACK_KEY_RATIO: 1
+  #手势操作
+  #双击
+  DOUBLE_TAP_RATIO: 1
+  #缩小(两指)
+  PINCH_RATIO: 1
+  #放大(两指)
+  UNPINCH_RATIO: 1
+  #拖拽
+  DRAG_RATIO: 1
+  #CLICK_ITEM_XPATH_LIST中指定元素的点击次数(比率)
+  CLICK_ITEM_BY_XPATH_RATIO: 5
 
-#（可选）自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
-#如果不需要自动登录功能以下值不需要修改
-LOGIN_ELEMENTS:
-  #Android 登录相关元素及操作
-  LOGIN_ELEMENTS_ANDROID:
-  - ANDOIRD_LOGIN_CHANGE:
-      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/login_change"]'
-      ACTION: click
-  - ANDROID_USERNAME:
-      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
-      ACTION: input
-      VALUE: '13691034108'
-  - ANDROID_PASSWORD:
-      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_password"]'
-      ACTION: input
-      VALUE: '123456'
-  - ANDROID_LOGIN_BUTTON:
-      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
-      ACTION: click
-      VALUE: '1'
+#（可选）Monkey操作相关的一些值
+MONKEY_LIST:
+  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
+  MONKEY_SPECIAL_POINT_LIST:
+    - '80,160'
 
-  #iOS登录相关元素及操作
-  LOGIN_ELEMENTS_IOS:
-  - IOS_USERNAME:
-      XPATH: '//*[@type="XCUIElementTypeTextField"]'
-      ACTION: input
-      VALUE: '1361234567'
-  - IOS_PASSWORD:
-      XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
-      ACTION: input
-      VALUE: '123456'
-  - IOS_LOGIN_BUTTON:
-      XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
-      ACTION: click
-  - DRAG:
-      XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
-      ACTION: drag
-      VALUE: '250,1050,800,1050,800,1550'
+  #根据坐标长按某点10秒
+  LONG_PRESS_LIST:
+    - '100,250'
+
+  #设置不点击的区域(圆形)， radius为圆半径， 坐标为不想点击区域的圆心
+  MONKEY_BLACKLIST_POINT_LIST:
+    - 'radius,10'
+    - '0,0'
+
+  #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
+  CLICK_ITEM_XPATH_LIST:
+    - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
+    -
+
+
 
 
 #（可选）以下各值主要用于提高测试的效率，根据app着情修改或者不改
@@ -166,54 +175,7 @@ LIST:
   - text
 
 
-#执行Monkey测试的一些配置项
-#设置事件百分比 各事件百分比之和为100
-MONKEY:
-  #以下各项值总和为100即可
-  SWIPE_RATIO: 4
-  CLICK_RATIO: 70
-  #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 1
-  RESTART_APP_RATIO: 1
-  LONG_PRESS_RATIO: 1
-  #Android Only
-  HOME_KEY_RATIO: 1
-  #触发Back Key
-  BACK_KEY_RATIO: 1
-  #手势操作
-  #双击
-  DOUBLE_TAP_RATIO: 1
-  #缩小(两指)
-  PINCH_RATIO: 1
-  #放大(两指)
-  UNPINCH_RATIO: 1
-  #拖拽
-  DRAG_RATIO: 1
-  #通过Xpath点击元素的次数,若找不到相应的元素则会忽略当该事件，CLICK_ITEM_XPATH_LIST 中填写待查找元素的xpath列表
-  CLICK_ITEM_BY_XPATH_RATIO: 5
-
-
-#（可选）Monkey操作相关的一些值
-MONKEY_LIST:
-  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
-  MONKEY_SPECIAL_POINT_LIST:
-  - '80,160'
-
-  #根据坐标长按某点10秒
-  LONG_PRESS_LIST:
-  - '100,250'
-
-  #设置不点击的区域(圆形)， radius为圆半径， 坐标为不想点击区域的圆心
-  MONKEY_BLACKLIST_POINT_LIST:
-  - 'radius,10'
-  - '0,0'
-
-  #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制
-  CLICK_ITEM_XPATH_LIST:
-  - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
-
-
-#*******************以下内容通常不需要修改**************************
+#****************************************************以下内容通常不需要修改****************************************************
 
 #微信的配置 在运行小程序测试时会用到
 WECHAT_CONFIG:
@@ -280,4 +242,42 @@ INFLUXDB:
   DB_PORT: 8086
   DB_IP: localhost
 
+#*******************ENABLE_AUTO_LOGIN 为true里需要修改以下内容**************************
+#（可选）自动登录时查找控件所需要的信息,当找到列表中第一个元素时会按顺序操作以下元素。注意xpath中的属性值要加双引号""
+#如果不需要自动登录功能以下值不需要修改
+LOGIN_ELEMENTS:
+  #开启自动登录功能
+  ENABLE_AUTO_LOGIN: false
 
+  #Android 登录相关元素及操作
+  LOGIN_ELEMENTS_ANDROID:
+    - ANDROID_USERNAME:
+        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/code_identify_login_phone"]'
+        ACTION: input
+        VALUE: '13691034101'
+    - ANDROID_PASSWORD:
+        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_pasDsword"]'
+        ACTION: input
+        VALUE: '123456'
+    - ANDROID_LOGIN_BUTTON:
+        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
+        ACTION: click
+        VALUE: '1'
+
+  #iOS登录相关元素及操作
+  LOGIN_ELEMENTS_IOS:
+    - IOS_USERNAME:
+        XPATH: '//*[@type="XCUIElementTypeTextField"]'
+        ACTION: input
+        VALUE: '1361234567'
+    - IOS_PASSWORD:
+        XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
+        ACTION: input
+        VALUE: '123456'
+    - IOS_LOGIN_BUTTON:
+        XPATH: '//*[@type="XCUIElementTypeButton" and @name="登录" and @label="登录"]'
+        ACTION: click
+    - DRAG:
+        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_username"]'
+        ACTION: drag
+        VALUE: '250,1050,800,1050,800,1550'
