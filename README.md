@@ -4,7 +4,7 @@
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 QQ 技术交流群 ： 728183683
-
+ 
 作者提供有偿UI自动化培训、UI测试工具开发及Jenkins集成，有意者请联系群主
 
 环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）

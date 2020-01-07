@@ -35,11 +35,11 @@ MONKEY:
   #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
   CLICK_SPECIAL_POINT_RATIO: 2
   #重启app
-  RESTART_APP_RATIO: 2
+  RESTART_APP_RATIO: 0
   #长按
-  LONG_PRESS_RATIO: 2
+  LONG_PRESS_RATIO: 1
   #触发Home键 (Android Only)
-  HOME_KEY_RATIO: 2
+  HOME_KEY_RATIO: 0
   #触发Back Key
   BACK_KEY_RATIO: 2
   #手势操作
@@ -52,7 +52,7 @@ MONKEY:
   #拖拽
   DRAG_RATIO: 4
   #CLICK_ITEM_XPATH_LIST中指定元素的点击次数
-  CLICK_ITEM_BY_XPATH_RATIO: 5
+  CLICK_ITEM_BY_XPATH_RATIO: 1
 
 
 #（可选）Monkey操作相关的一些值
@@ -60,8 +60,7 @@ MONKEY_LIST:
 
   #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
   CLICK_ITEM_XPATH_LIST:
-    - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
-    -
+    #- '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
 
   #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
   MONKEY_SPECIAL_POINT_LIST:

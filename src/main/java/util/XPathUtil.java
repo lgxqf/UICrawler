@@ -1385,6 +1385,7 @@ public class XPathUtil {
                         break;
                     case ConfigUtil.BACK_KEY_RATIO:
                         Driver.pressBack();
+                        break;
                     case ConfigUtil.CLICK_ITEM_BY_XPATH_RATIO:
                         if(xpathListSize == 0){
                             log.error("xpath list is 0");
@@ -1432,22 +1433,6 @@ public class XPathUtil {
         }
     }
 
-//    public static void test(){
-//        Driver.sleep(10);
-//        scale = 3;
-//        int step = 10;
-//        int v = 30;
-//        for(int i=0; i< 3; i++) {
-//            Driver.clickByCoordinate(v,v);
-//            PictureUtil.takeAndModifyScreenShotAsyn(v * scale, v * scale);
-//            v = v+ step;
-//        }
-//    }
-
-    public static StringBuilder getRepoStep(){
-        return repoStep;
-    }
-
     public static String showNodes(String xml, String oldNodePath) throws Exception{
         Document document = builder.parse(new ByteArrayInputStream(xml.getBytes()));
         NodeList nodes = (NodeList) xpath.evaluate(clickXpath, document, XPathConstants.NODESET);
@@ -1456,7 +1441,6 @@ public class XPathUtil {
 
         log.info(String.valueOf("UI nodes length : " + length));
         String temp = oldNodePath;
-
 
         while(--length >=0){
             Node node = nodes.item(length);
