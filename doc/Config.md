@@ -7,33 +7,33 @@
 * 待输入文本列表及待输入的控件类型
 * Monkey触发事件类型及比率
 
-  ### 一些默认值，通常不需要修改
-  SCREENSHOT_COUNT : 截屏数量  
-  MAX_DEPTH : 遍历深度  
-  MAX_CLICK_COUNT : 点击次数   
-  APPIUM_SERVER_IP : Appium Server地址
-  * 通常情况下不需要修改，除非Appium server和手机不在同一台电脑上，需把该值改为Appium Server所在电脑的IP    
-  
-  DEFAULT_WAIT_SEC: 查找元素的最长时间限制    
-  DEFAULT_POLLING_INTERVAL_SEC: 查找元素的时间间隔  
+### 一些默认值，通常不需要修改
+SCREENSHOT_COUNT : 截屏数量  
+MAX_DEPTH : 遍历深度  
+MAX_CLICK_COUNT : 点击次数   
+APPIUM_SERVER_IP : Appium Server地址
+* 通常情况下不需要修改，除非Appium server和手机不在同一台电脑上，需把该值改为Appium Server所在电脑的IP    
 
-  PORT: Appium Server Port   
-  IOS_WDA_PORT: WDA Port(iOS)  
-  IGNORE_CRASH :忽略Crash  
-  * true 遇到crash会重启App继续遍历
-  * false 遇到crash停止遍历
-  
-  ### 针对不同APP必需修改的值
-  Android APK包名和主Activity  
-  * ANDROID_PACKAGE: com.xxxx.yyyy
-  * ANDROID_MAIN_ACTIVITY: com.xxx.yyy.StartActivity
- 
-  IOS_BUNDLE_ID: iOS的bundle id com.xxxx.yyy   
-  IOS_BUNDLE_NAME: 手机屏幕上显示的app的名字  如下图： 其值为:学而思test  
-  ![](https://github.com/lgxqf/UICrawler/blob/master/doc/IOS_BUNDLE_NAME.png)   
-  IOS_IPA_NAME: ips文件名前缀 
-  * 这个很关键用于判断iOS app是否crash了
-  * 可以通过idevicecrashreport ./ 查看ips文件名前缀. 如：AlipayWallet-2018-04-23-125441.ips  其IOS_IPA_NAME值为AlipayWallet
+DEFAULT_WAIT_SEC: 查找元素的最长时间限制    
+DEFAULT_POLLING_INTERVAL_SEC: 查找元素的时间间隔  
+
+PORT: Appium Server Port   
+IOS_WDA_PORT: WDA Port(iOS)  
+IGNORE_CRASH :忽略Crash  
+* true 遇到crash会重启App继续遍历
+* false 遇到crash停止遍历
+
+### 针对不同APP必需修改的值
+Android APK包名和主Activity  
+* ANDROID_PACKAGE: com.xxxx.yyyy
+* ANDROID_MAIN_ACTIVITY: com.xxx.yyy.StartActivity
+
+IOS_BUNDLE_ID: iOS的bundle id com.xxxx.yyy   
+IOS_BUNDLE_NAME: 手机屏幕上显示的app的名字  如下图： 其值为:学而思test  
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/IOS_BUNDLE_NAME.png)   
+IOS_IPA_NAME: ips文件名前缀 
+* 这个很关键用于判断iOS app是否crash了
+* 可以通过idevicecrashreport ./ 查看ips文件名前缀. 如：AlipayWallet-2018-04-23-125441.ips  其IOS_IPA_NAME值为AlipayWallet
 
 
 ### Monkey功能配置
