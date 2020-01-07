@@ -168,15 +168,6 @@ Android查看当前activity
 
 ## [配置文件介绍](doc/Config.md)
 
-### 配置文件主要可配置项
-* 截图数量控制
-* 黑名单、白名单
-* 限制遍历深度、次数、时间
-* 遍历界面元素的xpath
-* 自动登录的用户名和密码及相应的UI元素ID 
-* 待输入文本列表及待输入的控件类型
-* Monkey触发事件类型及比率
-
 
 ## 测试报告 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/Test-Report.png)
