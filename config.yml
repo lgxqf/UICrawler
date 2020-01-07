@@ -25,34 +25,44 @@ CRITICAL_ELEMENT:
   #微信小程序测试 使用参数 -y 时需指定小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 学而思营业厅
 
-#执行Monkey测试的一些配置项
-#设置事件百分比 各事件百分比之和为100
+#****************************************************Monkey测试时根据需要更改下面的值，调节事件发生概率****************************************************
+#每项为事件随机发生的次数，各项之和为100
 MONKEY:
-  #以下各项值总和为100即可
-  SWIPE_RATIO: 4
+  #滑动
+  SWIPE_RATIO: 5
+  #点击
   CLICK_RATIO: 70
   #点击 MONKEY_SPECIAL_POINT_LIST 中的坐标 主要用于触发"返回"功能
-  CLICK_SPECIAL_POINT_RATIO: 1
-  RESTART_APP_RATIO: 1
-  LONG_PRESS_RATIO: 1
-  #Android Only
-  HOME_KEY_RATIO: 1
+  CLICK_SPECIAL_POINT_RATIO: 2
+  #重启app
+  RESTART_APP_RATIO: 2
+  #长按
+  LONG_PRESS_RATIO: 2
+  #触发Home键 (Android Only)
+  HOME_KEY_RATIO: 2
   #触发Back Key
-  BACK_KEY_RATIO: 1
+  BACK_KEY_RATIO: 2
   #手势操作
   #双击
-  DOUBLE_TAP_RATIO: 1
+  DOUBLE_TAP_RATIO: 2
   #缩小(两指)
-  PINCH_RATIO: 1
+  PINCH_RATIO: 2
   #放大(两指)
-  UNPINCH_RATIO: 1
+  UNPINCH_RATIO: 2
   #拖拽
-  DRAG_RATIO: 1
-  #CLICK_ITEM_XPATH_LIST中指定元素的点击次数(比率)
+  DRAG_RATIO: 4
+  #CLICK_ITEM_XPATH_LIST中指定元素的点击次数
   CLICK_ITEM_BY_XPATH_RATIO: 5
+
 
 #（可选）Monkey操作相关的一些值
 MONKEY_LIST:
+
+  #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
+  CLICK_ITEM_XPATH_LIST:
+    - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
+    -
+
   #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
   MONKEY_SPECIAL_POINT_LIST:
     - '80,160'
@@ -66,19 +76,13 @@ MONKEY_LIST:
     - 'radius,10'
     - '0,0'
 
-  #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
-  CLICK_ITEM_XPATH_LIST:
-    - '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
-    -
 
-
-
+#****************************************************以下内容通常不需要修改****************************************************
 
 #（可选）以下各值主要用于提高测试的效率，根据app着情修改或者不改
 LIST:
-  #UI中出现下列文字时 触发back键(iOS 由左向右划触发返回操作)
+  #UI元素中出现下列文字时 触发back键(iOS 由左向右划触发返回操作)
   PRESS_BACK_TEXT_LIST:
-  - 学而思在线客服
   - 返回
 
   #当pp跳转到以下app时 触发back键
@@ -137,6 +141,7 @@ LIST:
   - 呼叫
   - 低电量模式
   - 关闭
+  - 打车
   - '//*[@text="去付款"]'
 
   #不点击以下类型控件及其子元素
