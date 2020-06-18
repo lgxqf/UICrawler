@@ -1,16 +1,18 @@
-#以下的内容很运行工具的关键，需要根据不同的APP定制
+#合理的配置对于运行工具很重要，配置的内容需根据不同的APP定制
+
+#****************************************************UI遍历根据需要更改下面的值****************************************************
 CRITICAL_ELEMENT:
 
-  #Android
+  #---Android---
   #Android App测试时，需指定App包名和启动的Activity
   ANDROID_PACKAGE: com.eg.android.AlipayGphone
   ANDROID_MAIN_ACTIVITY: com.eg.android.AlipayGphone.AlipayLogin
-  #通过xpath指定要点击的元素的属性要求， 注意值两侧要加单引号''
+  #通过xpath过滤出要点击的元素， 注意值两侧要加单引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
-  #若App顶、底UI含有TabBar ,需指定TabBar的id, 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
-  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.xes.jazhanghui.activity:id/bottomBar"'
+  #若App顶、底含有TabBar, 需指定TabBar的id, 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="android:id/tabs"'
 
-  #iOS
+  #---iOS---
   #若执行iOS App测试，必需指定以下IOS_开头的内容
   IOS_BUNDLE_ID: com.alipay
   #手机桌面上显示的APP的名字
@@ -21,7 +23,7 @@ CRITICAL_ELEMENT:
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
 
-  #微信小程序
+  #---微信小程序---
   #微信小程序测试 使用参数 -y 时需指定小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 美团
 
@@ -56,13 +58,13 @@ MONKEY:
 
 
 #（可选）Monkey操作相关的一些值
-MONKEY_LIST:
+MONKEY_SPECIAL_ACTION:
 
   #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
   CLICK_ITEM_XPATH_LIST:
     #- '//*[@resource-id="com.xes.jazhanghui.activity:id/tv_item_course"]'
 
-  #提高测试效率，点击以下点(x,y)时会触发"后退"操作，避免在一个页面停留时间太久
+  #点击特定的点，如：(x,y)为back键的位置时,触发"后退"操作，避免在一个页面停留时间太久
   MONKEY_SPECIAL_POINT_LIST:
     - '80,160'
 
