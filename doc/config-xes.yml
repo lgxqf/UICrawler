@@ -56,7 +56,7 @@ MONKEY:
 
 
 #（可选）Monkey操作相关的一些值
-MONKEY_LIST:
+MONKEY_SPECIAL_ACTION:
 
   #设置需要点击的元素的xpath，点击次数由 CLICK_ITEM_BY_XPATH_RATIO 控制， 若找不到相应的元素则会忽略该事件
   CLICK_ITEM_XPATH_LIST:
