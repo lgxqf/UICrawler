@@ -101,7 +101,7 @@ appium --session-override
 -p 设定appium server的端口 , 不加参数默认为4723
 ```
 
-### 5.1 运行元素遍历
+### 5.1 运行 UI遍历
 ```aidl
 java -jar UICrawler.jar -u udid 
 -u 指定设备udid
@@ -109,7 +109,7 @@ java -jar UICrawler.jar -u udid
 -f 指定yml配置文件 若无此参数 默认为config.yml 
 ```
 
-### 5.2 运行 Monkey功能
+### 5.2 运行 Monkey
 ```aidl
 java -jar UICrawler.jar -u udid -m
 ```
