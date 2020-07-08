@@ -163,7 +163,7 @@ Android 查看app包名 和 Main activity
   aapt 通常在android sdk的 build-tools目录下, "apk"是apk文件路径
 
 Android查看当前activity
-    adb shell dumpsys activity | grep "mFoc"
+    adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'
 ```
 
 ## 测试报告 
