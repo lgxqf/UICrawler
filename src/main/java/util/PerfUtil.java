@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,7 +133,11 @@ public class PerfUtil {
             String tableName = "tb_"+ String.valueOf(String.valueOf(System.currentTimeMillis()));
 
             while (isRunning) {
-                String time = String.valueOf(System.currentTimeMillis());
+                //String time = String.valueOf(System.currentTimeMillis());
+                Long timeStamp = System.currentTimeMillis();  //获取当前时间戳
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String time = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
+
                 Map<String,String> memInfo = getMemInfo();
                 String cpuInfo = getCPUInfo();
                 memInfo.put("cpu",cpuInfo);

@@ -1035,7 +1035,9 @@ public class XPathUtil {
                 //TODO:do it for ios, 太小的元素 或webview中 屏幕没有显示出来的元素排队在外
                 int tolerance = 5;
                 if(Math.abs(endX - startX) < tolerance || Math.abs(endY - startY) < tolerance){
-                    log.info("Removed due to exceed tolerance : " + tolerance + " StartX: " + String.valueOf(startX) + " StartY: "  + String.valueOf(startY) + " EndX: " + String.valueOf(endX) + "EndY: " + String.valueOf(endY));
+                    if (ConfigUtil.isShowDomXML() ){
+                        log.info("Removed due to exceed tolerance : " + tolerance + " StartX: " + String.valueOf(startX) + " StartY: " + String.valueOf(startY) + " EndX: " + String.valueOf(endX) + " EndY: " + String.valueOf(endY));
+                    }
                     return null;
                 }
             }
