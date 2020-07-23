@@ -45,6 +45,7 @@ class PictureRunnable implements Runnable{
 
 public class PictureUtil {
     public static Logger log = LoggerFactory.getLogger(PictureUtil.class);
+    private static final int  DEFAULT_RADIUS = 20;
 
     private Font font = new Font("", Font.PLAIN, 20);// 添加字体的属性设置
     private int fontSize;
@@ -65,11 +66,11 @@ public class PictureUtil {
     }
 
     static String takeAndModifyScreenShot(List<Point> list,String ext){
-        return takeAndModifyScreenShot(list,100,ext);
+        return takeAndModifyScreenShot(list,DEFAULT_RADIUS,ext);
     }
 
     static String takeAndModifyScreenShot(int x, int y){
-        return takeAndModifyScreenShot(x,y,100);
+        return takeAndModifyScreenShot(x,y,DEFAULT_RADIUS);
     }
 
     static String takeAndModifyScreenShot(int x, int y,int radius){
@@ -86,7 +87,7 @@ public class PictureUtil {
     static String takeAndModifyScreenShot(List<Point> pointList,int radius,String ext){
 
         String img = Driver.takeScreenShot();
-        drawPoint(img,pointList,radius,radius,Color.RED);
+        drawPoint(img,pointList,radius,Color.RED);
         File file = new File(img);
         if(pointList.size() > 1) {
             img = img.replace(".png", "_" + ext + ".png");
@@ -100,7 +101,7 @@ public class PictureUtil {
         return img;
     }
 
-    private static void drawPoint(String srcImagePath,List<Point> pointList,int width,int height,Color color){
+    private static void drawPoint(String srcImagePath,List<Point> pointList,int radius,Color color){
         FileOutputStream fos = null;
 
         try {
@@ -111,13 +112,14 @@ public class PictureUtil {
             Graphics2D g2d = image.createGraphics();
             AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
             g2d.setComposite(ac);
+            int rb = 2* radius;
 
             for(Point point : pointList) {
                 g2d.setColor(Color.BLACK);
-                g2d.fillOval(point.x, point.y, 40, 40);
+                g2d.fillOval(point.x - radius, point.y - radius, 2*radius, 2*radius);
 
                 g2d.setColor(color);
-                g2d.fillOval(point.x, point.y, width, height);            //填充一个椭圆形
+                g2d.fillOval(point.x - rb, point.y - rb, 2*rb, 2*rb);            //填充一个椭圆形
             }
 
             fos = new FileOutputStream(srcImagePath);
