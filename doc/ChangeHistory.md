@@ -1,4 +1,8 @@
 # CHANGE HISTORY
+### 2021-02-20
+* 升级Java-client为7.4.1
+* 升级commons-collections 为 commons-collections4
+
 ### 2020-07-23
 解决截图黑红圆不同心的问题
 
