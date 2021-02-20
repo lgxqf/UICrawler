@@ -9,8 +9,12 @@ QQ 技术交流群 ： 728183683
 
 环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
-v2.3版已支持 Appium 1.16.0, Java-client 7.3.0
+v2.3.1版支持 Appium v1.20.2, Java-client 7.4.0(需要安装 java 12)
 
+注：Android SDK build-tools  30.0.0 需要配合Java 12才能使用否则会报错 "appium-uiautomator2-server-v4.20.0.apk'. Original error: Error: A JNI error has occurred"
+详情参考 
+  https://ceshiren.com/t/topic/2329
+  https://blog.csdn.net/weixin_46055113/article/details/111193255
 
 ## 关于如何发挥测试工具的价值
 * 用不同的账号登录app运行测试，因为每个账号可能看到的内容不一样
