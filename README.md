@@ -1,7 +1,6 @@
 # UICrawler
 ## 基于Appium的App UI遍历 & Monkey 工具
 
-![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 QQ 技术交流群 ： 728183683
  
@@ -15,6 +14,8 @@ v2.3.1版支持 Appium v1.20.2, Java-client 7.4.0
 详情参考 
   https://ceshiren.com/t/topic/2329
   https://blog.csdn.net/weixin_46055113/article/details/111193255
+
+![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 ## 关于如何发挥测试工具的价值
 * 用不同的账号登录app运行测试，因为每个账号可能看到的内容不一样
