@@ -976,7 +976,7 @@ public final class Driver {
             swipeHorizontally(true);
         }
 
-        Driver.sleep(1);
+        Driver.sleep(0.5);
     }
 
     public static String getCurrentActivity(){
