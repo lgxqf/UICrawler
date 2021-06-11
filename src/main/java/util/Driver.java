@@ -134,13 +134,14 @@ public final class Driver {
 
     public static String takeScreenShot(String screenShotName) {
         //等待1秒再截图，不然界面还在变化，载图不是完整初始化后的页面
-        sleep(1);
+        sleep(0.5);
 
         File screenShot = null;
 
         try {
 
             if(Util.isAndroid()) {
+                log.info("screenshot begin");
                 screenShot = driver.getScreenshotAs(OutputType.FILE);
             }else{
                 String fileName = ConfigUtil.getRootDir() + File.separator +"del.png";
@@ -186,10 +187,10 @@ public final class Driver {
     }
 
     public static String getPageSource(){
-        return getPageSource(1);
+        return getPageSource(0.5);
     }
 
-    public static String getPageSource(int second){
+    public static String getPageSource(double second){
         log.info("======================================================getPageSource");
 
         if(second > 0){
