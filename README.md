@@ -2,18 +2,15 @@
 ## 基于Appium的App UI遍历 & Monkey 工具
 
 
-针对个人和公司提供有偿UI自动化技术、接口自动化技术、接口mock技术等培训及测试工具定制开发
-* QQ 技术交流群 ： 728183683
+* 针对个人和公司提供有偿UI自动化技术、接口自动化技术、接口mock技术等培训及测试工具定制开发
+  * QQ 技术交流群 ： 728183683
 
-环境搭建及基本使用说明： https://testerhome.com/topics/14490  （感谢网友harsayer 倾力之作）
 
-v2.3.1版支持 Appium v1.20.2, Java-client 7.4.0
+* 环境搭建及基本使用说明
+  * https://testerhome.com/topics/14490  感谢网友harsayer 倾力之作
+  * JDK 1.8 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-注：Android SDK build-tools  30.0.0 需要配合Java 12才能使用否则会报错 "appium-uiautomator2-server-v4.20.0.apk'. Original error: Error: A JNI error has occurred"
-详情参考 
-  https://ceshiren.com/t/topic/2329
-  https://blog.csdn.net/weixin_46055113/article/details/111193255
-
+v2.3.1版支持 Appium v1.20.2, Java-client 7.5.1 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 ## 关于如何发挥测试工具的价值
@@ -107,7 +104,7 @@ appium --session-override
 
 ### 5.1 运行 UI遍历
 ```aidl
-java -jar UICrawler.jar -u udid 
+java -jar UICrawler.jar -u udid -f config.yml
 -u 指定设备udid
 -t 指定appium server的端口（此项为可选项，默认值是4723)
 -f 指定yml配置文件 若无此参数 默认为config.yml 
@@ -215,5 +212,10 @@ Android查看当前activity
 * https://appiumpro.com/editions/12
 * SpringAOP https://blog.csdn.net/zknxx/article/details/53240959
 
+## Known issue
+* Android SDK build-tools  30.0.0 需要配合Java 12才能使用否则会报错 "appium-uiautomator2-server-v4.20.0.apk'. Original error: Error: A JNI error has occurred"
+详情参考
+  * https://ceshiren.com/t/topic/2329
+  * https://blog.csdn.net/weixin_46055113/article/details/111193255
 
 ## [CHANGE HISTORY](https://github.com/lgxqf/UICrawler/blob/master/doc/ChangeHistory.md)
