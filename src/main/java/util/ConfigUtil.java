@@ -307,6 +307,7 @@ public class ConfigUtil {
         clickCount = count;
     }
 
+    public static boolean getIsDelScreenshot() { return getBooleanValue("ENABLE_DELETE_SCREEN");}
     public static long getScreenshotCount() { return getLongValue("SCREENSHOT_COUNT");}
 
     public static String getActivityName() {

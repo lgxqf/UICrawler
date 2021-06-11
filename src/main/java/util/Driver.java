@@ -154,6 +154,11 @@ public final class Driver {
 
             if(++screenshotCount % 5 == 0) {
                 log.info("Screenshot count is " + screenshotCount);
+
+                if (! ConfigUtil.getIsDelScreenshot()){
+                    return screenShotName;
+                }
+
                 String path = ConfigUtil.getRootDir() + File.separator + ConfigUtil.SCREEN_SHOT;
 
                 File file = new File(path);
