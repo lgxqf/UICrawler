@@ -206,7 +206,7 @@ GENERAL:
   #点击次数
   MAX_CLICK_COUNT: 1000000
   #查找元素的时间
-  DEFAULT_WAIT_SEC: 5
+  DEFAULT_WAIT_SEC: 3
   #查找元素的间隔时间
   DEFAULT_POLLING_INTERVAL_SEC: 2
   #是否忽略Crash,设为true时,crash后会重启app然后继续遍历
