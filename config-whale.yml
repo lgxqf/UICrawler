@@ -198,7 +198,7 @@ GENERAL:
   #截屏数量限制
   SCREENSHOT_COUNT: 5000
   #达到截屏限制数量时删除所有截屏
-  ENABLE_DELETE_SCREEN: false
+  # ENABLE_DELETE_SCREEN: false
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
   #遍历深度
