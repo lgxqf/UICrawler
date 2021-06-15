@@ -4,13 +4,12 @@
 
 * 针对个人和公司提供有偿UI自动化技术、接口自动化技术、接口mock技术等培训及测试工具定制开发
   * QQ 技术交流群 ： 728183683
-
-
+  
 * 环境搭建及基本使用说明
   * https://testerhome.com/topics/14490  感谢网友harsayer 倾力之作
   * JDK 1.8 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
-
-* v2.3.1版支持 Appium v1.20.2, Java-client 7.5.1 
+  * 支持 Appium v1.20.2, Java-client 7.5.1
+  
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 ## 关于如何发挥测试工具的价值
