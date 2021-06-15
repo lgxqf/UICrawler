@@ -10,7 +10,7 @@
   * https://testerhome.com/topics/14490  感谢网友harsayer 倾力之作
   * JDK 1.8 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-v2.3.1版支持 Appium v1.20.2, Java-client 7.5.1 
+* v2.3.1版支持 Appium v1.20.2, Java-client 7.5.1 
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 
 ## 关于如何发挥测试工具的价值
