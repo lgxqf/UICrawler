@@ -5,12 +5,12 @@ CRITICAL_ELEMENT:
 
   #---Android---
   #Android App测试时，需指定App包名和启动的Activity
-  ANDROID_PACKAGE: com.jingyupeiyou.weclass
-  ANDROID_MAIN_ACTIVITY: com.jingyupeiyou.weclass.login.v3.LoginActivity
+  ANDROID_PACKAGE: com.jingyupeiyou.weparent
+  ANDROID_MAIN_ACTIVITY: com.jingyupeiyou.weparent.modulesplash.SplashActivity
   #通过xpath过滤出要点击的元素， 注意值两侧要加单引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   #若App顶、底含有TabBar, 需指定TabBar的id, 若无TabBar注释下行。 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
-  # ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="android:id/tabs"'
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.jingyupeiyou.weparent:id/simple_tab_layout"'
 
   #---iOS---
   #若执行iOS App测试，必需指定以下IOS_开头的内容
@@ -92,6 +92,9 @@ LIST:
     - com.autonavi.minimap
     - com.android.settings
     - com.tencent.mm
+    - com.android.documentsui
+    - com.huawei.gallery.app
+    - com.android.gallery3d
 
   #当前遇到以下Activity时 触发back键 (Android only)
   PRESS_BACK_ACTIVITY_LIST:
@@ -134,6 +137,7 @@ LIST:
   #不点击包含以下文本的控件
   ITEM_BLACKLIST:
     - 客服
+    - 转人工服务
     - 退出
     - 电话
     - 不允许
@@ -143,7 +147,13 @@ LIST:
     - 呼叫
     - 低电量模式
     - 关闭
+    - 退出登录
+    - 用户协议
+    - 隐私政策
     - '//*[@text="去付款"]'
+    - '//*[@text="vConsole"]'
+    - '//*[@resource-id="__vconsole"]'
+    - '//*[@resource-id="com.jingyupeiyou.weparent:id/chat_emoji_normal"]'
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:
@@ -260,15 +270,19 @@ LOGIN_ELEMENTS:
   #Android 登录相关元素及操作
   LOGIN_ELEMENTS_ANDROID:
     - ANDROID_USERNAME:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/code_identify_login_phone"]'
+        XPATH: '//*[@resource-id="com.jingyupeiyou.weparent:id/fragment_send_verifycode_input_phone"]'
         ACTION: input
-        VALUE: '13691034101'
+        VALUE: '17600883594'
     - ANDROID_PASSWORD:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_pasDsword"]'
+        XPATH: '//*[@resource-id="com.jingyupeiyou.weparent:id/fragment_send_verifycode_input_password"]'
         ACTION: input
-        VALUE: '123456'
+        VALUE: '666888'
+    - ANDROID_VERIFY_BUTTON:
+        XPATH: '//*[@resource-id="SM_BTN_1"]'
+        ACTION: click
+        VALUE: '1'
     - ANDROID_LOGIN_BUTTON:
-        XPATH: '//*[@resource-id="com.xes.jazhanghui.activity:id/xes_login_button"]'
+        XPATH: '//*[@resource-id="com.jingyupeiyou.weparent:id/fragment_send_verifycode_next_page"]'
         ACTION: click
         VALUE: '1'
 
@@ -277,7 +291,7 @@ LOGIN_ELEMENTS:
     - IOS_USERNAME:
         XPATH: '//*[@type="XCUIElementTypeTextField"]'
         ACTION: input
-        VALUE: '1361234567'
+        VALUE: '17600883594'
     - IOS_PASSWORD:
         XPATH: '//*[@type="XCUIElementTypeSecureTextField" and @value="请输入登录密码"]'
         ACTION: input

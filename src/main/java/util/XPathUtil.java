@@ -320,7 +320,7 @@ public class XPathUtil {
 
     //检查包名，返回false时 说明已经crash或跳出了当前app
     //此时如果ignoreCrash=true, stop会被重新设成false, 然后重启app
-    //此时如果ignoreCrash=fasle, stop会被高成true，但不会重启app
+    //此时如果ignoreCrash=false, stop会被高成true，但不会重启app
     public static PackageStatus isValidPackageName(String packageName, boolean restart){
         log.info("Method: isValidPackageName");
         PackageStatus isValid = PackageStatus.CRASHED;
@@ -329,6 +329,11 @@ public class XPathUtil {
         for(String name : packageNameList){
             if(null != packageName && packageName.contains(name)){
                 isValid = PackageStatus.VALID;
+
+                if(pressBackPackageList.contains(packageName)) {
+                    isValid = PackageStatus.PRESS_BACK;
+                    log.info("Package name :" + packageName + "is in pressBackList, so press back key");
+                }
                 break;
             }
         }
