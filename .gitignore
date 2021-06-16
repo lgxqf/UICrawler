@@ -7,3 +7,4 @@ logs/
 log/
 target/
 crawler_output/
+dependency-reduced-pom.xml
