@@ -133,3 +133,4 @@
 
 ### 2021-06-16 v2.27
 * 包名在ANDROID_VALID_PACKAGE_LIST中时 如果包句也在PRESS_BACK_PACKAGE_LIST中时 执行press back操作
+* 重启app前 Press home key 

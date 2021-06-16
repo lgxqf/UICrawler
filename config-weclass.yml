@@ -86,20 +86,25 @@ LIST:
   PRESS_BACK_TEXT_LIST:
     - 返回
 
-  #当pp跳转到以下app时 触发back键
+  #除了APP本身的包名外 根据以下包名判断是否跳出了APP,当app跳转到以下app时被认为是合法，会继续遍历操作。 全匹配
+  ANDROID_VALID_PACKAGE_LIST:
+    - com.miui.securitycenter
+    - com.android.server.telecom
+    - com.lbe.security.miui
+    - packageinstaller
+
+  #跳转到以下app时 触发back键。 模糊匹配
   PRESS_BACK_PACKAGE_LIST:
     - 高德地图
     - com.autonavi.minimap
     - com.android.settings
     - com.tencent.mm
     - com.android.documentsui
-    - com.huawei.gallery.app
-    - com.android.gallery3d
+    - gallery
+    - camera
 
   #当前遇到以下Activity时 触发back键 (Android only)
   PRESS_BACK_ACTIVITY_LIST:
-    - .mvp.servicecenter.view.ServiceCenterMapDetailActivity
-    - activity.SobotChatActivity
     - com.android.internal.app.ResolverActivity
 
   #待输入文本的控制类型
@@ -112,14 +117,6 @@ LIST:
   INPUT_TEXT_LIST:
     - '123'
     - 'ABC'
-
-  #除了APP本身的包名外 根据以下包名判断是否跳出了APP,当app跳转到以下app时被认为是合法，会继续遍历操作
-  ANDROID_VALID_PACKAGE_LIST:
-    - com.miui.securitycenter
-    - com.android.server.telecom
-    - com.lbe.security.miui
-    - gallery
-    - packageinstaller
 
   #同ANDROID_VALID_PACKAGE_LIST
   IOS_VALID_BUNDLE_LIST:

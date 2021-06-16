@@ -83,6 +83,7 @@ public final class Driver {
 
     public static void appRelaunch(){
         log.info("Restart app...");
+        Driver.pressHome();
 
         try {
             //TODO: driver.quit() is needed or not?
@@ -979,6 +980,19 @@ public final class Driver {
         Driver.sleep(0.5);
     }
 
+    public static void pressHome(){
+        log.info("Method : pressHome");
+
+        if(Util.isAndroid()){
+            pressKeyCode(AndroidKey.HOME);
+        }else{
+            HashMap<String, Object> args = new LinkedHashMap<>();
+            args.put("name", "home");
+            driver.executeScript("mobile: pressButton", args);
+        }
+
+        Driver.sleep(0.5);
+    }
     public static String getCurrentActivity(){
         String activity="ios";
 
