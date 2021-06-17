@@ -6,9 +6,10 @@
   * QQ 技术交流群 ： 728183683
   
 * 环境搭建及基本使用说明
-  * https://testerhome.com/topics/14490  感谢网友harsayer 倾力之作
-  * JDK 1.8 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
-  * 支持 Appium v1.20.2, Java-client 7.5.1
+  * 环境搭建(感谢网友harsayer倾力之作)： https://testerhome.com/topics/14490  
+  * JDK 1.8: https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
+  * Appium v1.20.2: http://appium.io/
+  * Java-client 7.5.1 : https://search.maven.org/search?q=g:io.appium%20AND%20a:java-client
   
 ![](https://github.com/lgxqf/UICrawler/blob/master/doc/pic/picToMov.gif)
 

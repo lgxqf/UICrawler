@@ -3,16 +3,16 @@
 #****************************************************UI遍历根据需要更改下面的值****************************************************
 CRITICAL_ELEMENT:
 
-  #---Android---
+  #------Android---------
   #Android App测试时，需指定App包名和启动的Activity
   ANDROID_PACKAGE: com.jingyupeiyou.weclass
   ANDROID_MAIN_ACTIVITY: com.jingyupeiyou.weclass.login.v3.LoginActivity
   #通过xpath过滤出要点击的元素， 注意值两侧要加单引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   #若App顶、底含有TabBar, 需指定TabBar的id, 若无TabBar注释下行。 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
-  # ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="android:id/tabs"'
+  #ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="android:id/tabs"'
 
-  #---iOS---
+  #---------iOS---------
   #若执行iOS App测试，必需指定以下IOS_开头的内容
   IOS_BUNDLE_ID: com.alipay
   #手机桌面上显示的APP的名字
@@ -23,7 +23,7 @@ CRITICAL_ELEMENT:
   IOS_CLICK_XPATH_HEADER: '@visible="true" and string-length(@value)<30'
 
 
-  #---微信小程序---
+  #---------微信小程序---------
   #微信小程序测试 使用参数 -y 时需指定小程序的名字
   WECHAT_MINI_PROGRAM_NAME: 美团
 
@@ -99,6 +99,22 @@ LIST:
     - activity.SobotChatActivity
     - com.android.internal.app.ResolverActivity
 
+  #不点击包含以下文本的控件
+  ITEM_BLACKLIST:
+    - 客服
+    - 退出
+    - 电话
+    - 不允许
+    - 拒绝
+    - 拍照
+    - 禁止
+    - 呼叫
+    - 低电量模式
+    - 关闭
+    - '//*[@text="去付款"]'
+    - '//*[@text="vConsole"]'
+    - '//*[@resource-id="__vconsole"]'
+
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
     - android.widget.TextView
@@ -130,22 +146,6 @@ LIST:
     - 取消
     - 已解决
     - 提交
-
-  #不点击包含以下文本的控件
-  ITEM_BLACKLIST:
-    - 客服
-    - 退出
-    - 电话
-    - 不允许
-    - 拒绝
-    - 拍照
-    - 禁止
-    - 呼叫
-    - 低电量模式
-    - 关闭
-    - '//*[@text="去付款"]'
-    - '//*[@text="vConsole"]'
-    - '//*[@resource-id="__vconsole"]'
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:

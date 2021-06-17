@@ -57,11 +57,6 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>io.humble</groupId>-->
-        <!--<artifactId>humble-video-all</artifactId>-->
-        <!--<version>0.2.1</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <properties>
