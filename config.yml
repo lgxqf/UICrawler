@@ -144,6 +144,8 @@ LIST:
     - 低电量模式
     - 关闭
     - '//*[@text="去付款"]'
+    - '//*[@text="vConsole"]'
+    - '//*[@resource-id="__vconsole"]'
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:
