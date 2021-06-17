@@ -4,8 +4,8 @@
 #runTest.sh curl start/stop udid buildNumber 
 #runTest.sh appium 5
 #runTest.sh kill-appium
-#runTest.sh download xes ios
-#runTest.sh run xes ios udid 4723 config-xes.yml buildNumber
+#runTest.sh download new ios
+#runTest.sh run new ios udid 4723 config-new.yml buildNumber
 
 #Sequqnce for action run only. For other actoin, sequency may change.
 ACTION=$1
@@ -156,10 +156,10 @@ downloadApp(){
     BUNDLE_URL=""
 
     case "$APP" in
-        "xes")
-            APK_URL="http://10.1.12.3/Android/Apk/current/xesapp.apk"
-            APK_URL="http://10.1.12.3/Android/Apk/current/xesapp.apk/app-gamma.apk"
-            BUNDLE_URL="http://10.1.12.3/iOS/current/XesApp.ipa"
+        "new")
+            APK_URL="http://192.168.1.2/Android/Apk/current/newapp.apk"
+            APK_URL="http://192.168.1.2/Android/Apk/current/newapp.apk/app-gamma.apk"
+            BUNDLE_URL="http://192.168.1.2/iOS/current/newApp.ipa"
             ;;
 
         "weclass")
@@ -168,9 +168,9 @@ downloadApp(){
             ;;
 
         *)
-            echo "default value is xes"
-            APK_URL="http://10.1.12.3/Android/Apk/current/xesapp.apk"
-            BUNDLE_URL="http://10.1.12.3/iOS/current/XesApp.ipa"
+            echo "default value is new"
+            APK_URL="http://192.168.1.2/Android/Apk/current/newapp.apk"
+            BUNDLE_URL="http://192.168.1.2/iOS/current/newApp.ipa"
             ;;
     esac
 
@@ -186,7 +186,7 @@ downloadApp(){
     FILE=${APP_ROOT_DIR}${APP}"$EXT"
     echo  $DOWNLOAD_URL  "====>" $FILE
 
-    if [ "$APP" == "xes" ]; then
+    if [ "$APP" == "new" ]; then
         curl "$DOWNLOAD_URL" -o $FILE --progress
     fi
 }
@@ -217,8 +217,8 @@ if [ -z "$1" ]; then
     echo "./runTest.sh curl start/stop udid buildNumber"
     echo "./runTest.sh appium 5 --- start 5 appium server"
     echo "./runTest.sh kill-appium --- kill all the appium process"
-    echo "./runTest.sh download xes android  --- download android app for xes"
-    echo "./runTest.sh run xes ios udid 4723 config_xes.yml buildNumber --- run test for xes on ios with udid and appium port appium_port"
+    echo "./runTest.sh download new android  --- download android app for new"
+    echo "./runTest.sh run new ios udid 4723 config_new.yml buildNumber --- run test for new on ios with udid and appium port appium_port"
     exit 0
 fi
 
@@ -301,9 +301,9 @@ if [ $ACTION == "run" ] || [ $ACTION == "install" ]; then
 
     if [ $LEN -lt 20 ]; then
         echo "Android Device is : "  $UDID
-        #if [ "$APP" == "xes" ]; then
+        #if [ "$APP" == "new" ]; then
         #    echo "Uninstalling app..."
-        #    $CMD -s $UDID uninstall com.xes.jazhanghui.activity
+        #    $CMD -s $UDID uninstall com.new.jazhanghui.activity
         #fi
         echo "Installing app..."
         CMD=$ADB
