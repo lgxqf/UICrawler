@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 public class MyLogger {
     public static Logger log = LoggerFactory.getLogger(MyLogger.class);
 
-    public static void info(String str){
-        if(null != str){
+    public static void info(String str) {
+        if (null != str) {
             log.info(str);
         }
     }
 
-    public static void info(Object obj){
+    public static void info(Object obj) {
         log.info(String.valueOf(obj));
     }
 

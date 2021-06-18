@@ -131,6 +131,10 @@
 * 处理在运行小程序测试时 PRESS_BACK_KEY_PACKAGE_LIST 中包含微信包名的情况
 * 根据PRESS_BACK_ACTIVITY_LIST 中配置的activity的名字来触发返回键
 
-### 2021-06-16 v2.27
+### 2021-06-16 v2.3.7
 * 包名在ANDROID_VALID_PACKAGE_LIST中时 如果包句也在PRESS_BACK_PACKAGE_LIST中时 执行press back操作
-* 重启app前 Press home key 
+* 重启app前 Press home key
+
+### 2021-06-16 v2.3.8
+* 添加在配置项   GENERAL： ENABLE_SCREEN_SHOT: false  控制是否截图， 若截图不生成，视频也不会生成
+* Code reformat
