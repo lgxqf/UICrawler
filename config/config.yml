@@ -205,10 +205,14 @@ WECHAT_CONFIG:
 
 #一些全局的配置
 GENERAL:
+  #控制是否生成截图, false时不会生成截图 但能提高运行速度
+  ENABLE_SCREEN_SHOT: true
+  #控制是否生成视频
+  GENERATE_VIDEO: true
   #截屏数量限制
-  SCREENSHOT_COUNT: 5000
+  SCREENSHOT_COUNT: 1000
   #达到截屏限制数量时删除所有截屏
-  # ENABLE_DELETE_SCREEN: false
+  ENABLE_DELETE_SCREEN: false
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
   #遍历深度
@@ -225,10 +229,6 @@ GENERAL:
   ENABLE_VERTICAL_SWIPE: false
   #运行时间限制(分钟)
   CRAWLER_RUNNING_TIME: 720
-  #控制是否生成截图
-  ENABLE_SCREEN_SHOT: false
-  #控制是否生成视频
-  GENERATE_VIDEO: true
   #控制视频方向，竖屏或模屏
   VIDEO_VERTICAL: true
   #每个UI变化X次时，检测是否需要自动登录

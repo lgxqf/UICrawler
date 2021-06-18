@@ -9,6 +9,10 @@
 
 ### 一些默认值，通常不需要修改
 SCREENSHOT_COUNT : 截屏数量  
+ENABLE_SCREEN_SHOT： 是否生成截图
+* true 元素点击时生成截图
+* false 元素点击时不生成截图，可以提高运行速度
+
 MAX_DEPTH : 遍历深度  
 MAX_CLICK_COUNT : 点击次数   
 APPIUM_SERVER_IP : Appium Server地址

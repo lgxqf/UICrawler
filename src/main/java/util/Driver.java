@@ -160,6 +160,7 @@ public final class Driver {
 
             FileUtils.copyFile(screenShot, new File(screenShotName));
 
+            //每5次截图 做一次操作是为了提高速度
             if (++screenshotCount % 5 == 0) {
                 log.info("Screenshot count is " + screenshotCount);
 
