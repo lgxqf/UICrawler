@@ -89,6 +89,18 @@ MONKEY_SPECIAL_ACTION:
 
 #（可选）以下各值主要用于提高测试的效率，根据app着情修改或者不改
 LIST:
+
+  #待输入文本的控制类型
+  INPUT_CLASS_LIST:
+    - android.widget.TextView
+    - XCUIElementTypeTextField
+    - XCUIElementTypeSecureTextField
+
+  #待输入的文本（随机选中后选列表中的一个）
+  INPUT_TEXT_LIST:
+    - '123'
+    - 'ABC'
+
   #UI元素中出现下列文字时 触发back键(iOS 由左向右划触发返回操作)
   PRESS_BACK_TEXT_LIST:
     - 返回
@@ -122,17 +134,6 @@ LIST:
     - '//*[@text="vConsole"]'
     - '//*[@resource-id="__vconsole"]'
 
-  #待输入文本的控制类型
-  INPUT_CLASS_LIST:
-    - android.widget.TextView
-    - XCUIElementTypeTextField
-    - XCUIElementTypeSecureTextField
-
-  #待输入的文本（随机选中后选列表中的一个）
-  INPUT_TEXT_LIST:
-    - '123'
-    - 'ABC'
-
   #除了APP本身的包名外 根据以下包名判断是否跳出了APP,当app跳转到以下app时被认为是合法，会继续遍历操作
   ANDROID_VALID_PACKAGE_LIST:
     - com.miui.securitycenter
@@ -149,7 +150,6 @@ LIST:
   ITEM_WHITE_LIST:
     - 确定
     - 允许
-    - 退出
     - 取消
     - 已解决
     - 提交
