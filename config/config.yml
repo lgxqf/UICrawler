@@ -5,8 +5,8 @@ CRITICAL_ELEMENT:
 
   #------Android---------
   #Android App测试时，需指定App包名和启动的Activity
-  ANDROID_PACKAGE: com.jingyupeiyou.weclass
-  ANDROID_MAIN_ACTIVITY: com.jingyupeiyou.weclass.login.v3.LoginActivity
+  ANDROID_PACKAGE: com.eg.android.AlipayGphone
+  ANDROID_MAIN_ACTIVITY: com.eg.android.AlipayGphone.AlipayLogin
   #通过xpath过滤出要点击的元素， 注意值两侧要加单引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   #若App顶、底含有TabBar, 需指定TabBar的id, 若无TabBar注释下行。 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
