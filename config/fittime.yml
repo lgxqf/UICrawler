@@ -5,12 +5,12 @@ CRITICAL_ELEMENT:
 
   #---Android---
   #Android App测试时，需指定App包名和启动的Activity
-  ANDROID_PACKAGE: com.jingyupeiyou.weparent
-  ANDROID_MAIN_ACTIVITY: com.jingyupeiyou.weparent.modulesplash.SplashActivity
+  ANDROID_PACKAGE: com.fittime.ftapp
+  ANDROID_MAIN_ACTIVITY: com.fittime.ftapp.MainActivity
   #通过xpath过滤出要点击的元素， 注意值两侧要加单引号''
   ANDROID_CLICK_XPATH_HEADER: ' ( string-length(@text)<30  or contains(@text,"允许") ) '
   #若App顶、底含有TabBar, 需指定TabBar的id, 若无TabBar注释下行。 多个id时用or拼接: 如'@resource-id="id1" or @resource-id="id2"'
-  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.jingyupeiyou.weparent:id/simple_tab_layout"'
+  ANDROID_BOTTOM_TAB_BAR_ID: '@resource-id="com.fittime.ftapp:id/rdg_RgTab"'
 
   #---iOS---
   #若执行iOS App测试，必需指定以下IOS_开头的内容
@@ -25,7 +25,7 @@ CRITICAL_ELEMENT:
 
   #---微信小程序---
   #微信小程序测试 使用参数 -y 时需指定小程序的名字
-  WECHAT_MINI_PROGRAM_NAME: 美团
+  WECHAT_MINI_PROGRAM_NAME: 口袋辣椒营
 
 #****************************************************Monkey测试时根据需要更改下面的值，调节事件发生概率****************************************************
 #每项为事件随机发生的次数，各项之和为100

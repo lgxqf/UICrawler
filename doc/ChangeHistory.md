@@ -1,4 +1,8 @@
 # CHANGE HISTORY
+
+### 2021-12-15
+升级Java-client为7.6.0, Appium Server 1.22.1
+
 ### 2021-02-20
 * 升级Java-client为7.4.1
 * 升级commons-collections 为 commons-collections4

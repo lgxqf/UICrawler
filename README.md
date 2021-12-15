@@ -211,6 +211,7 @@ Android查看当前activity
 * http://appium.io/docs/en/commands/mobile-command/
 * https://appiumpro.com/editions/12
 * SpringAOP https://blog.csdn.net/zknxx/article/details/53240959
+* Appium inspector 用法 https://blog.csdn.net/weixin_45314192/article/details/120743367
 
 ## Known issue
 * Android SDK build-tools  30.0.0 需要配合Java 12才能使用否则会报错 "appium-uiautomator2-server-v4.20.0.apk'. Original error: Error: A JNI error has occurred"
