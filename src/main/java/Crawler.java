@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.cli.*;
 import org.apache.commons.collections4.map.ListOrderedMap;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.*;
@@ -18,7 +19,6 @@ public class Crawler {
     private static List<String> crashFileList;
     private static boolean isReported = false;
     private static String udid;
-    private static String outputDir;
 
     private static class CtrlCHandler extends Thread {
         @Override
@@ -56,7 +56,9 @@ public class Crawler {
         //Generate full video
         try {
             log.info("Generating full video file, please wait...");
-            PictureUtil.picToVideo(ConfigUtil.getRootDir() + File.separator + "testing_steps.mp4", fullList);
+            if (fullList != null) {
+                PictureUtil.picToVideo(ConfigUtil.getRootDir() + File.separator + "testing_steps.mp4", fullList);
+            }
         } catch (Exception e) {
             log.error("Fail to generate full.mp4 file");
             e.printStackTrace();
@@ -71,16 +73,21 @@ public class Crawler {
                 log.info("Generating crash video file, please wait...");
                 int beginIndex = 0;
 
-                int size = fullListWithoutPath.size();
+                int size = 0;
+                if (fullListWithoutPath != null) {
+                    size = fullListWithoutPath.size();
+                }
                 for (String crashStep : crashFileList) {
-                    int endIndex = fullListWithoutPath.indexOf(crashStep);
+                    int endIndex = Objects.requireNonNull(fullListWithoutPath).indexOf(crashStep);
                     //显示一张crash后的照片
                     if (-1 != endIndex && endIndex <= size) {
                         if (endIndex + 1 < size) {
                             endIndex++;
                         }
                         String fileName = ConfigUtil.getRootDir() + File.separator + "crash" + File.separator + fullListWithoutPath.get(endIndex - 1).replace(".png", ".mp4");
-                        PictureUtil.picToVideo(fileName, fullList.subList(beginIndex, endIndex + 1));
+                        if (fullList != null) {
+                            PictureUtil.picToVideo(fileName, fullList.subList(beginIndex, endIndex + 1));
+                        }
                         beginIndex = endIndex + 1;
                     }
                 }
@@ -154,7 +161,7 @@ public class Crawler {
         for (String item : crashFileList) {
             ArrayList<String> row = new ArrayList<>();
             index++;
-            row.add("<img width=\"100px\">" + String.valueOf(index) + "</img>");
+            row.add("<img width=\"100px\">" + index + "</img>");
             List<String> crashStepList = getCrashSteps(item);
 
             for (String step : crashStepList) {
@@ -203,10 +210,10 @@ public class Crawler {
 
             clickedList.add(headerRow);
 
-            for (String newaActivity : monkeyMap.keySet()) {
+            for (String newActivity : monkeyMap.keySet()) {
                 ArrayList<String> row = new ArrayList<>();
-                row.add(newaActivity);
-                row.add(monkeyMap.get(newaActivity).toString());
+                row.add(newActivity);
+                row.add(monkeyMap.get(newActivity).toString());
                 clickedList.add(row);
             }
         }
@@ -222,18 +229,24 @@ public class Crawler {
     }
 
     private static List<String> getCrashSteps(String crashName) {
-        List<String> stepList = new ArrayList<>();
-
+        int index = 0;
         int picCount = (int) ConfigUtil.getLongValue(ConfigUtil.CRASH_PIC_COUNT);
+        List<String> stepList = new ArrayList<>();
         List<String> screenshotList = Util.getFileList(ConfigUtil.getScreenShotDir(), ".png", false);
-        int index = screenshotList.indexOf(crashName);
+
+        if (screenshotList != null) {
+            index = screenshotList.indexOf(crashName);
+        }
 
         if (-1 == index) {
             log.error("Fail to find crash file " + crashName + " in screenshot folder");
             return stepList;
         }
 
-        int length = screenshotList.size();
+        int length = 0;
+        if (screenshotList != null) {
+            length = screenshotList.size();
+        }
 
         int startIndex = index - picCount + 2;
         int endIndex = index + 2;
@@ -251,7 +264,9 @@ public class Crawler {
         }
 
         log.info("StartIndex " + startIndex + " EndIndex " + endIndex);
-        stepList = screenshotList.subList(startIndex, endIndex);
+        if (screenshotList != null) {
+            stepList = screenshotList.subList(startIndex, endIndex);
+        }
 
         log.info(stepList.toString());
 
@@ -262,7 +277,7 @@ public class Crawler {
         return isMonkey;
     }
 
-    @SuppressWarnings("unchecked")
+    //    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         String version = "2.3 ---Jan/07/2020";
 
@@ -275,22 +290,23 @@ public class Crawler {
         options.addOption("n", "ios_bundle_name", false, "ios bundle");
         options.addOption("z", "wda_port", true, "wda port for ios");
 
-        //options.addOption("c", "run_count", true, "Maximum click count");
-        //options.addOption("d", "crawler_ui_depth", true, "Maximum Crawler UI Depth");
-        //options.addOption("l", "loop count", true, "Crawler loop count");
-        //options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
 
         options.addOption("e", "performance", false, "record performance data");
         options.addOption("f", "config", true, "Yaml config  file");
         options.addOption("i", "ignore crash", false, "Ignore crash");
         options.addOption("m", "run monkey", false, "run in monkey mode");
-        options.addOption("o", "output_dir", true, "ouptut directory");
+        options.addOption("o", "output_dir", true, "output directory");
         options.addOption("s", "server_ip", true, "appium server ip");
         options.addOption("t", "port", true, "appium port");
         options.addOption("u", "udid", true, "device serial");
         options.addOption("v", "version", false, "build version with date");
         options.addOption("w", "wechat_mode", false, "run in wechat mode");
         options.addOption("x", "write_to_db", false, "write performance data to influxDB");
+
+        //options.addOption("c", "run_count", true, "Maximum click count");
+        //options.addOption("d", "crawler_ui_depth", true, "Maximum Crawler UI Depth");
+        //options.addOption("l", "loop count", true, "Crawler loop count");
+        //options.addOption("r", "crawler_running_time", true, "minutes of running crawler ");
 
         CommandLine commandLine = parser.parse(options, args);
         String configFile;
@@ -352,7 +368,7 @@ public class Crawler {
         }
 
         if (commandLine.hasOption("o")) {
-            outputDir = commandLine.getOptionValue('o').trim();
+            String outputDir = commandLine.getOptionValue('o').trim();
 
             if (Util.isDir(outputDir)) {
                 ConfigUtil.setOutputDir(outputDir);
@@ -369,7 +385,6 @@ public class Crawler {
                 loopCount = Integer.parseInt(commandLine.getOptionValue("l"));
             } catch (Exception e) {
                 log.error("Fail to get loop count, set loop count to 1");
-                loopCount = 1;
             }
         }
 
@@ -380,7 +395,7 @@ public class Crawler {
 
             log.info("Crawler loop No is " + (i + 1));
 
-            summaryMap = (Map<String, String>) new ListOrderedMap();
+            summaryMap = new ListOrderedMap<>();
             isReported = false;
             beginTime = new Date();
 
@@ -440,7 +455,7 @@ public class Crawler {
             }
             Util.createDir(ConfigUtil.getRootDir());
 
-            AppiumDriver appiumDriver;
+            AppiumDriver<WebElement> appiumDriver;
 
             //启动Appium
             if (Util.isAndroid(udid)) {

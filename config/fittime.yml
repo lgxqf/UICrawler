@@ -106,6 +106,7 @@ LIST:
   #当前遇到以下Activity时 触发back键 (Android only)
   PRESS_BACK_ACTIVITY_LIST:
     - com.android.internal.app.ResolverActivity
+    - com.fittime.play.view.SportCourseDetailVideoActivity # 运动视频
 
   #待输入文本的控制类型
   INPUT_CLASS_LIST:
@@ -133,8 +134,7 @@ LIST:
 
   #不点击包含以下文本的控件
   ITEM_BLACKLIST:
-    - 客服
-    - 转人工服务
+    - 联系客服
     - 退出
     - 电话
     - 不允许
@@ -148,9 +148,6 @@ LIST:
     - 用户协议
     - 隐私政策
     - '//*[@text="去付款"]'
-    - '//*[@text="vConsole"]'
-    - '//*[@resource-id="__vconsole"]'
-    - '//*[@resource-id="com.jingyupeiyou.weparent:id/chat_emoji_normal"]'
 
   #不点击以下类型控件及其子元素
   IOS_EXCLUDE_BAR:
@@ -206,7 +203,7 @@ GENERAL:
   #截屏数量限制
   SCREENSHOT_COUNT: 5000
   #达到截屏限制数量时删除所有截屏
-  # ENABLE_DELETE_SCREEN: false
+  ENABLE_DELETE_SCREEN: false
   #Crash时截图显示步骤数量
   CRASH_PIC_COUNT: 10
   #遍历深度

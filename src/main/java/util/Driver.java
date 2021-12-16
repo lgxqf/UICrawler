@@ -1,7 +1,6 @@
 package util;
 
 import io.appium.java_client.*;
-import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
@@ -35,7 +34,7 @@ import java.util.*;
 public final class Driver {
     public static org.slf4j.Logger log = LoggerFactory.getLogger(Driver.class);
 
-    public static AppiumDriver driver;
+    public static AppiumDriver<WebElement> driver;
     private static int deviceHeight;
     private static int deviceWidth;
     private static final int APP_START_WAIT_TIME = 20;
@@ -70,18 +69,6 @@ public final class Driver {
         }
     }
 
-    public static void ios_launchApp() {
-        log.info(MyLogger.getMethodName());
-        driver.launchApp();
-        Driver.sleep(APP_START_WAIT_TIME);
-    }
-
-    public static void appRelaunch(StringBuilder builder) {
-        builder.append("RESTART : " + APP_START_WAIT_TIME + "\n");
-
-        appRelaunch();
-    }
-
     public static void appRelaunch() {
         log.info("Restart app...");
         Driver.pressHome();
@@ -104,29 +91,16 @@ public final class Driver {
         }
     }
 
-    public static void startActivity(String appPackage, String appActivity) {
-        log.info(MyLogger.getMethodName() + " " + appActivity);
-
-        Activity activity = new Activity(appPackage, appActivity);
-        //activity.setAppWaitActivity(RES.ACTIVITY_MAIN);
-        ((AndroidDriver) driver).startActivity(activity);
-
-        Driver.sleep(APP_START_WAIT_TIME);
-        log.info(MyLogger.getMethodName() + " Started");
-    }
-
-    public static void setDriver(AppiumDriver driverRef) {
+    public static void setDriver(AppiumDriver<WebElement> driverRef) {
         driver = driverRef;
     }
 
-    public static AppiumDriver getDriver() {
+    public static AppiumDriver<WebElement> getDriver() {
         return driver;
     }
 
-    protected static String getScreenShortName() {
-        String screenshotName = ConfigUtil.getRootDir() + File.separator + ConfigUtil.SCREEN_SHOT + File.separator + Util.getDatetime() + ".png";
-
-        return screenshotName;
+    static String getScreenShortName() {
+        return ConfigUtil.getRootDir() + File.separator + ConfigUtil.SCREEN_SHOT + File.separator + Util.getDatetime() + ".png";
 
     }
 
@@ -143,7 +117,7 @@ public final class Driver {
         //等待1秒再截图，不然界面还在变化，载图不是完整初始化后的页面
         sleep(0.5);
 
-        File screenShot = null;
+        File screenShot;
 
         try {
 
@@ -174,7 +148,7 @@ public final class Driver {
 
                 File[] array = file.listFiles();
 
-                if (array.length > ConfigUtil.getScreenshotCount()) {
+                if (array != null && array.length > ConfigUtil.getScreenshotCount()) {
                     File delFile = array[0];
 
                     for (File f : array) {
@@ -244,7 +218,7 @@ public final class Driver {
 
             //黑名单中的node会返回NULL,也就是说UIStructure中不会包含"客服"相关的元素
             if (null != nodeXpath) {
-                uiStructure.append("\n" + nodeXpath + "\n");
+                uiStructure.append("\n").append(nodeXpath).append("\n");
             }
         }
 
@@ -264,41 +238,13 @@ public final class Driver {
 
 
     //====================Element operation========================
-    public static void inputPassword(WebElement elem, String text) {
-        log.info(MyLogger.getMethodName() + " " + text);
 
-        if (!Util.isAndroid()) {
-            log.info("Input password " + text + " for ios");
-            //目前iOS只支持输入6个1，因为找不到输密码对话框的ID,只能点键盘输入
-            for (int i = 0; i < 6; i++) {
-                elem.click();
-            }
-        } else {
-            elem.click();
-            //经常会输入不完 先随便输个数 然后等待一段时间后 再重新输入一次
-            elem.sendKeys("1111");//因为清除不干净，实际密码需设置成相同数字串"111111"。by Jack Si
-            Driver.sleep(1);
-            elem.sendKeys(text);
-            Driver.sleep(1);
-        }
+
+    public static MobileElement findElementByXpath(String xPath) {
+        log.info(MyLogger.getMethodName() + xPath);
+        return findElement(By.xpath(xPath));
     }
 
-    public static void setText(MobileElement elem, String text) {
-        log.info(MyLogger.getMethodName() + " " + text);
-
-        elem.click();
-        elem.clear();
-        elem.setValue(text);
-    }
-
-    public static void sendKeys(MobileElement elem, String text) {
-        log.info(MyLogger.getMethodName() + " " + text);
-
-        elem.click();
-        elem.clear();
-        elem.sendKeys(text);
-        log.info("Text is set to : " + elem.getText());
-    }
 
     public static int getDeviceHeight() {
         log.info(MyLogger.getMethodName());
@@ -343,54 +289,13 @@ public final class Driver {
 
     public static Dimension getScreenSize() {
         log.info(MyLogger.getMethodName());
-        Dimension dimensions = driver.manage().window().getSize();
 
-        return dimensions;
+        return driver.manage().window().getSize();
     }
 
-    public static void clickElementCenter(MobileElement elem) {
-        log.info(MyLogger.getMethodName());
-
-        Point point = elem.getCenter();
-        log.info("Element center : " + point);
-
-        TouchAction touchAction = new TouchAction(driver);
-        touchAction.press(PointOption.point(point.getX(), point.getY())).waitAction(WaitOptions.waitOptions(Duration.ofMillis(50))).release().perform();
-    }
-
-    /**
-     * 按住元素的底部中间，向上滑动元素的高度
-     *
-     * @param elem
-     */
-    public static void scrollUpFromElemBottomToTop(MobileElement elem) {
-        log.info(MyLogger.getMethodName());
-
-        Point p = elem.getLocation();
-        Dimension dim = elem.getSize();
-        log.info("element location:  x:" + p.getX() + ", y:" + p.getY() + ". " + "height： " + dim.getHeight() + ",width： " + dim.getWidth());
-        int startX = p.getX() + (int) (dim.getWidth() * 0.5);
-        int startY = p.getY() + dim.getHeight();
-        int endX = startX;
-        int endY = p.getY();
-
-        log.info("startX : " + startX + " startY : " + startY + " EndX : " + endX + " EndY " + endY);
-
-        TouchAction touchAction = new TouchAction(driver);
-        //Appium在 iOS上 Moveto(int x, int )是相对位置 而位绝对位置与Android不同   http://appium.github.io/java-client/
-        if (!Util.isAndroid()) {
-            endX = 0;
-            endY = -dim.getHeight();
-        }
-
-        touchAction.press(PointOption.point(startX, startY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).moveTo(PointOption.point(endX, endY)).release().perform();
-        log.info("scroll over");
-    }
 
     /**
      * 向上滑动，从某个元素的顶部中间位置开始向上滑动一段距离
-     *
-     * @param yDiff
      */
     public static void scrollUp(MobileElement elem, int yDiff) {
         log.info(MyLogger.getMethodName());
@@ -425,16 +330,6 @@ public final class Driver {
         }
     }
 
-    /**
-     * 向下滑动，从某个元素的顶部中间位置开始向下滑动一段距离
-     *
-     * @param yDiff
-     */
-    public static void scrollDown(MobileElement elem, int yDiff) {
-        log.info(MyLogger.getMethodName());
-        scrollUp(elem, (-yDiff));
-    }
-
 
     //====================Element Finding===========================
     public static MobileElement findElement(By by, int waitSeconds) {
@@ -445,7 +340,7 @@ public final class Driver {
         //.ExpectedConditions.elementToBeClickable();
         AppiumDriverWait wait = AppiumDriverWait.getInstance(driver, waitSeconds);
 
-        AppiumFunction<AppiumDriver, WebElement> waitFunction = var1 -> {
+        AppiumFunction<AppiumDriver,WebElement> waitFunction = var1 -> {
             WebElement elem = null;
 
             try {
@@ -473,9 +368,9 @@ public final class Driver {
             return elem;
         };
 
-        WebElement elem = wait.until(waitFunction);
+        //WebElement elem = wait.until(waitFunction);
 
-        return (MobileElement) elem;
+        return (MobileElement) wait.until(waitFunction);
     }
 
     public static List<MobileElement> findElements(By by, int waitSeconds) {
@@ -503,37 +398,23 @@ public final class Driver {
 //                    list = ((IOSDriver) driver).findElementsByIosNsPredicate(id);
 //                }
             } catch (Exception e) {
-                log.info("!!!!!!!!!!!!!!!!!!!!!!Element : " + by.toString() + " is not founded! Polling again...");
+                log.info("!!!!!!!!!!!!!!!!!!!!!!Element : " + by + " is not founded! Polling again...");
             }
 
             int size = list.size();
 
             if (0 == size) {
                 list = null;
-                log.info(by.toString() + " list size is 0");
+                log.info(by + " list size is 0");
             } else {
-                log.info(by.toString() + " list size is " + size);
+                log.info(by + " list size is " + size);
             }
 
             return list;
         };
 
-        List<MobileElement> elemList = wait.until(waitFunction);
-
-        return elemList;
+        return wait.until(waitFunction);
     }
-
-//    public static List<MobileElement> findElementsById(String str){
-//        log.info(util.MyLogger.getMethodName() + " " + str);
-////
-////        if(util.Util.isAndroid()){
-////            return driver.findElements(By.id(str));
-////        }
-////
-////        return  ((IOSDriver) driver).findElementsByIosNsPredicate(str);
-//
-//        return util.Driver.findElements(By.id(str),util.ConfigUtil.DEFAULT_WAIT_SEC);
-//    }
 
     public static List<MobileElement> findElements(By by) {
         log.info(MyLogger.getMethodName() + by);
@@ -573,9 +454,6 @@ public final class Driver {
 
     /**
      * 查找元素，如果元素不存在，不报异常，返回null
-     *
-     * @param id
-     * @return
      */
     public static MobileElement findElemByIdWithoutException(String id, int second) {
         log.info(MyLogger.getMethodName());
@@ -596,21 +474,6 @@ public final class Driver {
         return elem;
     }
 
-    public static MobileElement findElemByIdWithoutException(String id) {
-        return findElemByIdWithoutException(id, (int) ConfigUtil.getDefaultWaitSec());
-    }
-
-    /**
-     * 检查某个元素是否存在，存在返回true，不存在返回false
-     *
-     * @param id
-     * @return
-     */
-    public static boolean elemCheckById(String id) {
-        log.info(MyLogger.getMethodName());
-
-        return elemCheckById(id, (int) ConfigUtil.getDefaultWaitSec());
-    }
 
     public static boolean elemCheckById(String id, int second) {
         log.info(MyLogger.getMethodName());
@@ -640,27 +503,10 @@ public final class Driver {
         return elem;
     }
 
-    public static boolean elemCheckByText(String text) {
-        log.info(MyLogger.getMethodName());
-
-        boolean ret = false;
-        MobileElement elem = findElemByTextWithoutException(text);
-
-        if (null != elem) {
-            ret = true;
-        }
-
-        log.info(text + " " + ret);
-        return ret;
-    }
-
 
     /**
      * 滑动到指定元素，如果元素不存在，不报异常，返回null
      * 只有安卓实现了滑动，ios还是使用find方法
-     *
-     * @param id
-     * @return
      */
     public static MobileElement scrollToElementByIdWithoutException(String id) {
         log.info(MyLogger.getMethodName());
@@ -684,50 +530,10 @@ public final class Driver {
         return elem;
     }
 
-    /**
-     * 检查某个元素是否存在，存在返回true，不存在返回false
-     *
-     * @param id
-     * @return
-     */
-    public static boolean elemCheckByScrollToId(String id) {
-        log.info(MyLogger.getMethodName());
-
-        boolean ret = false;
-        MobileElement elem = scrollToElementByIdWithoutException(id);
-
-        if (null != elem) {
-            ret = true;
-        }
-
-        log.info(id + " " + ret);
-        return ret;
-    }
-
-
-    public static MobileElement findElementByXpath(String xPath) {
-        log.info(MyLogger.getMethodName() + xPath);
-        return findElement(By.xpath(xPath));
-    }
-
-    public static List<MobileElement> findElementsByXpath(String xpath) {
-        return findElements(By.xpath(xpath));
-    }
-
-    public static List<MobileElement> findElementsByXpathWithoutException(String xpath) {
-        return findElemsWithoutException(By.xpath(xpath));
-    }
-
-    public static MobileElement findElementById(String id) {
-        if (!Util.isAndroid()) {
-            return findElementByNsPredicateIOS(id);
-        }
-        return findElement(By.id(id));
-    }
 
     public static MobileElement findElementByText(String str) {
         if (!Util.isAndroid()) {
-            str = "name == " + "\'" + str + "\'";
+            str = "name == " + "'" + str + "'";
             return findElementByNsPredicateIOS(str);
         } else {
             //return findElement(By.xpath("//*[contains(@text," + "\"" + str + "\"" + ")]"));
@@ -735,21 +541,6 @@ public final class Driver {
         }
     }
 
-    public static MobileElement findElementContainsText(String str) {
-        if (!Util.isAndroid()) {
-            str = "name CONTAINS " + "\'" + str + "\'";
-            return findElementByNsPredicateIOS(str);
-        } else {
-            str = "//*[contains(@text," + "\"" + str + "\"" + ")]";
-            return findElement(By.xpath(str));
-        }
-    }
-
-
-    public static MobileElement findElementByClassAndText(String className, String str) {
-        str = "//*[@class=\"" + className + "\" and @text=\"" + str + "\"]";
-        return findElement(By.xpath(str));
-    }
 
     //IOS only
     public static MobileElement findElementByNsPredicateIOS(String str) {
@@ -763,64 +554,9 @@ public final class Driver {
         return findElement(MobileBy.iOSNsPredicateString(str), seconds);
     }
 
-    public static MobileElement getFirstbyPredicateIOS(String str) {
-        MobileElement elem;
-
-        List<MobileElement> elemList = ((IOSDriver) driver).findElementsByIosNsPredicate(str);
-
-        if (null == elemList || elemList.size() == 0) {
-            elem = null;
-        } else {
-            elem = elemList.get(0);
-        }
-
-        return elem;
-    }
-
-
-    //===================End of element finding methods
-    public static String getTextByXpath(String xPath) {
-        return findElementByXpath(xPath).getText();
-    }
-
-    public static String getXpathByResID(String resId) {
-        return getXpathByResID(resId, "com.tigerbrokers.stock:id/edit_number");
-    }
-
-    public static String getXpathByResID(String resId, String subResID) {
-        return "//*[contains(@resource-id,\"" + resId + "\")]//*[contains(@resource-id,\"" + subResID + "\")]";
-    }
-
-    public static String getXpathByClassID(String resId, String classId) {
-        return "//*[contains(@resource-id,\"" + resId + "\")]//*[contains(@class,\"" + classId + "\")]";
-    }
-
-
-    /**
-     * 滑动到指定元素id的位置
-     *
-     * @param id
-     * @return
-     */
-    public static MobileElement scrollToElementById(String id) {
-        log.info(MyLogger.getMethodName());
-
-        if (!Util.isAndroid()) {
-            return Driver.findElementByNsPredicateIOS(id);
-        }
-
-        By by = MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView("
-                + "new UiSelector().resourceId(\"" + id + "\"));");
-//        By by = MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView("
-//                + "new UiSelector().text(\"" + text + "\"));");
-        return Driver.findElement(by);
-    }
 
     /**
      * 滑动到指定元素文本的位置
-     *
-     * @param text
-     * @return
      */
     public static MobileElement scrollToElementByText(String text) {
         log.info(MyLogger.getMethodName() + " " + text);
@@ -830,7 +566,7 @@ public final class Driver {
         return Driver.findElement(by);
     }
 
-    public static AppiumDriver prepareForAppiumIOS(String bundleId, String uuid, String appiumPort, String wdaLocalPort) throws Exception {
+    public static AppiumDriver<WebElement> prepareForAppiumIOS(String bundleId, String uuid, String appiumPort, String wdaLocalPort) throws Exception {
         log.info(MyLogger.getMethodName());
 
         ConfigUtil.setUdid(uuid);
@@ -853,14 +589,14 @@ public final class Driver {
 
         String url = "http://" + ConfigUtil.getServerIp() + ":" + appiumPort + "/wd/hub";
         log.info(url);
-        driver = new IOSDriver(new URL(url), capabilities);
+        driver = new IOSDriver<>(new URL(url), capabilities);
 
         performWechatAction(bundleId);
 
         return driver;
     }
 
-    public static AppiumDriver prepareForAppiumAndroid(String appPackage, String appActivity, String udid, String port) throws Exception {
+    public static AppiumDriver<WebElement> prepareForAppiumAndroid(String appPackage, String appActivity, String udid, String port) throws Exception {
         log.info(MyLogger.getMethodName());
 
         log.info("appPackage " + appPackage);
@@ -885,7 +621,7 @@ public final class Driver {
 
         String url = "http://" + ConfigUtil.getServerIp() + ":" + port + "/wd/hub";
         log.info(url);
-        driver = new AndroidDriver(new URL(url), capabilities);
+        driver = new AndroidDriver<>(new URL(url), capabilities);
 
         performWechatAction(appPackage);
 
@@ -945,25 +681,20 @@ public final class Driver {
         pressBack();
     }
 
-    public static void takesScreenShotAndPressBack(StringBuilder builder) {
-        takeScreenShot();
-        pressBack();
-    }
-
     public static void drag(List<String> pointsList) {
         log.info(MyLogger.getMethodName());
         TouchAction dragAction = new TouchAction(driver);
         List<PointOption> pointOptionList = new ArrayList<>();
 
         if (pointsList.size() % 2 != 0) {
-            log.error("drag value is not configured correctly: " + pointOptionList.toString());
+            log.error("drag value is not configured correctly: " + pointOptionList);
             return;
         }
 
         try {
             for (int i = 0; i < pointsList.size(); i = i + 2) {
-                int x = Integer.valueOf(pointsList.get(i));
-                int y = Integer.valueOf(pointsList.get(i + 1));
+                int x = Integer.parseInt(pointsList.get(i));
+                int y = Integer.parseInt(pointsList.get(i + 1));
                 pointOptionList.add(PointOption.point(x, y));
             }
             for (int i = 0; i < pointOptionList.size(); i++) {
@@ -1011,7 +742,7 @@ public final class Driver {
 
         if (Util.isAndroid()) {
             try {
-                activity = ((AndroidDriver) driver).currentActivity();
+                activity = ((AndroidDriver<WebElement>) driver).currentActivity();
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error("Fail to get current Activity");
@@ -1020,17 +751,6 @@ public final class Driver {
         }
 
         return activity;
-    }
-
-    public static String getCurrentPackage() {
-        String packageName = "ios package";
-
-        if (Util.isAndroid()) {
-            packageName = ((AndroidDriver) driver).getCurrentPackage();
-            log.info("packageName " + packageName);
-        }
-
-        return packageName;
     }
 
     public static int getSDKVersion(String udid) {
@@ -1060,7 +780,7 @@ public final class Driver {
 
             res = res.substring(index + 1, length).trim().substring(1, 3);//[25]
             log.info("sdk version : " + res);
-            sdkversion = Integer.valueOf(res);
+            sdkversion = Integer.parseInt(res);
         }
 
         return sdkversion;
@@ -1089,7 +809,7 @@ public final class Driver {
     }
 
     public static String getPlatformName() {
-        return driver.getPlatformName().toUpperCase();
+        return Objects.requireNonNull(driver.getPlatformName()).toUpperCase();
     }
 
     public static String getPlatformVersion() {
@@ -1268,10 +988,6 @@ public final class Driver {
     }
 
     public static void swipeVertical(boolean scrollDown) {
-        swipeVertical(scrollDown, null);
-    }
-
-    public static void swipeVertical(boolean scrollDown, StringBuilder builder) {
         log.info(MyLogger.getMethodName());
 
         Dimension dimensions = driver.manage().window().getSize();
@@ -1301,9 +1017,9 @@ public final class Driver {
 
         swipe(startX, startY, endX, endY);
 
-        if (builder != null) {
-            builder.append("SWIPE : " + startX + "," + startY + "," + endX + "," + endY + "\n");
-        }
+//        if (builder != null) {
+//            builder.append("SWIPE : ").append(startX).append(",").append(startY).append(",").append(endX).append(",").append(endY).append("\n");
+//        }
     }
 
     public static void swipeHorizontally(boolean leftToRight) {
@@ -1349,8 +1065,7 @@ public final class Driver {
 
     public static void pressKeyCode(AndroidKey code) {
         if (Util.isAndroid()) {
-            //((AndroidDriver)driver).pressKeyCode(code);
-            ((AndroidDriver) driver).pressKey(new KeyEvent(code));
+            ((AndroidDriver<WebElement>) driver).pressKey(new KeyEvent(code));
         } else {
             //((IOSDriver)driver)
         }
@@ -1394,5 +1109,187 @@ public final class Driver {
         Object batterInfo = Driver.driver.executeScript("mobile:batteryInfo");
         log.info("Battery Info : " + batterInfo);
         return batterInfo.toString();
+    }
+
+    //===================End of element finding methods
+    public static String getTextByXpath(String xPath) {
+        return findElementByXpath(xPath).getText();
+    }
+
+    public static String getXpathByResID(String resId, String subResID) {
+        return "//*[contains(@resource-id,\"" + resId + "\")]//*[contains(@resource-id,\"" + subResID + "\")]";
+    }
+
+    public static String getXpathByClassID(String resId, String classId) {
+        return "//*[contains(@resource-id,\"" + resId + "\")]//*[contains(@class,\"" + classId + "\")]";
+    }
+
+    /**
+     * 滑动到指定元素id的位置
+     */
+    public static MobileElement scrollToElementById(String id) {
+        log.info(MyLogger.getMethodName());
+
+        if (!Util.isAndroid()) {
+            return Driver.findElementByNsPredicateIOS(id);
+        }
+
+        By by = MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView("
+                + "new UiSelector().resourceId(\"" + id + "\"));");
+        // by = MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(" + "new UiSelector().text(\"" + text + "\"));");
+        return Driver.findElement(by);
+    }
+
+    public static MobileElement findElementContainsText(String str) {
+        if (!Util.isAndroid()) {
+            str = "name CONTAINS " + "'" + str + "'";
+            return findElementByNsPredicateIOS(str);
+        } else {
+            str = "//*[contains(@text," + "\"" + str + "\"" + ")]";
+            return findElement(By.xpath(str));
+        }
+    }
+
+
+    public static MobileElement findElementByClassAndText(String className, String str) {
+        str = "//*[@class=\"" + className + "\" and @text=\"" + str + "\"]";
+        return findElement(By.xpath(str));
+    }
+
+    public static void setText(MobileElement elem, String text) {
+        log.info(MyLogger.getMethodName() + " " + text);
+
+        elem.click();
+        elem.clear();
+        elem.setValue(text);
+    }
+
+    /**
+     * 检查某个元素是否存在，存在返回true，不存在返回false
+     */
+    public static boolean elemCheckByScrollToId(String id) {
+        log.info(MyLogger.getMethodName());
+
+        boolean ret = false;
+        MobileElement elem = scrollToElementByIdWithoutException(id);
+
+        if (null != elem) {
+            ret = true;
+        }
+
+        log.info(id + " " + ret);
+        return ret;
+    }
+
+
+    /**
+     * 检查某个元素是否存在，存在返回true，不存在返回false
+     */
+    public static boolean elemCheckById(String id) {
+        log.info(MyLogger.getMethodName());
+
+        return elemCheckById(id, (int) ConfigUtil.getDefaultWaitSec());
+    }
+
+    public static List<MobileElement> findElementsByXpath(String xpath) {
+        return findElements(By.xpath(xpath));
+    }
+
+    public static List<MobileElement> findElementsByXpathWithoutException(String xpath) {
+        return findElemsWithoutException(By.xpath(xpath));
+    }
+
+    public static MobileElement findElementById(String id) {
+        if (!Util.isAndroid()) {
+            return findElementByNsPredicateIOS(id);
+        }
+        return findElement(By.id(id));
+    }
+
+    public static void sendKeys(MobileElement elem, String text) {
+        log.info(MyLogger.getMethodName() + " " + text);
+
+        elem.click();
+        elem.clear();
+        elem.sendKeys(text);
+        log.info("Text is set to : " + elem.getText());
+    }
+
+
+    public static boolean elemCheckByText(String text) {
+        log.info(MyLogger.getMethodName());
+
+        boolean ret = false;
+        MobileElement elem = findElemByTextWithoutException(text);
+
+        if (null != elem) {
+            ret = true;
+        }
+
+        log.info(text + " " + ret);
+        return ret;
+    }
+
+    /**
+     * 向下滑动，从某个元素的顶部中间位置开始向下滑动一段距离
+     */
+    public static void scrollDown(MobileElement elem, int yDiff) {
+        log.info(MyLogger.getMethodName());
+        scrollUp(elem, (-yDiff));
+    }
+
+    /**
+     * 按住元素的底部中间，向上滑动元素的高度
+     */
+    public static void scrollUpFromElemBottomToTop(MobileElement elem) {
+        log.info(MyLogger.getMethodName());
+
+        Point p = elem.getLocation();
+        Dimension dim = elem.getSize();
+        log.info("element location:  x:" + p.getX() + ", y:" + p.getY() + ". " + "height： " + dim.getHeight() + ",width： " + dim.getWidth());
+        int startX = p.getX() + (int) (dim.getWidth() * 0.5);
+        int startY = p.getY() + dim.getHeight();
+        int endX = startX;
+        int endY = p.getY();
+
+        log.info("startX : " + startX + " startY : " + startY + " EndX : " + endX + " EndY " + endY);
+
+        TouchAction touchAction = new TouchAction(driver);
+        //Appium在 iOS上 Moveto(int x, int )是相对位置 而位绝对位置与Android不同   http://appium.github.io/java-client/
+        if (!Util.isAndroid()) {
+            endX = 0;
+            endY = -dim.getHeight();
+        }
+
+        touchAction.press(PointOption.point(startX, startY)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).moveTo(PointOption.point(endX, endY)).release().perform();
+        log.info("scroll over");
+    }
+
+
+    public static MobileElement findElemByIdWithoutException(String id) {
+        return findElemByIdWithoutException(id, (int) ConfigUtil.getDefaultWaitSec());
+    }
+
+
+    public static void clickElementCenter(MobileElement elem) {
+        log.info(MyLogger.getMethodName());
+
+        Point point = elem.getCenter();
+        log.info("Element center : " + point);
+
+        TouchAction touchAction = new TouchAction(driver);
+        touchAction.press(PointOption.point(point.getX(), point.getY())).waitAction(WaitOptions.waitOptions(Duration.ofMillis(50))).release().perform();
+    }
+
+
+    public static String getCurrentPackage() {
+        String packageName = "ios package";
+
+        if (Util.isAndroid()) {
+            packageName = ((AndroidDriver<WebElement>) driver).getCurrentPackage();
+            log.info("packageName " + packageName);
+        }
+
+        return packageName;
     }
 }
