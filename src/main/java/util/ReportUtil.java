@@ -10,25 +10,28 @@ import java.util.*;
 
 public class ReportUtil {
     public static org.slf4j.Logger log = LoggerFactory.getLogger(ReportUtil.class);
+    private static Map<String, String> summaryMap = new ListOrderedMap<>();
+    private static HashMap<String, HashSet<String>> clickedElementMap;
+    private static List<ArrayList<String>> clickedActivityList = new ArrayList<>();
+    private static List<ArrayList<String>> detailedList = new ArrayList<>();
+    private static StringBuilder builder;
+
+    public static void setClickedElementMap(HashMap<String, HashSet<String>> map) {
+        clickedElementMap = map;
+    }
 
     public static void setSummaryMap(Map<String, String> summaryMap) {
         ReportUtil.summaryMap = summaryMap;
     }
 
-    @SuppressWarnings("unchecked")
-    private static Map<String, String> summaryMap = new ListOrderedMap();
-
     public static void setDetailedList(List<ArrayList<String>> detailedList) {
         ReportUtil.detailedList = detailedList;
     }
 
-    public static void setClickedList(List<ArrayList<String>> clickedList) {
-        ReportUtil.clickedList = clickedList;
+    public static void setClickedActivityList(List<ArrayList<String>> clickedActivityList) {
+        ReportUtil.clickedActivityList = clickedActivityList;
     }
 
-    private static List<ArrayList<String>> clickedList = new ArrayList<>();
-    private static List<ArrayList<String>> detailedList = new ArrayList<>();
-    private static StringBuilder builder;
 
     public static void generateReport(File file) {
         builder = new StringBuilder();
@@ -49,6 +52,7 @@ public class ReportUtil {
 
         if (Util.isAndroid()) {
             addClickedTable();
+            addClickedElemTable();
         }
 
         builder.append("</body>\n" + "</html>\n");
@@ -83,11 +87,30 @@ public class ReportUtil {
     }
 
     private static void addClickedTable() {
-        generateTable("Activity Clicked List", clickedList, "No Activity is clicked.");
+        generateTable("Activity List", clickedActivityList, "No Activity is clicked.");
+    }
+
+    private static void addClickedElemTable(){
+
+        List<ArrayList<String>> clickedElemList = new ArrayList<>();
+        ArrayList<String> headerRow = new ArrayList<>();
+        headerRow.add("HEAD");
+        headerRow.add("Activity");
+        headerRow.add("Element List");
+        clickedElemList.add(headerRow);
+
+        for (String activity : clickedElementMap.keySet()){
+            ArrayList<String> row = new ArrayList<>();
+            row.add(activity);
+            row.add(clickedElementMap.get(activity).toString());
+            clickedElemList.add(row);
+        }
+
+        generateTable("Clicked Element",clickedElemList,"No element is clicked");
     }
 
     private static void generateTable(String header, List<ArrayList<String>> rowList, String info) {
-        builder.append("<br/>\n<h2>" + header + "</h2>\n");
+        builder.append("<br/>\n<h2>").append(header).append("</h2>\n");
         builder.append("<table width=\"100%\" border=\"1\" align=\"center\" cellspacing=\"1\">\n");
         builder.append(" <tbody>\n");
 
@@ -96,18 +119,18 @@ public class ReportUtil {
             if (list.get(0).equals("HEAD")) {
                 list.remove("HEAD");
                 for (String str : list) {
-                    builder.append("        <th class=\"left\" >" + str + "</th>\n");
+                    builder.append("        <th class=\"left\" >").append(str).append("</th>\n");
                 }
             } else {
                 for (String str : list) {
-                    builder.append("        <td>" + str + "</td>\n");
+                    builder.append("        <td>").append(str).append("</td>\n");
                 }
             }
             builder.append("    </tr>\n");
         }
 
         if (rowList.size() == 0) {
-            builder.append("        <td class=\"left\">" + info + "</td>\n");
+            builder.append("        <td class=\"left\">").append(info).append("</td>\n");
         }
 
         builder.append(" </tbody>\n</table>\n");

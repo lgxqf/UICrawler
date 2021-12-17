@@ -223,7 +223,8 @@ public class Crawler {
 
         ReportUtil.setSummaryMap(summaryMap);
         ReportUtil.setDetailedList(detailedList);
-        ReportUtil.setClickedList(clickedList);
+        ReportUtil.setClickedActivityList(clickedList);
+        ReportUtil.setClickedElementMap(XPathUtil.getClickedElementMap());
         ReportUtil.generateReport(report);
         log.info("\n\n------------------------------Test report : " + reportName + "\n\n");
     }

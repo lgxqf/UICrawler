@@ -22,7 +22,7 @@ public class XPathUtil {
 
     private static final Map<String, Map<String, Long>> monkeyClickedMap = new HashMap<>();
     private static final Map<String, Long> clickedActivityMap = new HashMap<>();
-    private static final HashMap<String,HashSet<String>> clickedElementMap = new LinkedHashMap<>();
+    private static final HashMap<String, HashSet<String>> clickedElementMap = new LinkedHashMap<>();
     private static final HashSet<String> set = new LinkedHashSet<>();
     private static DocumentBuilder builder;
     private static boolean stop = false;
@@ -390,7 +390,7 @@ public class XPathUtil {
         return isValid;
     }
 
-    public static HashMap<String,HashSet<String>>  getClickedElementMap() {
+    public static HashMap<String, HashSet<String>> getClickedElementMap() {
         return clickedElementMap;
     }
 
@@ -400,7 +400,7 @@ public class XPathUtil {
         String page = xml;
 
         try {
-            String activityName= "";
+            String activityName = "";
             if (Util.isAndroid()) {
                 activityName = Driver.getCurrentActivity();
                 log.info("Current Activity name : " + activityName);
@@ -418,8 +418,6 @@ public class XPathUtil {
             }
 
             String elem_tag = elem.getText();
-            if (Objects.equals(elem_tag, ""))
-                elem_tag = elem.getAttribute("resource_id");
 
             if (!Objects.equals(elem_tag, "")) {
                 HashSet<String> clickedElemSet = clickedElementMap.get(activityName);
